@@ -5,13 +5,13 @@ import styled from 'styled-components'
 
 export default function Onboarding() {
     const [tutorialModalOpened, setTutorialModalOpened] = React.useState(false);
-    const openTutorialModal = () => {
-        setTutorialModalOpened(true);
+    const toggleTutorialModal = () => {
+        setTutorialModalOpened(prev=>!prev);
     }
 
   return (
     <Container>
-        {tutorialModalOpened && <TutorialModal/>}
+        {tutorialModalOpened && <TutorialModal onClose={toggleTutorialModal}/>}
         <OnboardingContainer>
             <h2>Welcome!</h2>
         <img width={64} height={64} src={'/logo.png'} alt='wordle logo'/>
@@ -19,7 +19,7 @@ export default function Onboarding() {
         <p>Get 6 chances to guess a 5-letter word.</p>
         <ButtonsContainer>
             <MainButton>Play</MainButton>
-            <SecondaryButton onClick={openTutorialModal}>How to Play</SecondaryButton>
+            <SecondaryButton onClick={toggleTutorialModal}>How to Play</SecondaryButton>
             <HistoryButton>View word History</HistoryButton>
         </ButtonsContainer>
         <DateText>{moment().format('MMMM DD YYYY')}</DateText>
