@@ -46,11 +46,11 @@ const RestLetters = styled.span`
   border: 2px solid #565758;
 `;
 
-const SuccessWordExampleContainer = styled.div`
+const WordExampleContainer = styled.div`
   margin-top: 10px;
 `;
 
-const SuccessWordExplanation = styled.p`
+const WordExplanation = styled.p`
   margin-top: 10px;
   color: #d7dadc;
 `;
@@ -110,11 +110,11 @@ function WordExample({ word, letterHighlight,type, explanation}: { letterHighlig
   }, []);
 
   return (
-    <SuccessWordExampleContainer>
+    <WordExampleContainer>
     <WordContainer>
       {letters.map((letter, index) => {
         return letterHighlightUppercase === letter ? 
-          type ==='sucess' ?
+          type ==='success' ?
         <CorrectLetter animate={animate}>{correctLetter}</CorrectLetter>
         : type ==='present' ?
         <PresentLetter animate={animate}>{correctLetter}</PresentLetter>
@@ -122,8 +122,8 @@ function WordExample({ word, letterHighlight,type, explanation}: { letterHighlig
         <RestLetters key={index}>{letter}</RestLetters>;
       })}
     </WordContainer>
-    <SuccessWordExplanation><b>{letterHighlightUppercase}</b> {explanation}</SuccessWordExplanation>
-    </SuccessWordExampleContainer>
+    <WordExplanation><b>{letterHighlightUppercase}</b> {explanation}</WordExplanation>
+    </WordExampleContainer>
   );
 }
 
