@@ -1,12 +1,15 @@
+import { BrowserRouter, Routes, Route } from 'react-router-dom';
 import Onboarding from './components/Onboarding';
+import Game from './components/Game';
 
 function App() {
   return (
-    <div className="App">
-      <header className="App-header">
-        <Onboarding/>
-      </header>
-    </div>
+    <BrowserRouter>
+      <Routes>
+        <Route path="/" element={<Onboarding />} />
+        <Route path="/play" element={<Game />} />
+      </Routes>
+    </BrowserRouter>
   );
 }
 

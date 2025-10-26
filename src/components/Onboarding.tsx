@@ -2,10 +2,13 @@ import moment from 'moment';
 import { useEffect, useState } from 'react';
 import TutorialModal from './TutorialModal';
 import styled from 'styled-components';
+import { useNavigate } from 'react-router-dom'; 
 
 export default function Onboarding() {
+    const navigate = useNavigate();
   const [tutorialModalOpened, setTutorialModalOpened] = useState(false);
   const toggleTutorialModal = () => setTutorialModalOpened(prev => !prev);
+  
 
   const [nextWordDiff, setNextWordDiff] = useState(
     moment.duration(moment().utc().add(1, 'days').startOf('day').diff(moment().utc()))
@@ -37,7 +40,7 @@ export default function Onboarding() {
         <Description>Get 6 chances to guess a 5-letter word.</Description>
 
         <ButtonsContainer>
-          <MainButton>Play</MainButton>
+          <MainButton onClick={() => navigate('/play')}>Play</MainButton>
           <SecondaryButton onClick={toggleTutorialModal}>How to Play</SecondaryButton>
           <HistoryButton>View word History</HistoryButton>
         </ButtonsContainer>
