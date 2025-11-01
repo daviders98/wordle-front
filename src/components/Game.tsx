@@ -100,7 +100,7 @@ const Row = styled.div<{ $shake: boolean }>`
       : ""}
 `;
 
-const Cell = styled.div<{ $animate: boolean; $flip: boolean }>`
+const Cell = styled.div<{ $animate: boolean; $flip: boolean; $revealed: boolean }>`
   width: 60px;
   height: 60px;
   border: 2px solid #565758;
@@ -110,7 +110,7 @@ const Cell = styled.div<{ $animate: boolean; $flip: boolean }>`
   font-size: 24px;
   font-weight: bold;
   color: #d7dadc;
-  background-color: #121213;
+  background-color: ${({ $revealed }) => ($revealed ? "#3a3a3c" : "#121213")};
   transform-style: preserve-3d;
   perspective: 400px;
 
@@ -155,6 +155,9 @@ function Game() {
   const [animatedCells, setAnimatedCells] = useState(
     Array.from({ length: 6 }, () => Array(5).fill(false))
   );
+  const [revealedCells, setRevealedCells] = useState(
+  Array.from({ length: 6 }, () => Array(5).fill(false))
+);
 
   const [shakingRows, setShakingRows] = useState(Array(6).fill(false));
   const [message, setMessage] = useState("");
@@ -266,19 +269,30 @@ function Game() {
     if (isGuessing && isValidGuess && currentGuess) {
       for (let i = 0; i < 5; i++) {
         setTimeout(() => {
-          setFlippedCells((prev) => {
-            const copy = prev.map((row) => [...row]);
-            copy[currentRowIndex][i] = true;
-            return copy;
-          });
+          setFlippedCells(prev => {
+  const copy = prev.map(row => [...row]);
+  copy[currentRowIndex][i] = true;
+  return copy;
+});
 
-          setTimeout(() => {
-            setFlippedCells((prev) => {
-              const copy = prev.map((row) => [...row]);
-              copy[currentRowIndex][i] = false;
-              return copy;
-            });
-          }, 1000);
+setFlippedCells(prev => {
+  const copy = prev.map(row => [...row]);
+  copy[currentRowIndex][i] = true;
+  return copy;
+});
+
+setTimeout(() => {
+  setFlippedCells(prev => {
+    const copy = prev.map(row => [...row]);
+    copy[currentRowIndex][i] = false;
+    return copy;
+  });
+  setRevealedCells(prev => {
+    const copy = prev.map(row => [...row]);
+    copy[currentRowIndex][i] = true;
+    return copy;
+  });
+}, 850);
         }, i * 400);
       }
 
@@ -328,6 +342,7 @@ guessing()
                   key={col}
                   $animate={animatedCells[row][col]}
                   $flip={flippedCells[row][col]}
+                  $revealed={revealedCells[row][col]}
                 >
                   {guesses[row][col]}
                 </Cell>
