@@ -1,19 +1,32 @@
+import { useState, useEffect, useRef } from 'react';
 import { BrowserRouter, Routes, Route } from 'react-router-dom';
 import Onboarding from './components/Onboarding';
 import Game from './components/Game';
-import WakeUpApp from './components/WakeUpApp';
+import Loading from './components/Loading';
 
 function App() {
-  return (<>
-  <WakeUpApp/>
-  <BrowserRouter>
+  const [wakeUpDone, setWakeUpDone] = useState(false);
+  const wakeUpCalled = useRef(false);
+
+  useEffect(() => {
+    if (wakeUpCalled.current) return;
+    wakeUpCalled.current = true;
+
+    fetch(`${process.env.REACT_APP_RENDER_BASE_URL}/api/health`)
+      .then(() => setWakeUpDone(true))
+      .catch(() => alert('Error, game cannot be played.'));
+  }, []);
+
+  return (
+    <BrowserRouter>
       <Routes>
         <Route path="/" element={<Onboarding />} />
-        <Route path="/play" element={<Game />} />
+        <Route
+          path="/play"
+          element={wakeUpDone ? <Game /> : <Loading />}
+        />
       </Routes>
     </BrowserRouter>
-  </>
-    
   );
 }
 
