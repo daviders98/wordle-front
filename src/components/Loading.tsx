@@ -1,5 +1,7 @@
 import CircularProgress from '@mui/material/CircularProgress';
 import styled, { keyframes } from 'styled-components';
+import TutorialModal from './TutorialModal';
+import { useState } from 'react';
 
 const fadeIn = keyframes`
   from { opacity: 0; transform: translateY(10px); }
@@ -43,8 +45,11 @@ const StyledSpinner = styled(CircularProgress)`
 `;
 
 function Loading() {
+    const [tutorialModalOpened, setTutorialModalOpened] = useState(true);
+      const toggleTutorialModal = () => setTutorialModalOpened(prev => !prev);
   return (
     <LoadingContainer>
+        {tutorialModalOpened && <TutorialModal onClose={toggleTutorialModal} />}
       <LoadingText>Server is waking up now, please wait a little bit.</LoadingText>
       <LoadingText>Perfection takes time {'[:'}</LoadingText>
       <StyledSpinner size={60} thickness={4} />

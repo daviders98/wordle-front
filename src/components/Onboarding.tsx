@@ -9,7 +9,6 @@ export default function Onboarding() {
   const [tutorialModalOpened, setTutorialModalOpened] = useState(false);
   const toggleTutorialModal = () => setTutorialModalOpened(prev => !prev);
   
-
   const [nextWordDiff, setNextWordDiff] = useState(
     moment.duration(moment().utc().add(1, 'days').startOf('day').diff(moment().utc()))
   );
