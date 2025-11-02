@@ -104,15 +104,32 @@ const Row = styled.div<{ $shake: boolean }>`
 const CellContainer = styled.div<{
   $animate: boolean;
   $flip: boolean;
+  $win?: boolean;
+  $winDelay?: number;
 }>`
   width: 60px;
   height: 60px;
   perspective: 400px;
+
   ${({ $animate }) =>
     $animate &&
     css`
       animation: ${popAnimation} 0.15s ease-in-out;
     `}
+
+  ${({ $win, $winDelay }) =>
+    $win &&
+    css`
+      animation: ${jumpAnimation} 0.8s ease-in-out ${$winDelay}s 1 forwards;
+    `}
+`;
+
+const jumpAnimation = keyframes`
+  0% { transform: translateY(0) scale(1); }
+  25% { transform: translateY(-25px) scale(1.1); }
+  50% { transform: translateY(-30px) scale(1.1); }
+  75% { transform: translateY(-25px) scale(1.1); }
+  100% { transform: translateY(0) scale(1); }
 `;
 
 const CellInner = styled.div<{
@@ -185,6 +202,13 @@ const [cellStatuses, setCellStatuses] = useState( Array.from({ length: 6 }, () =
   const lastMessage = useRef("");
   const shakeCooldown = useRef(Array(6).fill(false));
   const shakingRowsRef = useRef(Array(6).fill(false));
+
+  const isWinningRow = (rowIndex: number) => {
+  return (
+    rowIndex === currentRowIndex &&
+    cellStatuses[rowIndex].every((status) => status === "correct")
+  );
+};
 
   const testWord = async (word: string)=>{
     const response = await fetch(`${process.env.REACT_APP_RENDER_BASE_URL}/api/validate-word/`,{
@@ -326,10 +350,15 @@ const [cellStatuses, setCellStatuses] = useState( Array.from({ length: 6 }, () =
           if (prevCurrentRowIndex === 5) {
             setGameStatus("game-over");
             return prevCurrentRowIndex;
-          } else {
-            setCurrentGuess("");
+          } else if(resultArray.every((val:number)=>{
+            return val === 2
+          })){
+            setGameStatus("game-over")
+            return prevCurrentRowIndex;
           }
+          setCurrentGuess("");
           return prevCurrentRowIndex + 1;
+          
         });
         setIsGuessing(false);
       }, 5 * 300 + 500);
@@ -379,14 +408,20 @@ const [cellStatuses, setCellStatuses] = useState( Array.from({ length: 6 }, () =
           {Array.from({ length: 6 }).map((_, row) => (
             <Row key={row} $shake={shakingRows[row]}>
               {Array.from({ length: 5 }).map((_, col) => (
-                <CellContainer $animate={animatedCells[row][col]} $flip={flippedCells[row][col]}>
-  <CellInner $flip={flippedCells[row][col]}>
-    <CellFront>{guesses[row][col]}</CellFront>
-    <CellBack $status={cellStatuses[row][col]}>
-      {guesses[row][col]}
-    </CellBack>
-  </CellInner>
-</CellContainer>
+                <CellContainer
+                    $animate={animatedCells[row][col]}
+                    $flip={flippedCells[row][col]}
+                    $win={gameStatus === "game-over" &&
+                      cellStatuses[row].every((status) => status === "correct")}
+                      $winDelay={isWinningRow(row) ? col * 0.1 : 0}
+                  >
+                    <CellInner $flip={flippedCells[row][col]}>
+                      <CellFront>{guesses[row][col]}</CellFront>
+                      <CellBack $status={cellStatuses[row][col]}>
+                        {guesses[row][col]}
+                      </CellBack>
+                    </CellInner>
+                  </CellContainer>
               ))}
             </Row>
           ))}
