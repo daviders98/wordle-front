@@ -30,6 +30,7 @@ const LoadingText = styled.p`
   animation: ${fadeIn} 1.2s ease-in-out forwards;
   text-align: center;
   letter-spacing: 0.3px;
+  padding: 0 14px 0 ;
 
   &:last-of-type {
     color: #bdbdbd;

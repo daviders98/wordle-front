@@ -1,6 +1,7 @@
 import { HelpOutline } from "@mui/icons-material";
 import { useCallback, useEffect, useRef, useState } from "react";
 import styled, { keyframes, css } from "styled-components";
+import Keyboard from "./Keyboard";
 
 const popAnimation = keyframes`
   0% { transform: scale(1); }
@@ -49,11 +50,6 @@ const GameContainer = styled.div`
   width: 100%;
   height: 100vh;
   background-color: #121213;
-  padding-top: 70px;
-
-  @media (max-height: 700px) {
-    padding-top: 60px;
-  }
 `;
 
 const NavBarContainer = styled.div`
@@ -94,16 +90,16 @@ const IconsContainer = styled.div`
 const Board = styled.div`
   display: flex;
   flex-direction: column;
-  gap: 1.5vh;
+  gap: 2vh;
 
   @media (max-width: 600px) {
-    gap: 1vh;
+    gap: 1.5vh;
   }
 `;
 
 const Row = styled.div<{ $shake: boolean }>`
   display: flex;
-  gap: 1.5vw;
+  gap: .5vw;
   justify-content: center;
 
   ${({ $shake }) =>
@@ -404,6 +400,19 @@ const [cellStatuses, setCellStatuses] = useState( Array.from({ length: 6 }, () =
         didFetchJWT.current = true
     }
   },[])
+  const computeKeyStatuses = (cellStatuses: ("absent" | "present" | "correct" | undefined)[][], guesses: any[]) => {
+  const map: Record<string, "absent" | "present" | "correct"> = {};
+  guesses.forEach((row, rIndex) => {
+    row.forEach((letter: string | number, cIndex: number) => {
+      const status = cellStatuses[rIndex][cIndex];
+      if (!letter || !status) return;
+      map[letter] = status;
+    });
+  });
+  return map;
+};
+
+const keyStatuses = computeKeyStatuses(cellStatuses, guesses);
 
   return (
     <>
@@ -437,6 +446,22 @@ const [cellStatuses, setCellStatuses] = useState( Array.from({ length: 6 }, () =
             </Row>
           ))}
         </Board>
+        <Keyboard
+  onKeyPress={(key) => {
+    if (gameStatus === "game-over") return;
+    
+    if (key === "ENTER") {
+      setIsGuessing(true);
+    } else if (key === "⌫") {
+      setCurrentGuess((prev) => prev.slice(0, -1));
+    } else if (/^[A-Z]$/.test(key)) {
+      setCurrentGuess((prev) =>
+        prev.length < 5 ? prev + key : prev
+      );
+    }
+  }}
+  keyStatuses={keyStatuses}
+/>
       </GameContainer>
     </>
   );
