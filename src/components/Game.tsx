@@ -167,7 +167,16 @@ function Game() {
   const shakingRowsRef = useRef(Array(6).fill(false));
 
   const testWord = async (word: string)=>{
-    const response = await fetch(`${process.env.REACT_APP_DICTIONARY_API_URL}${word}`,{method:'get'})
+    const response = await fetch(`${process.env.REACT_APP_RENDER_BASE_URL}/api/validate-word/`,{
+        method:'POST',
+        body:JSON.stringify({
+            word: word
+        }),
+        headers:{
+            'Content-Type': 'application/json',
+            Authorization: `Bearer ${jwtValue}`,
+        }
+    })
     return response.status===200
   }
 
