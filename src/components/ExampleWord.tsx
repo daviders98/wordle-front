@@ -7,7 +7,7 @@ const spin = keyframes`
   100% { transform: rotateX(720deg); }
 `;
 
-const CorrectLetter = styled.span<{ animate: boolean }>`
+const CorrectLetter = styled.span<{ $animate: boolean }>`
   display: inline-block;
   width: 40px;
   height: 40px;
@@ -21,11 +21,11 @@ const CorrectLetter = styled.span<{ animate: boolean }>`
   border-radius: 4px;
   border: 2px solid #565758;
 
-  ${({ animate }) =>
-    animate &&
+  ${({ $animate }) =>
+    $animate ?
     css`
       animation: ${spin} 2s ease-in-out;
-    `}
+    `:''}
 `;
 
 const WordContainer = styled.div`
@@ -55,7 +55,7 @@ const WordExplanation = styled.p`
   color: #d7dadc;
 `;
 
-const PresentLetter = styled.span<{ animate: boolean }>`
+const PresentLetter = styled.span<{ $animate: boolean }>`
   display: inline-block;
   width: 40px;
   height: 40px;
@@ -69,14 +69,14 @@ const PresentLetter = styled.span<{ animate: boolean }>`
   border-radius: 4px;
   border: 2px solid #565758;
 
-  ${({ animate }) =>
-    animate &&
+  ${({ $animate }) =>
+    $animate ?
     css`
       animation: ${spin} 2s ease-in-out;
-    `}
+    `:''}
 `;
 
-const AbscentLetter = styled.span<{ animate: boolean }>`
+const AbscentLetter = styled.span<{ $animate: boolean }>`
   display: inline-block;
   width: 40px;
   height: 40px;
@@ -90,11 +90,11 @@ const AbscentLetter = styled.span<{ animate: boolean }>`
   border-radius: 4px;
   border: 2px solid #565758;
   
-  ${({ animate }) =>
-    animate &&
+  ${({ $animate }) =>
+    $animate ?
     css`
       animation: ${spin} 2s ease-in-out;
-    `}
+    `:''}
 `;
 
 
@@ -115,10 +115,10 @@ function WordExample({ word, letterHighlight,type, explanation}: { letterHighlig
       {letters.map((letter, index) => {
         return letterHighlightUppercase === letter ? 
           type ==='success' ?
-        <CorrectLetter animate={animate}>{correctLetter}</CorrectLetter>
+        <CorrectLetter key={index} $animate={animate}>{correctLetter}</CorrectLetter>
         : type ==='present' ?
-        <PresentLetter animate={animate}>{correctLetter}</PresentLetter>
-        : <AbscentLetter animate={animate}>{correctLetter}</AbscentLetter>:
+        <PresentLetter key={index} $animate={animate}>{correctLetter}</PresentLetter>
+        : <AbscentLetter key={index} $animate={animate}>{correctLetter}</AbscentLetter>:
         <RestLetters key={index}>{letter}</RestLetters>;
       })}
     </WordContainer>

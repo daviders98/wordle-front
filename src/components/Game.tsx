@@ -112,16 +112,16 @@ const CellContainer = styled.div<{
   perspective: 400px;
 
   ${({ $animate }) =>
-    $animate &&
+    $animate ?
     css`
       animation: ${popAnimation} 0.15s ease-in-out;
-    `}
+    `: ''}
 
   ${({ $win, $winDelay }) =>
-    $win &&
+    $win ?
     css`
       animation: ${jumpAnimation} 0.8s ease-in-out ${$winDelay}s 1 forwards;
-    `}
+    `: ''}
 `;
 
 const jumpAnimation = keyframes`
@@ -409,6 +409,7 @@ const [cellStatuses, setCellStatuses] = useState( Array.from({ length: 6 }, () =
             <Row key={row} $shake={shakingRows[row]}>
               {Array.from({ length: 5 }).map((_, col) => (
                 <CellContainer
+                    key={col}
                     $animate={animatedCells[row][col]}
                     $flip={flippedCells[row][col]}
                     $win={gameStatus === "game-over" &&
