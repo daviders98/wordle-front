@@ -41,7 +41,7 @@ const Message = styled.div`
 `;
 
 const GameContainer = styled.div`
-  position: relative; /* needed for Message absolute positioning */
+  position: relative;
   display: flex;
   flex-direction: column;
   align-items: center;
@@ -84,14 +84,14 @@ const IconsContainer = styled.div`
 const Board = styled.div`
   display: flex;
   flex-direction: column;
-  gap: 8px;
+  gap: 12px;
 `;
 
 const Row = styled.div<{ $shake: boolean }>`
   display: flex;
-  gap: 4px;
+  gap: 8px;
   justify-content: center;
-  
+
   ${({ $shake }) =>
     $shake
       ? css`
@@ -100,9 +100,36 @@ const Row = styled.div<{ $shake: boolean }>`
       : ""}
 `;
 
-const Cell = styled.div<{ $animate: boolean; $flip: boolean; $revealed: boolean }>`
+
+const CellContainer = styled.div<{
+  $animate: boolean;
+  $flip: boolean;
+}>`
   width: 60px;
   height: 60px;
+  perspective: 400px;
+  ${({ $animate }) =>
+    $animate &&
+    css`
+      animation: ${popAnimation} 0.15s ease-in-out;
+    `}
+`;
+
+const CellInner = styled.div<{
+  $flip: boolean;
+}>`
+  width: 100%;
+  height: 100%;
+  position: relative;
+  transform-style: preserve-3d;
+  transition: transform 0.6s ease-in-out;
+  transform: rotateX(${({ $flip }) => ($flip ? -180 : 0)}deg);
+`;
+
+const CellFront = styled.div`
+  position: absolute;
+  width: 100%;
+  height: 100%;
   border: 2px solid #565758;
   display: flex;
   align-items: center;
@@ -110,39 +137,34 @@ const Cell = styled.div<{ $animate: boolean; $flip: boolean; $revealed: boolean 
   font-size: 24px;
   font-weight: bold;
   color: #d7dadc;
-  background-color: ${({ $revealed }) => ($revealed ? "#3a3a3c" : "#121213")};
-  transform-style: preserve-3d;
-  perspective: 400px;
-
-  ${({ $animate }) =>
-    $animate
-      ? css`
-          animation: ${popAnimation} 0.15s ease-in-out;
-        `
-      : undefined}
-
-  ${({ $flip }) =>
-    $flip
-      ? css`
-          animation: ${flipAnimation} 1s ease-in-out;
-        `
-      : undefined}
+  background-color: #121213;
+  backface-visibility: hidden;
 `;
 
-const flipAnimation = keyframes`
-  0% {
-    transform: rotateX(0deg);
-  }
-  50% {
-    transform: rotateX(90deg);
-    background-color: #3a3a3c;
-  }
-  100% {
-    transform: rotateX(0deg);
-  }
+const CellBack = styled.div<{
+  $status?: "absent" | "present" | "correct";
+}>`
+  position: absolute;
+  width: 100%;
+  height: 100%;
+  border: 2px solid #565758;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  font-size: 24px;
+  font-weight: bold;
+  color: #d7dadc;
+  backface-visibility: hidden;
+  transform: rotateX(-180deg);
+  background-color: ${({ $status }) => {
+    if ($status === "correct") return "#538d4e";
+    if ($status === "present") return "#b59f3b";
+    if ($status === "absent") return "#3a3a3c";
+    return "#3a3a3c";
+  }};
 `;
 
-function Game() {
+export default function Game() {
   const initialArray = Array.from({ length: 6 }, () => Array(5).fill(""));
   const [guesses, setGuesses] = useState(initialArray);
   const [currentGuess, setCurrentGuess] = useState("");
@@ -155,9 +177,7 @@ function Game() {
   const [animatedCells, setAnimatedCells] = useState(
     Array.from({ length: 6 }, () => Array(5).fill(false))
   );
-  const [revealedCells, setRevealedCells] = useState(
-  Array.from({ length: 6 }, () => Array(5).fill(false))
-);
+const [cellStatuses, setCellStatuses] = useState( Array.from({ length: 6 }, () => Array<"absent" | "present" | "correct" | undefined>(5).fill(undefined)) );
   const [shakingRows, setShakingRows] = useState(Array(6).fill(false));
   const [message, setMessage] = useState("");
   const [jwtValue, setJwtValue] = useState<string | null>(null);
@@ -177,8 +197,16 @@ function Game() {
             Authorization: `Bearer ${jwtValue}`,
         }
     })
-    return response.status===200
+    const data = await response.json()
+    return data.valid
   }
+  const compareWithSolution = async (word: string)=>{ 
+    const response = await fetch(`${process.env.REACT_APP_RENDER_BASE_URL}/api/check-guess/`,{ method:'POST', body:JSON.stringify({ guess: word }), 
+    headers:{ 'Content-Type': 'application/json', Authorization: `Bearer ${jwtValue}`, } })
+     const data = await response.json(); 
+     return data.letters } 
+     
+  const mapResultToStatus = (result: number[]): ("absent" | "present" | "correct")[] => { return result.map((val) => { if (val === 0) return "absent"; if (val === 1) return "present"; if (val === 2) return "correct"; return "absent"; }); };
 
   const showMessage = (text: string) => {
   if (messageCooldown.current && lastMessage.current === text) return;
@@ -276,33 +304,21 @@ function Game() {
     const guessing = async () => {
         const isValidGuess = await testWord(currentGuess);
     if (isGuessing && isValidGuess && currentGuess) {
+      const resultArray = await compareWithSolution(currentGuess)
       for (let i = 0; i < 5; i++) {
+        const status = mapResultToStatus(resultArray)[i];
         setTimeout(() => {
-          setFlippedCells(prev => {
-  const copy = prev.map(row => [...row]);
-  copy[currentRowIndex][i] = true;
-  return copy;
-});
-
-setFlippedCells(prev => {
-  const copy = prev.map(row => [...row]);
-  copy[currentRowIndex][i] = true;
-  return copy;
-});
-
-setTimeout(() => {
-  setFlippedCells(prev => {
-    const copy = prev.map(row => [...row]);
-    copy[currentRowIndex][i] = false;
-    return copy;
-  });
-  setRevealedCells(prev => {
-    const copy = prev.map(row => [...row]);
-    copy[currentRowIndex][i] = true;
-    return copy;
-  });
-}, 850);
-        }, i * 400);
+          setCellStatuses((prev) => {
+              const copy = prev.map((row) => [...row]);
+              copy[currentRowIndex][i] = status;
+              return copy;
+            });
+          setFlippedCells((prev) => {
+            const copy = prev.map((row) => [...row]);
+            copy[currentRowIndex][i] = true;
+            return copy;
+          });
+        }, i * 350);
       }
 
       setTimeout(() => {
@@ -323,7 +339,7 @@ setTimeout(() => {
         setIsGuessing(false)
     }
 }
-guessing()
+  guessing()
   }
 , [isGuessing, currentRowIndex]);
 
@@ -363,14 +379,14 @@ guessing()
           {Array.from({ length: 6 }).map((_, row) => (
             <Row key={row} $shake={shakingRows[row]}>
               {Array.from({ length: 5 }).map((_, col) => (
-                <Cell
-                  key={col}
-                  $animate={animatedCells[row][col]}
-                  $flip={flippedCells[row][col]}
-                  $revealed={revealedCells[row][col]}
-                >
-                  {guesses[row][col]}
-                </Cell>
+                <CellContainer $animate={animatedCells[row][col]} $flip={flippedCells[row][col]}>
+  <CellInner $flip={flippedCells[row][col]}>
+    <CellFront>{guesses[row][col]}</CellFront>
+    <CellBack $status={cellStatuses[row][col]}>
+      {guesses[row][col]}
+    </CellBack>
+  </CellInner>
+</CellContainer>
               ))}
             </Row>
           ))}
@@ -379,5 +395,3 @@ guessing()
     </>
   );
 }
-
-export default Game;
