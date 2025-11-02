@@ -4,7 +4,8 @@ import Game from './components/Game';
 import WakeUpApp from './components/WakeUpApp';
 
 function App() {
-  return (<><WakeUpApp/>
+  return (<>
+  <WakeUpApp/>
   <BrowserRouter>
       <Routes>
         <Route path="/" element={<Onboarding />} />

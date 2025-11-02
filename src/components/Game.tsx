@@ -158,9 +158,9 @@ function Game() {
   const [revealedCells, setRevealedCells] = useState(
   Array.from({ length: 6 }, () => Array(5).fill(false))
 );
-
   const [shakingRows, setShakingRows] = useState(Array(6).fill(false));
   const [message, setMessage] = useState("");
+  const [jwtValue, setJwtValue] = useState<string | null>(null);
   const messageCooldown = useRef(false);
   const lastMessage = useRef("");
   const shakeCooldown = useRef(Array(6).fill(false));
@@ -324,6 +324,22 @@ guessing()
       window.removeEventListener("keydown", handleKeyDown);
     };
   }, [handleKeyDown]);
+
+  const didFetchJWT = useRef(false);
+  useEffect(()=>{
+    const getJWT = async function() {
+        const response = await fetch(`${process.env.REACT_APP_RENDER_BASE_URL}/api/get-jwt/`,{
+        method:'POST',
+        credentials: "include",
+    })
+    const jwt = await response.json()
+    setJwtValue(jwt.token)
+    }
+    if(!didFetchJWT.current){
+        getJWT()
+        didFetchJWT.current = true
+    }
+  },[])
 
   return (
     <>
