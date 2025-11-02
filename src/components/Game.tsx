@@ -29,12 +29,12 @@ const shakeAnimation = keyframes`
 
 const Message = styled.div`
   position: absolute;
-  top: 100px;
+  top: 80px;
   background-color: #333;
   color: white;
-  padding: 10px 20px;
+  padding: 8px 16px;
   border-radius: 6px;
-  font-size: 16px;
+  font-size: clamp(12px, 3.5vw, 16px);
   animation: ${fadeInOut} 2.5s ease-in-out;
   pointer-events: none;
   z-index: 5;
@@ -49,6 +49,11 @@ const GameContainer = styled.div`
   width: 100%;
   height: 100vh;
   background-color: #121213;
+  padding-top: 70px;
+
+  @media (max-height: 700px) {
+    padding-top: 60px;
+  }
 `;
 
 const NavBarContainer = styled.div`
@@ -60,6 +65,11 @@ const NavBarContainer = styled.div`
   color: #f8f8f8;
   position: fixed;
   top: 0;
+  z-index: 10;
+
+  @media (max-width: 600px) {
+    height: 50px;
+  }
 `;
 
 const HelpIcon = styled(HelpOutline)`
@@ -84,22 +94,28 @@ const IconsContainer = styled.div`
 const Board = styled.div`
   display: flex;
   flex-direction: column;
-  gap: 12px;
+  gap: 1.5vh;
+
+  @media (max-width: 600px) {
+    gap: 1vh;
+  }
 `;
 
 const Row = styled.div<{ $shake: boolean }>`
   display: flex;
-  gap: 8px;
+  gap: 1.5vw;
   justify-content: center;
 
   ${({ $shake }) =>
-    $shake
-      ? css`
-          animation: ${shakeAnimation} 700ms ease-in-out;
-        `
-      : ""}
-`;
+    $shake &&
+    css`
+      animation: ${shakeAnimation} 700ms ease-in-out;
+    `}
 
+  @media (max-width: 600px) {
+    gap: 1vw;
+  }
+`;
 
 const CellContainer = styled.div<{
   $animate: boolean;
@@ -107,21 +123,28 @@ const CellContainer = styled.div<{
   $win?: boolean;
   $winDelay?: number;
 }>`
-  width: 60px;
-  height: 60px;
+  width: 12vw;
+  height: 12vw;
+  max-width: 60px;
+  max-height: 60px;
   perspective: 400px;
 
   ${({ $animate }) =>
-    $animate ?
+    $animate &&
     css`
       animation: ${popAnimation} 0.15s ease-in-out;
-    `: ''}
+    `}
 
   ${({ $win, $winDelay }) =>
-    $win ?
+    $win &&
     css`
       animation: ${jumpAnimation} 0.8s ease-in-out ${$winDelay}s 1 forwards;
-    `: ''}
+    `}
+
+  @media (max-width: 600px) {
+    width: 14vw;
+    height: 14vw;
+  }
 `;
 
 const jumpAnimation = keyframes`
@@ -151,27 +174,14 @@ const CellFront = styled.div`
   display: flex;
   align-items: center;
   justify-content: center;
-  font-size: 24px;
+  font-size: clamp(16px, 4vw, 24px);
   font-weight: bold;
   color: #d7dadc;
   background-color: #121213;
   backface-visibility: hidden;
 `;
 
-const CellBack = styled.div<{
-  $status?: "absent" | "present" | "correct";
-}>`
-  position: absolute;
-  width: 100%;
-  height: 100%;
-  border: 2px solid #565758;
-  display: flex;
-  align-items: center;
-  justify-content: center;
-  font-size: 24px;
-  font-weight: bold;
-  color: #d7dadc;
-  backface-visibility: hidden;
+const CellBack = styled(CellFront)<{ $status?: "absent" | "present" | "correct" }>`
   transform: rotateX(-180deg);
   background-color: ${({ $status }) => {
     if ($status === "correct") return "#538d4e";
