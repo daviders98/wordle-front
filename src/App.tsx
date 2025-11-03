@@ -3,6 +3,7 @@ import { BrowserRouter, Routes, Route } from 'react-router-dom';
 import Onboarding from './components/Onboarding';
 import Game from './components/Game';
 import Loading from './components/Loading';
+import { StatsProvider } from './context/StatsContext';
 
 function App() {
   const [wakeUpDone, setWakeUpDone] = useState(false);
@@ -19,6 +20,7 @@ function App() {
 
   return (
     <BrowserRouter>
+    <StatsProvider>
       <Routes>
         <Route path="/" element={<Onboarding />} />
         <Route
@@ -26,6 +28,7 @@ function App() {
           element={wakeUpDone ? <Game /> : <Loading />}
         />
       </Routes>
+      </StatsProvider>
     </BrowserRouter>
   );
 }

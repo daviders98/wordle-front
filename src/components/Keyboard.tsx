@@ -38,13 +38,14 @@ const Key = styled.button<{ $status?: "absent" | "present" | "correct" }>`
   }};
   color: #f8f8f8;
   font-weight: bold;
-  font-size: clamp(14px, 4vw, 18px);
+  font-size: clamp(12px, 4vw, 18px);
   border: none;
   border-radius: 6px;
   padding: 18px 16px 18px;
   cursor: pointer;
   flex: 1;
   text-transform: uppercase;
+  min-height:58px;
 
   &:active {
     transform: scale(0.97);

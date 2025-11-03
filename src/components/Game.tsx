@@ -2,12 +2,19 @@ import { HelpOutline } from "@mui/icons-material";
 import { useCallback, useEffect, useRef, useState } from "react";
 import styled, { keyframes, css } from "styled-components";
 import Keyboard from "./Keyboard";
+import { useStats } from "../context/StatsContext";
+import StatsModal from "./StatsModal";
 
 const popAnimation = keyframes`
   0% { transform: scale(1); }
   50% { transform: scale(1.2); }
   100% { transform: scale(1); }
 `;
+
+const PageContainer = styled.div`
+  height: 100vh;
+  background-color: #121213;
+`
 
 const fadeInOut = keyframes`
   0% { opacity: 0; transform: translateY(-10px); }
@@ -31,8 +38,8 @@ const shakeAnimation = keyframes`
 const Message = styled.div`
   position: absolute;
   top: 80px;
-  background-color: #333;
-  color: white;
+  background-color: white;
+  color: #333;
   padding: 8px 16px;
   border-radius: 6px;
   font-size: clamp(12px, 3.5vw, 16px);
@@ -46,10 +53,12 @@ const GameContainer = styled.div`
   display: flex;
   flex-direction: column;
   align-items: center;
-  justify-content: center;
+  justify-content: space-evenly;
   width: 100%;
-  height: 100vh;
   background-color: #121213;
+  overflow: hidden;
+  padding:12px 0 12px;
+  flex: 1;
 `;
 
 const NavBarContainer = styled.div`
@@ -59,8 +68,6 @@ const NavBarContainer = styled.div`
   display: flex;
   align-items: center;
   color: #f8f8f8;
-  position: fixed;
-  top: 0;
   z-index: 10;
 
   @media (max-width: 600px) {
@@ -190,10 +197,11 @@ const CellBack = styled(CellFront)<{ $status?: "absent" | "present" | "correct" 
 export default function Game() {
   const initialArray = Array.from({ length: 6 }, () => Array(5).fill(""));
   const [guesses, setGuesses] = useState(initialArray);
+  const [showStatsModal,setShowStatsModal] = useState(false)
   const [currentGuess, setCurrentGuess] = useState("");
   const [currentRowIndex, setCurrentRowIndex] = useState(0);
   const [isGuessing, setIsGuessing] = useState(false);
-  const [gameStatus, setGameStatus] = useState("in progress");
+  const [gameStatus, setGameStatus] = useState("start");
   const [flippedCells, setFlippedCells] = useState(
     Array.from({ length: 6 }, () => Array(5).fill(false))
   );
@@ -204,11 +212,13 @@ const [cellStatuses, setCellStatuses] = useState( Array.from({ length: 6 }, () =
   const [shakingRows, setShakingRows] = useState(Array(6).fill(false));
   const [message, setMessage] = useState("");
   const [jwtValue, setJwtValue] = useState<string | null>(null);
+  const [didWin,setDidWin] = useState(false);
   const messageCooldown = useRef(false);
   const lastMessage = useRef("");
   const shakeCooldown = useRef(Array(6).fill(false));
   const shakingRowsRef = useRef(Array(6).fill(false));
-
+  const { stats, updateStats } = useStats();
+  const toggleStatsModal = ()=>setShowStatsModal(prev=>!prev)
   const isWinningRow = (rowIndex: number) => {
   return (
     rowIndex === currentRowIndex &&
@@ -267,6 +277,17 @@ const [cellStatuses, setCellStatuses] = useState( Array.from({ length: 6 }, () =
     shakeCooldown.current[rowIndex] = false;
   }, 1000);
 };
+
+  useEffect(() => {
+  if (gameStatus === "game-over") {
+    showMessage(didWin?"Splendid! 🎉":"Better luck next time 🥲")
+    setTimeout(()=>{
+      updateStats(didWin)
+      setShowStatsModal(true);
+    },900)
+  }
+}, [gameStatus, didWin]);
+
 
   useEffect(() => {
     setGuesses((prevGuesses) => {
@@ -360,6 +381,7 @@ const [cellStatuses, setCellStatuses] = useState( Array.from({ length: 6 }, () =
             return val === 2
           })){
             setGameStatus("game-over")
+            setDidWin(true)
             return prevCurrentRowIndex;
           }
           setCurrentGuess("");
@@ -415,7 +437,8 @@ const [cellStatuses, setCellStatuses] = useState( Array.from({ length: 6 }, () =
 const keyStatuses = computeKeyStatuses(cellStatuses, guesses);
 
   return (
-    <>
+    <PageContainer>
+      {showStatsModal && <StatsModal onClose={toggleStatsModal}/>}
       <NavBarContainer>
         <IconsContainer>
           <HelpIcon />
@@ -463,6 +486,6 @@ const keyStatuses = computeKeyStatuses(cellStatuses, guesses);
   keyStatuses={keyStatuses}
 />
       </GameContainer>
-    </>
+    </PageContainer>
   );
 }
