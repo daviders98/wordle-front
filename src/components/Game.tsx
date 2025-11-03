@@ -1,9 +1,9 @@
-import { HelpOutline } from "@mui/icons-material";
 import { useCallback, useEffect, useRef, useState } from "react";
 import styled, { keyframes, css } from "styled-components";
 import Keyboard from "./Keyboard";
 import { useStats } from "../context/StatsContext";
 import StatsModal from "./StatsModal";
+import NavBar from "./NavBar";
 
 const popAnimation = keyframes`
   0% { transform: scale(1); }
@@ -59,39 +59,6 @@ const GameContainer = styled.div`
   overflow: hidden;
   padding:12px 0 12px;
   flex: 1;
-`;
-
-const NavBarContainer = styled.div`
-  width: 100%;
-  height: 60px;
-  background-color: #1a1a1b;
-  display: flex;
-  align-items: center;
-  color: #f8f8f8;
-  z-index: 10;
-
-  @media (max-width: 600px) {
-    height: 50px;
-  }
-`;
-
-const HelpIcon = styled(HelpOutline)`
-  color: #f8f8f8;
-  cursor: pointer;
-  padding: 12px;
-  border-radius: 4px;
-  height: 100%;
-  &:hover {
-    color: #d7dadc;
-    background-color: #333334;
-  }
-`;
-
-const IconsContainer = styled.div`
-  cursor: pointer;
-  height: 100%;
-  display: flex;
-  align-items: center;
 `;
 
 const Board = styled.div`
@@ -439,11 +406,7 @@ const keyStatuses = computeKeyStatuses(cellStatuses, guesses);
   return (
     <PageContainer>
       {showStatsModal && <StatsModal onClose={toggleStatsModal}/>}
-      <NavBarContainer>
-        <IconsContainer>
-          <HelpIcon />
-        </IconsContainer>
-      </NavBarContainer>
+      <NavBar/>
       <GameContainer>
         {message && <Message>{message}</Message>}
         <Board>
