@@ -165,28 +165,38 @@ const CellBack = styled(CellFront)<{ $status?: "absent" | "present" | "correct" 
 
 export default function Game() {
   const previousData = localStorage.getItem('game-data')
-  const previousRowIndex = previousData ? JSON.parse(previousData).guesses.findIndex(
+  const parsedPreviousData = previousData ? JSON.parse(previousData) : null;
+  const previousRowIndex = parsedPreviousData ? parsedPreviousData?.guesses.findIndex(
   (row:string[]) => row.every(cell => cell === "")
 ): 0;
   const initialArray = Array.from({ length: 6 }, () => Array(5).fill(""));
   const initialCellStatuses = Array.from({ length: 6 }, () => Array<"absent" | "present" | "correct" | undefined>(5).fill(undefined))
-  const [guesses, setGuesses] = useState(previousData ? JSON.parse(previousData).guesses : initialArray);
+  const hasCorrectRow = parsedPreviousData?.cellStatuses?.some(
+  (row: string[]) => row.every(cell => cell === "correct")
+);
+const allRowsFilled = parsedPreviousData?.cellStatuses?.every(
+  (row: string[]) => row.every(cell => cell !== "")
+);
+
+  const initialGameStatus = hasCorrectRow || allRowsFilled ? "game-over" : "start";
+
+  const [guesses, setGuesses] = useState(parsedPreviousData?.guesses || initialArray);
   const [showStatsModal,setShowStatsModal] = useState(false)
   const [currentGuess, setCurrentGuess] = useState("");
   const [currentRowIndex, setCurrentRowIndex] = useState(previousRowIndex);
   const [isGuessing, setIsGuessing] = useState(false);
-  const [gameStatus, setGameStatus] = useState("start");
+  const [gameStatus, setGameStatus] = useState(initialGameStatus);
   const [flippedCells, setFlippedCells] = useState(
-    previousData ? JSON.parse(previousData).guesses : initialArray
+    parsedPreviousData?.guesses || initialArray
   );
   const [animatedCells, setAnimatedCells] = useState(
-    previousData ? JSON.parse(previousData).guesses : initialArray
+    parsedPreviousData?.guesses || initialArray
   );
-const [cellStatuses, setCellStatuses] = useState(previousData ? JSON.parse(previousData).cellStatuses : initialCellStatuses);
+const [cellStatuses, setCellStatuses] = useState(parsedPreviousData?.cellStatuses || initialCellStatuses);
   const [shakingRows, setShakingRows] = useState(Array(6).fill(false));
   const [message, setMessage] = useState("");
   const [jwtValue, setJwtValue] = useState<string | null>(null);
-  const [didWin,setDidWin] = useState(false);
+  const [didWin,setDidWin] = useState(hasCorrectRow|| false);
   const messageCooldown = useRef(false);
   const lastMessage = useRef("");
   const shakeCooldown = useRef(Array(6).fill(false));
@@ -271,7 +281,6 @@ const [cellStatuses, setCellStatuses] = useState(previousData ? JSON.parse(previ
 
 
   useEffect(() => {
-    if(currentGuess){
       setGuesses((prevGuesses: any[]) => {
       const newGuesses = prevGuesses.map((row) => [...row]);
       if (currentGuess.length > 5) return newGuesses;
@@ -301,7 +310,6 @@ const [cellStatuses, setCellStatuses] = useState(previousData ? JSON.parse(previ
 
       return newGuesses;
     });
-    }
   }, [currentGuess, currentRowIndex]);
 
   const handleKeyDown = useCallback(
@@ -410,10 +418,8 @@ const [cellStatuses, setCellStatuses] = useState(previousData ? JSON.parse(previ
   cellStatuses: ("absent" | "present" | "correct" | undefined)[][],
   guesses: string[][]
 ) => {
-  if (!Array.isArray(guesses)) return {};
   const map: Record<string, "absent" | "present" | "correct"> = {};
   guesses.forEach((row, rIndex) => {
-    if (!Array.isArray(row)) return;
     row.forEach((letter, cIndex) => {
       const status = cellStatuses?.[rIndex]?.[cIndex];
       if (!letter || !status) return;
@@ -445,9 +451,9 @@ const keyStatuses = computeKeyStatuses(cellStatuses, guesses);
                       $winDelay={isWinningRow(row) ? col * 0.1 : 0}
                   >
                     <CellInner $flip={flippedCells[row][col]}>
-                      <CellFront>{guesses && guesses[row][col]}</CellFront>
+                      <CellFront>{guesses[row][col]}</CellFront>
                       <CellBack $status={cellStatuses[row][col]}>
-                        {guesses && guesses[row][col]}
+                        {guesses[row][col]}
                       </CellBack>
                     </CellInner>
                   </CellContainer>
