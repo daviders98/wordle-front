@@ -4,7 +4,7 @@ import TutorialModal from './TutorialModal';
 import styled from 'styled-components';
 import { useNavigate } from 'react-router-dom'; 
 
-export default function Onboarding() {
+export default function Onboarding({previousGameExist}:{previousGameExist:boolean}) {
     const navigate = useNavigate();
   const [tutorialModalOpened, setTutorialModalOpened] = useState(false);
   const toggleTutorialModal = () => setTutorialModalOpened(prev => !prev);
@@ -33,13 +33,13 @@ export default function Onboarding() {
           Next word coming in: {nextWordDiff.hours()}h {nextWordDiff.minutes()}m {nextWordDiff.seconds()}s
         </NextWordText>
 
-        <Title>Welcome!</Title>
+        <Title>Welcome {previousGameExist && 'back'}!</Title>
         <Logo src={'/logo.png'} alt='wordle logo' />
         <MainHeading>Wordle</MainHeading>
         <Description>Get 6 chances to guess a 5-letter word.</Description>
 
         <ButtonsContainer>
-          <MainButton onClick={() => navigate('/play')}>Play</MainButton>
+          <MainButton onClick={() => navigate('/play')}>{previousGameExist ? 'Continue': 'Play'}</MainButton>
           <SecondaryButton onClick={toggleTutorialModal}>How to Play</SecondaryButton>
           <HistoryButton>View word History</HistoryButton>
         </ButtonsContainer>

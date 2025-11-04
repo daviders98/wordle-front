@@ -4,11 +4,12 @@ import Onboarding from './components/Onboarding';
 import Game from './components/Game';
 import Loading from './components/Loading';
 import { StatsProvider } from './context/StatsContext';
+import useMidnightUTCReset from './hooks/UseMidnightUTCReset';
 
 function App() {
   const [wakeUpDone, setWakeUpDone] = useState(false);
   const wakeUpCalled = useRef(false);
-  const [showContinueScreen,setShowContinueScreen] = useState(true)
+  const [previousGameExist,setPreviousGameExist] = useState(false)
 
   useEffect(() => {
     if (wakeUpCalled.current) return;
@@ -18,19 +19,17 @@ function App() {
       .then(() => setWakeUpDone(true))
       .catch(() => alert('Error, game cannot be played.'));
     
-    const previousGameData = localStorage.getItem("game-data"); //TO-DO: continue y comeback tomorrow screen
-    if(previousGameData){
-      setShowContinueScreen(true)
-    }else{
-      setShowContinueScreen(false)
-    }
+    const previousData = localStorage.getItem('game-data')
+    setPreviousGameExist(!!previousData)
   }, []);
+
+  useMidnightUTCReset();
 
   return (
     <BrowserRouter>
     <StatsProvider>
       <Routes>
-        <Route path="/" element={<Onboarding />} />
+        <Route path="/" element={<Onboarding previousGameExist={previousGameExist}/>} />
         <Route
           path="/play"
           element={wakeUpDone ? <Game /> : <Loading />}
