@@ -163,20 +163,25 @@ const CellBack = styled(CellFront)<{ $status?: "absent" | "present" | "correct" 
 `;
 
 export default function Game() {
+  const previousData = localStorage.getItem('game-data')
+  const previousRowIndex = previousData ? JSON.parse(previousData).guesses.findIndex(
+  (row:string[]) => row.every(cell => cell === "")
+): 0;
   const initialArray = Array.from({ length: 6 }, () => Array(5).fill(""));
-  const [guesses, setGuesses] = useState(initialArray);
+  const initialCellStatuses = Array.from({ length: 6 }, () => Array<"absent" | "present" | "correct" | undefined>(5).fill(undefined))
+  const [guesses, setGuesses] = useState(previousData ? JSON.parse(previousData).guesses : initialArray);
   const [showStatsModal,setShowStatsModal] = useState(false)
   const [currentGuess, setCurrentGuess] = useState("");
-  const [currentRowIndex, setCurrentRowIndex] = useState(0);
+  const [currentRowIndex, setCurrentRowIndex] = useState(previousRowIndex);
   const [isGuessing, setIsGuessing] = useState(false);
   const [gameStatus, setGameStatus] = useState("start");
   const [flippedCells, setFlippedCells] = useState(
-    Array.from({ length: 6 }, () => Array(5).fill(false))
+    previousData ? JSON.parse(previousData).guesses : initialArray
   );
   const [animatedCells, setAnimatedCells] = useState(
-    Array.from({ length: 6 }, () => Array(5).fill(false))
+    previousData ? JSON.parse(previousData).guesses : initialArray
   );
-const [cellStatuses, setCellStatuses] = useState( Array.from({ length: 6 }, () => Array<"absent" | "present" | "correct" | undefined>(5).fill(undefined)) );
+const [cellStatuses, setCellStatuses] = useState(previousData ? JSON.parse(previousData).cellStatuses : initialCellStatuses);
   const [shakingRows, setShakingRows] = useState(Array(6).fill(false));
   const [message, setMessage] = useState("");
   const [jwtValue, setJwtValue] = useState<string | null>(null);
@@ -185,16 +190,15 @@ const [cellStatuses, setCellStatuses] = useState( Array.from({ length: 6 }, () =
   const lastMessage = useRef("");
   const shakeCooldown = useRef(Array(6).fill(false));
   const shakingRowsRef = useRef(Array(6).fill(false));
-  const { stats, updateStats } = useStats();
+  const { updateStats } = useStats();
   const toggleStatsModal = ()=>setShowStatsModal(prev=>!prev)
   const isWinningRow = (rowIndex: number) => {
   return (
     rowIndex === currentRowIndex &&
-    cellStatuses[rowIndex].every((status) => status === "correct")
+    cellStatuses[rowIndex].every((status:string) => status === "correct")
   );
 };
-
-  const testWord = async (word: string)=>{
+  const testWord = async (word: string,retry=true):Promise<boolean>=>{
     const response = await fetch(`${process.env.REACT_APP_RENDER_BASE_URL}/api/validate-word/`,{
         method:'POST',
         body:JSON.stringify({
@@ -205,12 +209,20 @@ const [cellStatuses, setCellStatuses] = useState( Array.from({ length: 6 }, () =
             Authorization: `Bearer ${jwtValue}`,
         }
     })
+    if(response.status === 401 && retry){
+      await getJWT()
+      return await testWord(word,false)
+    }
     const data = await response.json()
     return data.valid
   }
-  const compareWithSolution = async (word: string)=>{ 
+  const compareWithSolution = async (word: string,retry=true):Promise<Array<number>>=>{ 
     const response = await fetch(`${process.env.REACT_APP_RENDER_BASE_URL}/api/check-guess/`,{ method:'POST', body:JSON.stringify({ guess: word }), 
     headers:{ 'Content-Type': 'application/json', Authorization: `Bearer ${jwtValue}`, } })
+    if(response.status === 401){
+      await getJWT()
+      return await compareWithSolution(word,false)
+    }
      const data = await response.json(); 
      return data.letters } 
      
@@ -258,7 +270,8 @@ const [cellStatuses, setCellStatuses] = useState( Array.from({ length: 6 }, () =
 
 
   useEffect(() => {
-    setGuesses((prevGuesses) => {
+    if(currentGuess){
+      setGuesses((prevGuesses: any[]) => {
       const newGuesses = prevGuesses.map((row) => [...row]);
       if (currentGuess.length > 5) return newGuesses;
 
@@ -269,7 +282,7 @@ const [cellStatuses, setCellStatuses] = useState( Array.from({ length: 6 }, () =
       if (currentGuess.length > 0) {
         const index = currentGuess.length - 1;
         if (currentGuess.length > prevGuesses[currentRowIndex].join("").length) {
-          setAnimatedCells((prev) => {
+          setAnimatedCells((prev:any[][]) => {
             const copy = prev.map((row) => [...row]);
             copy[currentRowIndex][index] = true;
             return copy;
@@ -277,7 +290,7 @@ const [cellStatuses, setCellStatuses] = useState( Array.from({ length: 6 }, () =
         }
 
         setTimeout(() => {
-          setAnimatedCells((prev) => {
+          setAnimatedCells((prev:any[][]) => {
             const copy = prev.map((row) => [...row]);
             copy[currentRowIndex][index] = false;
             return copy;
@@ -287,6 +300,7 @@ const [cellStatuses, setCellStatuses] = useState( Array.from({ length: 6 }, () =
 
       return newGuesses;
     });
+    }
   }, [currentGuess, currentRowIndex]);
 
   const handleKeyDown = useCallback(
@@ -319,6 +333,12 @@ const [cellStatuses, setCellStatuses] = useState( Array.from({ length: 6 }, () =
   );
 
   useEffect(()=>{
+    if(isGuessing){
+      localStorage.setItem('game-data',JSON.stringify({guesses,cellStatuses}))
+    }
+  },[cellStatuses])
+
+  useEffect(()=>{
     if (!isGuessing || !currentGuess) return;
     const guessing = async () => {
         const isValidGuess = await testWord(currentGuess);
@@ -327,21 +347,20 @@ const [cellStatuses, setCellStatuses] = useState( Array.from({ length: 6 }, () =
       for (let i = 0; i < 5; i++) {
         const status = mapResultToStatus(resultArray)[i];
         setTimeout(() => {
-          setCellStatuses((prev) => {
-              const copy = prev.map((row) => [...row]);
+          setCellStatuses((prev:any) => {
+              const copy = prev.map((row:any) => [...row]);
               copy[currentRowIndex][i] = status;
               return copy;
             });
-          setFlippedCells((prev) => {
+          setFlippedCells((prev: any[][]) => {
             const copy = prev.map((row) => [...row]);
             copy[currentRowIndex][i] = true;
             return copy;
           });
         }, i * 350);
       }
-
       setTimeout(() => {
-        setCurrentRowIndex((prevCurrentRowIndex) => {
+        setCurrentRowIndex((prevCurrentRowIndex:number) => {
           if(resultArray.every((val:number)=>{
             return val === 2
           })){
@@ -375,9 +394,7 @@ const [cellStatuses, setCellStatuses] = useState( Array.from({ length: 6 }, () =
     };
   }, [handleKeyDown]);
 
-  const didFetchJWT = useRef(false);
-  useEffect(()=>{
-    const getJWT = async function() {
+  const getJWT = async function() {
         const response = await fetch(`${process.env.REACT_APP_RENDER_BASE_URL}/api/get-jwt/`,{
         method:'POST',
         credentials: "include",
@@ -385,16 +402,19 @@ const [cellStatuses, setCellStatuses] = useState( Array.from({ length: 6 }, () =
     const jwt = await response.json()
     setJwtValue(jwt.token)
     }
-    if(!didFetchJWT.current){
-        getJWT()
-        didFetchJWT.current = true
-    }
+  useEffect(()=>{
+    getJWT()
   },[])
-  const computeKeyStatuses = (cellStatuses: ("absent" | "present" | "correct" | undefined)[][], guesses: any[]) => {
+  const computeKeyStatuses = (
+  cellStatuses: ("absent" | "present" | "correct" | undefined)[][],
+  guesses: string[][]
+) => {
+  if (!Array.isArray(guesses)) return {};
   const map: Record<string, "absent" | "present" | "correct"> = {};
   guesses.forEach((row, rIndex) => {
-    row.forEach((letter: string | number, cIndex: number) => {
-      const status = cellStatuses[rIndex][cIndex];
+    if (!Array.isArray(row)) return;
+    row.forEach((letter, cIndex) => {
+      const status = cellStatuses?.[rIndex]?.[cIndex];
       if (!letter || !status) return;
       map[letter] = status;
     });
@@ -419,13 +439,13 @@ const keyStatuses = computeKeyStatuses(cellStatuses, guesses);
                     $animate={animatedCells[row][col]}
                     $flip={flippedCells[row][col]}
                     $win={gameStatus === "game-over" &&
-                      cellStatuses[row].every((status) => status === "correct")}
+                      cellStatuses[row].every((status:string) => status === "correct")}
                       $winDelay={isWinningRow(row) ? col * 0.1 : 0}
                   >
                     <CellInner $flip={flippedCells[row][col]}>
-                      <CellFront>{guesses[row][col]}</CellFront>
+                      <CellFront>{guesses && guesses[row][col]}</CellFront>
                       <CellBack $status={cellStatuses[row][col]}>
-                        {guesses[row][col]}
+                        {guesses && guesses[row][col]}
                       </CellBack>
                     </CellInner>
                   </CellContainer>

@@ -9,7 +9,7 @@ margin-top:20px;
   align-items: center;
   gap: 8px;
   padding: 10px 0;
-  z-index: 10;
+  z-index: 5;
 
   @supports (padding: env(safe-area-inset-bottom)) {
     padding-bottom: calc(10px + env(safe-area-inset-bottom));
