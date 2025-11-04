@@ -44,6 +44,10 @@ const RestLetters = styled.span`
   color: white;
   border-radius: 4px;
   border: 2px solid #565758;
+
+  @media (max-width: 600px) {
+    font-size: 16px;
+  }
 `;
 
 const WordExampleContainer = styled.div`

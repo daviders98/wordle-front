@@ -57,9 +57,9 @@ const Container = styled.div`
   display: flex;
   flex-direction: column;
   align-items: center;
-  justify-content: center;
+  justify-content: flex-start;
   min-height: 100vh;
-  padding: 16px;
+  padding: 8px;
   background-color: #e3e2e0;
 `;
 

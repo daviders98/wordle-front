@@ -52,8 +52,7 @@ const Key = styled.button<{ $status?: "absent" | "present" | "correct" }>`
   }
 
   @media (max-width: 600px) {
-    padding: 12px 7px;
-    
+    padding: 12px 7px; 
   }
 `;
 

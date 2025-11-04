@@ -11,11 +11,6 @@ const popAnimation = keyframes`
   100% { transform: scale(1); }
 `;
 
-const PageContainer = styled.div`
-  height: 100vh;
-  background-color: #121213;
-`
-
 const fadeInOut = keyframes`
   0% { opacity: 0; transform: translateY(-10px); }
   10% { opacity: 1; transform: translateY(0); }
@@ -48,18 +43,24 @@ const Message = styled.div`
   z-index: 5;
 `;
 
+const PageContainer = styled.div`
+  height: 100vh;
+  display: flex;
+  flex-direction: column;
+  background-color: #121213;
+`;
+
 const GameContainer = styled.div`
-  position: relative;
+  flex: 1;
   display: flex;
   flex-direction: column;
   align-items: center;
   justify-content: space-evenly;
   width: 100%;
   background-color: #121213;
-  overflow: hidden;
-  padding:12px 0 12px;
-  flex: 1;
+  padding: 12px 0;
 `;
+
 
 const Board = styled.div`
   display: flex;
@@ -341,14 +342,14 @@ const [cellStatuses, setCellStatuses] = useState( Array.from({ length: 6 }, () =
 
       setTimeout(() => {
         setCurrentRowIndex((prevCurrentRowIndex) => {
-          if (prevCurrentRowIndex === 5) {
-            setGameStatus("game-over");
-            return prevCurrentRowIndex;
-          } else if(resultArray.every((val:number)=>{
+          if(resultArray.every((val:number)=>{
             return val === 2
           })){
             setGameStatus("game-over")
             setDidWin(true)
+            return prevCurrentRowIndex;
+          }else if (prevCurrentRowIndex === 5) {
+            setGameStatus("game-over");
             return prevCurrentRowIndex;
           }
           setCurrentGuess("");

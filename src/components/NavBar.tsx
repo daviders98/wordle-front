@@ -35,14 +35,26 @@ export default function NavBar() {
         <ImageLogo src="logo.png" alt="logo" onClick={() => navigate('/')} />
 
         <RightIconsContainer>
-          <Tooltip title="Current streak in days" arrow>
+          <Tooltip title="Current streak in days" arrow slotProps={{
+                tooltip: {
+                sx: {
+                    fontSize: '14px',
+                },
+                },
+            }}>
             <StreakContainer>
               <FireIcon />
               <StreakNumber>{stats.currentStreak}</StreakNumber>
             </StreakContainer>
           </Tooltip>
 
-          <Tooltip title="Next word coming up in..." arrow>
+          <Tooltip title="Next word coming up in..." arrow slotProps={{
+                tooltip: {
+                sx: {
+                    fontSize: '14px',
+                },
+                },
+            }}>
             <CountdownContainer>
               <ClockIcon />
               <CountdownText>{timeLeft}</CountdownText>
