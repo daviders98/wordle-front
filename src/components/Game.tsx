@@ -4,6 +4,7 @@ import Keyboard from "./Keyboard";
 import { useStats } from "../context/StatsContext";
 import StatsModal from "./StatsModal";
 import NavBar from "./NavBar";
+import FireParticles from "./FireParticles";
 
 const popAnimation = keyframes`
   0% { transform: scale(1); }
@@ -428,6 +429,7 @@ const keyStatuses = computeKeyStatuses(cellStatuses, guesses);
     <PageContainer>
       {showStatsModal && <StatsModal onClose={toggleStatsModal}/>}
       <NavBar/>
+      <FireParticles active={didWin} />
       <GameContainer>
         {message && <Message>{message}</Message>}
         <Board>
