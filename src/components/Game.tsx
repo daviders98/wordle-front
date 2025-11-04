@@ -174,10 +174,9 @@ export default function Game() {
   const hasCorrectRow = parsedPreviousData?.cellStatuses?.some(
   (row: string[]) => row.every(cell => cell === "correct")
 );
-const allRowsFilled = parsedPreviousData?.cellStatuses?.every(
+const allRowsFilled = parsedPreviousData?.guesses?.every(
   (row: string[]) => row.every(cell => cell !== "")
 );
-
   const initialGameStatus = hasCorrectRow || allRowsFilled ? "game-over" : "start";
   const [hasPreviousData,setHasPreviousData] = useState(previousData)
   const [guesses, setGuesses] = useState(parsedPreviousData?.guesses || initialArray);
