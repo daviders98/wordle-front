@@ -268,5 +268,35 @@
         "date": "2025-11-04T08:44:31-07:00"
       }
     ]
+  },
+  {
+    "version": "v0.2.7",
+    "commits": [
+      {
+        "message": "feat(WOR-21): Add changelog page",
+        "author": "David Garcia",
+        "date": "2025-11-04T13:26:05-07:00"
+      }
+    ]
+  },
+  {
+    "version": "v0.2.8",
+    "commits": [
+      {
+        "message": "fix(WOR-22): Fixed bug when incomplete previous game was considered game over",
+        "author": "David Garcia",
+        "date": "2025-11-04T13:31:03-07:00"
+      }
+    ]
+  },
+  {
+    "version": "v0.2.9",
+    "commits": [
+      {
+        "message": "feat(WOR-23): Add husky to automatically run changelog",
+        "author": "David Garcia",
+        "date": "2025-11-04T16:43:02-07:00"
+      }
+    ]
   }
 ]
