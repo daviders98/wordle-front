@@ -5,6 +5,7 @@ import Game from './components/Game';
 import Loading from './components/Loading';
 import { StatsProvider } from './context/StatsContext';
 import useMidnightUTCReset from './hooks/UseMidnightUTCReset';
+import ChangelogPage from './components/ChangelogPage';
 
 function App() {
   const [wakeUpDone, setWakeUpDone] = useState(false);
@@ -33,6 +34,10 @@ function App() {
         <Route
           path="/play"
           element={wakeUpDone ? <Game /> : <Loading />}
+        />
+        <Route
+          path="/changelog"
+          element={<ChangelogPage />}
         />
       </Routes>
       </StatsProvider>

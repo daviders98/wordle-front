@@ -35,13 +35,14 @@ export default function Onboarding({previousGameExist}:{previousGameExist:boolea
 
         <Title>Welcome {previousGameExist && 'back'}!</Title>
         <Logo src={'/logo.png'} alt='wordle logo' />
-        <MainHeading>Wordle</MainHeading>
+        <MainHeading>Better Wordle</MainHeading>
         <Description>Get 6 chances to guess a 5-letter word.</Description>
 
         <ButtonsContainer>
           <MainButton onClick={() => navigate('/play')}>{previousGameExist ? 'Continue': 'Play'}</MainButton>
           <SecondaryButton onClick={toggleTutorialModal}>How to Play</SecondaryButton>
-          <HistoryButton>View word History</HistoryButton>
+          <UnderlinedText>View word History</UnderlinedText>
+          <UnderlinedText onClick={()=>navigate('/changelog')}>View App changelog</UnderlinedText>
         </ButtonsContainer>
 
         <DateText>{moment().format('MMMM DD YYYY')}</DateText>
@@ -151,7 +152,7 @@ const SecondaryButton = styled(MainButton)`
   }
 `;
 
-const HistoryButton = styled.button`
+const UnderlinedText = styled.button`
   background-color: transparent;
   border: none;
   color: #0C100F;
