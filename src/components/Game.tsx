@@ -179,7 +179,7 @@ const allRowsFilled = parsedPreviousData?.cellStatuses?.every(
 );
 
   const initialGameStatus = hasCorrectRow || allRowsFilled ? "game-over" : "start";
-
+  const [hasPreviousData,setHasPreviousData] = useState(previousData)
   const [guesses, setGuesses] = useState(parsedPreviousData?.guesses || initialArray);
   const [showStatsModal,setShowStatsModal] = useState(false)
   const [currentGuess, setCurrentGuess] = useState("");
@@ -273,7 +273,9 @@ const [cellStatuses, setCellStatuses] = useState(parsedPreviousData?.cellStatuse
   if (gameStatus === "game-over") {
     showMessage(didWin?"Splendid! 🎉":"Better luck next time 🥲")
     setTimeout(()=>{
-      updateStats(didWin)
+      if(!hasPreviousData){
+        updateStats(didWin)
+      }
       setShowStatsModal(true);
     },900)
   }
