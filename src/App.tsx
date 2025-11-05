@@ -6,6 +6,8 @@ import Loading from './components/Loading';
 import { StatsProvider } from './context/StatsContext';
 import useMidnightUTCReset from './hooks/UseMidnightUTCReset';
 import ChangelogPage from './components/ChangelogPage';
+import WordHistory from "./components/WordHistory";
+
 
 function App() {
   const [wakeUpDone, setWakeUpDone] = useState(false);
@@ -41,6 +43,7 @@ function App() {
           path="/changelog"
           element={<ChangelogPage />}
         />
+        <Route path="/history" element={<WordHistory />} />
       </Routes>
       </StatsProvider>
     </BrowserRouter>
