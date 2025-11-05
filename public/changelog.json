@@ -16,12 +16,7 @@
         "message": "chore: initial React.js app with TypeScript",
         "author": "David Garcia",
         "date": "2025-10-26T09:01:29-07:00"
-      }
-    ]
-  },
-  {
-    "version": "v0.0.2",
-    "commits": [
+      },
       {
         "message": "feat(WOR-1): Add Onboarding and tutorial modal",
         "author": "David Garcia",
@@ -30,7 +25,7 @@
     ]
   },
   {
-    "version": "v0.0.3",
+    "version": "v0.0.2",
     "commits": [
       {
         "message": "feat(WOR-1): Add Success word example, add help menu toggle",
@@ -40,7 +35,7 @@
     ]
   },
   {
-    "version": "v0.0.4",
+    "version": "v0.0.3",
     "commits": [
       {
         "message": "feat(WOR-1): Refactor examples section",
@@ -50,7 +45,7 @@
     ]
   },
   {
-    "version": "v0.0.5",
+    "version": "v0.0.4",
     "commits": [
       {
         "message": "feat(WOR-1): Finish onboarding section, add react router and new route",
@@ -60,7 +55,7 @@
     ]
   },
   {
-    "version": "v0.0.6",
+    "version": "v0.0.5",
     "commits": [
       {
         "message": "feat(WOR-2): Improve responsiveness, Add Game base",
@@ -70,7 +65,7 @@
     ]
   },
   {
-    "version": "v0.0.7",
+    "version": "v0.0.6",
     "commits": [
       {
         "message": "feat(WOR-3): Add Main game component, change gitignore, fix undefined pngs errors",
@@ -80,7 +75,7 @@
     ]
   },
   {
-    "version": "v0.0.8",
+    "version": "v0.0.7",
     "commits": [
       {
         "message": "feat(WOR-3): Prevent stacking animations, add revealed cells animation",
@@ -90,7 +85,7 @@
     ]
   },
   {
-    "version": "v0.0.9",
+    "version": "v0.0.8",
     "commits": [
       {
         "message": "feat(WOR-4): Add waking up backend server component",
@@ -100,7 +95,7 @@
     ]
   },
   {
-    "version": "v0.1.0",
+    "version": "v0.0.9",
     "commits": [
       {
         "message": "feat(WOR-5): Add jwt endpoint call and change component to load once per page load",
@@ -110,7 +105,7 @@
     ]
   },
   {
-    "version": "v0.1.1",
+    "version": "v0.1.0",
     "commits": [
       {
         "message": "feat(WOR-5): Add loading animation, refactor wake up logic",
@@ -120,7 +115,7 @@
     ]
   },
   {
-    "version": "v0.1.2",
+    "version": "v0.1.1",
     "commits": [
       {
         "message": "feat(WOR-6): Change loading animation, use render endpoint for word validation.",
@@ -130,7 +125,7 @@
     ]
   },
   {
-    "version": "v0.1.3",
+    "version": "v0.1.2",
     "commits": [
       {
         "message": "feat(WOR-7): Refactor cells to have 2 sides, add letter colours on guess",
@@ -140,7 +135,7 @@
     ]
   },
   {
-    "version": "v0.1.4",
+    "version": "v0.1.3",
     "commits": [
       {
         "message": "feat(WOR-8): Add tutorial modal in loading screen",
@@ -150,7 +145,7 @@
     ]
   },
   {
-    "version": "v0.1.5",
+    "version": "v0.1.4",
     "commits": [
       {
         "message": "feat(WOR-9): Add winning animation",
@@ -160,7 +155,7 @@
     ]
   },
   {
-    "version": "v0.1.6",
+    "version": "v0.1.5",
     "commits": [
       {
         "message": "fix(WOR-10): Fix TypeScript warnings",
@@ -170,7 +165,7 @@
     ]
   },
   {
-    "version": "v0.1.7",
+    "version": "v0.1.6",
     "commits": [
       {
         "message": "fix(WOR-11): Improve responsiveness",
@@ -180,7 +175,7 @@
     ]
   },
   {
-    "version": "v0.1.8",
+    "version": "v0.1.7",
     "commits": [
       {
         "message": "fix(WOR-12): Add bottom keyboard",
@@ -190,7 +185,7 @@
     ]
   },
   {
-    "version": "v0.1.9",
+    "version": "v0.1.8",
     "commits": [
       {
         "message": "feat(WOR-13): Add stats",
@@ -200,7 +195,7 @@
     ]
   },
   {
-    "version": "v0.2.0",
+    "version": "v0.1.9",
     "commits": [
       {
         "message": "feat(WORD-14): Add navbar",
@@ -210,7 +205,7 @@
     ]
   },
   {
-    "version": "v0.2.1",
+    "version": "v0.2.0",
     "commits": [
       {
         "message": "fix(WORD-15): Improve responsiveness",
@@ -220,7 +215,7 @@
     ]
   },
   {
-    "version": "v0.2.2",
+    "version": "v0.2.1",
     "commits": [
       {
         "message": "feat(WOR-16): Add continue feature and refetch JWT on expire",
@@ -230,7 +225,7 @@
     ]
   },
   {
-    "version": "v0.2.3",
+    "version": "v0.2.2",
     "commits": [
       {
         "message": "feat(WOR-17): Add fire particles on win",
@@ -240,7 +235,7 @@
     ]
   },
   {
-    "version": "v0.2.4",
+    "version": "v0.2.3",
     "commits": [
       {
         "message": "fix(WOR-18): Fix fire particles, fix bug that prevented to delete the first letter of every row, fix bug that allowed to type after game over on saved game",
@@ -250,7 +245,7 @@
     ]
   },
   {
-    "version": "v0.2.5",
+    "version": "v0.2.4",
     "commits": [
       {
         "message": "feat(WOR-19): Add timer to refresh at midnight, handle UI on existing games",
@@ -260,7 +255,7 @@
     ]
   },
   {
-    "version": "v0.2.6",
+    "version": "v0.2.5",
     "commits": [
       {
         "message": "fix(WOR-20): Fix bug when previous game was played, stats were increasing.",
@@ -270,7 +265,7 @@
     ]
   },
   {
-    "version": "v0.2.7",
+    "version": "v0.2.6",
     "commits": [
       {
         "message": "feat(WOR-21): Add changelog page",
@@ -280,7 +275,7 @@
     ]
   },
   {
-    "version": "v0.2.8",
+    "version": "v0.2.7",
     "commits": [
       {
         "message": "fix(WOR-22): Fixed bug when incomplete previous game was considered game over",
@@ -290,7 +285,7 @@
     ]
   },
   {
-    "version": "v0.2.9",
+    "version": "v0.2.8",
     "commits": [
       {
         "message": "feat(WOR-23): Add husky to automatically run changelog",
@@ -300,7 +295,7 @@
     ]
   },
   {
-    "version": "v0.3.0",
+    "version": "v0.2.9",
     "commits": [
       {
         "message": "feat(WOR-24): Refactor midnight UTC reset and fixed bug where current streak was not reset at midnight",
@@ -310,7 +305,7 @@
     ]
   },
   {
-    "version": "v0.3.1",
+    "version": "v0.3.0",
     "commits": [
       {
         "message": "feat(WOR-25): Fix bug where finishing a game did not update the onboarding screen",
@@ -320,7 +315,7 @@
     ]
   },
   {
-    "version": "v0.3.2",
+    "version": "v0.3.1",
     "commits": [
       {
         "message": "feat(WOR-25): Fix bug where finishing a game did not update the onboarding screen",
@@ -330,22 +325,22 @@
     ]
   },
   {
-    "version": "v0.3.3",
+    "version": "v0.3.2",
     "commits": [
       {
         "message": "chore: Sync backend changelog from main repo",
         "author": "github-actions[bot]",
         "date": "2025-11-05T03:21:06+00:00"
-      }
-    ]
-  },
-  {
-    "version": "v0.3.4",
-    "commits": [
+      },
       {
         "message": "chore: solve conflicts",
         "author": "David Garcia",
-        "date": "2025-11-04T20:26:24-07:00"
+        "date": "2025-11-04T20:26:28-07:00"
+      },
+      {
+        "message": "fix(WOR-26): Change chores in changelog to not increase version",
+        "author": "David Garcia",
+        "date": "2025-11-04T20:30:31-07:00"
       }
     ]
   }

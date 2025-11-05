@@ -31,21 +31,44 @@ function generateChangelog() {
     .toString()
     .trim();
 
+  if (!gitLog) {
+    console.log("⚠️ No commits found.");
+    return;
+  }
+
   const jsonString = `[${gitLog.slice(0, -1)}]`;
   const commits = JSON.parse(jsonString);
 
   let version = "v0.0.0";
   const changelog = [];
+  let currentVersionCommits = [];
 
   for (const commit of commits) {
-    changelog.push({
-      version,
-      commits: [commit],
-    });
-    version = bumpVersion(version);
+    const isChore = commit.message.startsWith("chore:");
+
+    currentVersionCommits.push(commit);
+
+    if (!isChore) {
+      changelog.push({
+        version,
+        commits: currentVersionCommits,
+      });
+
+      version = bumpVersion(version);
+      currentVersionCommits = [];
+    }
   }
 
+  if (currentVersionCommits.length > 0) {
+    changelog.push({
+      version,
+      commits: currentVersionCommits,
+    });
+  }
+
+  fs.mkdirSync(path.dirname(OUTPUT), { recursive: true });
   fs.writeFileSync(OUTPUT, JSON.stringify(changelog, null, 2));
+
   console.log(`✅ ${commits.length} commits exported to ${OUTPUT}`);
 }
 
