@@ -295,7 +295,17 @@
       {
         "message": "feat(WOR-23): Add husky to automatically run changelog",
         "author": "David Garcia",
-        "date": "2025-11-04T16:43:02-07:00"
+        "date": "2025-11-04T16:43:08-07:00"
+      }
+    ]
+  },
+  {
+    "version": "v0.3.0",
+    "commits": [
+      {
+        "message": "feat(WOR-24): Refactor midnight UTC reset and fixed bug where current streak was not reset at midnight",
+        "author": "David Garcia",
+        "date": "2025-11-04T19:12:08-07:00"
       }
     ]
   }

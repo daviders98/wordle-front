@@ -2,23 +2,24 @@ import { useEffect } from "react";
 
 export default function useMidnightUTCReset() {
   useEffect(() => {
-    const now = new Date();
-    const nextUTC = new Date(Date.UTC(
-      now.getUTCFullYear(),
-      now.getUTCMonth(),
-      now.getUTCDate() + 1,
-      0, 0, 0, 0
-    ));
+    const checkMidnight = () => {
+      const now = new Date();
+      if (now.getUTCHours() === 0 && now.getUTCMinutes() === 0) {
+        const statsData = localStorage.getItem("wordle-stats");
+        if (statsData) {
+          const parsed = JSON.parse(statsData);
+          parsed.currentStreak = 0;
+          localStorage.setItem("wordle-stats", JSON.stringify(parsed));
+        }
+        localStorage.removeItem("game-data");
+        console.log("🌙 Midnight UTC reached → resetting game data");
+        window.location.reload();
+      }
+    };
 
-    const delay = nextUTC.getTime() - now.getTime();
+    checkMidnight();
+    const interval = setInterval(checkMidnight, 60 * 1000);
 
-    const timer = setTimeout(() => {
-      localStorage.removeItem("game-data");
-      window.location.reload();
-    }, delay);
-
-    console.log("⏰ Will reset at next UTC midnight in", Math.round(delay / 1000 / 60), "minutes");
-
-    return () => clearTimeout(timer);
+    return () => clearInterval(interval);
   }, []);
 }
