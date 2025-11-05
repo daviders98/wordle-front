@@ -370,7 +370,22 @@
       {
         "message": "fix(WOR-29): Fix changelog page to be compatible with combined json",
         "author": "David Garcia",
-        "date": "2025-11-04T22:06:50-07:00"
+        "date": "2025-11-04T22:06:53-07:00"
+      }
+    ]
+  },
+  {
+    "version": "v0.3.6",
+    "commits": [
+      {
+        "message": "chore: Sync backend changelog from main repo",
+        "author": "github-actions[bot]",
+        "date": "2025-11-05T05:31:26+00:00"
+      },
+      {
+        "message": "feat(WOR-30): Add current word number",
+        "author": "David Garcia",
+        "date": "2025-11-04T22:52:32-07:00"
       }
     ]
   }

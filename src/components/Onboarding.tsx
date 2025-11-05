@@ -3,6 +3,7 @@ import { useEffect, useState } from 'react';
 import TutorialModal from './TutorialModal';
 import styled from 'styled-components';
 import { useNavigate } from 'react-router-dom'; 
+import Loading from './Loading';
 
 export default function Onboarding({previousGameExist}:{previousGameExist:boolean}) {
     const navigate = useNavigate();
@@ -12,8 +13,20 @@ export default function Onboarding({previousGameExist}:{previousGameExist:boolea
   const [nextWordDiff, setNextWordDiff] = useState(
     moment.duration(moment().utc().add(1, 'days').startOf('day').diff(moment().utc()))
   );
+  const [jwtValue, setJwtValue] = useState<string | null>(null);
+  const [loading,setLoading] = useState(true)
+  const [pastWords,setPastWords] = useState(null)
 
+  const getJWT = async function() {
+        const response = await fetch(`${process.env.REACT_APP_RENDER_BASE_URL}/api/get-jwt/`,{
+        method:'POST',
+        credentials: "include",
+    })
+    const jwt = await response.json()
+    setJwtValue(jwt.token)
+    }
   useEffect(() => {
+    getJWT()
     const interval = setInterval(() => {
       const diff = moment.duration(
         moment().utc().add(1, 'days').startOf('day').diff(moment().utc())
@@ -24,10 +37,34 @@ export default function Onboarding({previousGameExist}:{previousGameExist:boolea
     return () => clearInterval(interval);
   }, []);
 
+  const getPastWords = async (retry=true):Promise<boolean>=>{
+    const response = await fetch(`${process.env.REACT_APP_RENDER_BASE_URL}/api/list`,{
+        method:'GET',
+        headers:{
+            'Content-Type': 'application/json',
+            Authorization: `Bearer ${jwtValue}`,
+        }
+    })
+    if(response.status === 401 && retry){
+      await getJWT()
+      return await getPastWords(false)
+    }
+    const data = await response.json()
+    setLoading(false)
+    setPastWords(data)
+    return data
+  }
+
+  useEffect(()=>{
+    if(jwtValue){
+        getPastWords()
+    }
+  },[jwtValue])
+
   return (
     <Container>
       {tutorialModalOpened && <TutorialModal onClose={toggleTutorialModal} />}
-
+      {loading ?<Loading/>:
       <OnboardingContainer>
         <NextWordText>
           Next word coming in: {nextWordDiff.hours()}h {nextWordDiff.minutes()}m {nextWordDiff.seconds()}s
@@ -46,10 +83,11 @@ export default function Onboarding({previousGameExist}:{previousGameExist:boolea
         </ButtonsContainer>
 
         <DateText>{moment().format('MMMM DD YYYY')}</DateText>
-        <WordCountText>Word #1</WordCountText>
+        <WordCountText>Word #{pastWords && pastWords[0]['solution_number'] + 1}</WordCountText>
         <EditedByText>Edited by David Garcia</EditedByText>
         <DevLogo src={'/logo-devgarcia.png'} alt='devgarcia logo' />
       </OnboardingContainer>
+      }
     </Container>
   );
 }
