@@ -305,7 +305,17 @@
       {
         "message": "feat(WOR-24): Refactor midnight UTC reset and fixed bug where current streak was not reset at midnight",
         "author": "David Garcia",
-        "date": "2025-11-04T19:12:08-07:00"
+        "date": "2025-11-04T19:12:11-07:00"
+      }
+    ]
+  },
+  {
+    "version": "v0.3.1",
+    "commits": [
+      {
+        "message": "feat(WOR-25): Fix bug where finishing a game did not update the onboarding screen",
+        "author": "David Garcia",
+        "date": "2025-11-04T20:19:16-07:00"
       }
     ]
   }

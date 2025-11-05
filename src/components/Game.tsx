@@ -163,7 +163,7 @@ const CellBack = styled(CellFront)<{ $status?: "absent" | "present" | "correct" 
   }};
 `;
 
-export default function Game() {
+export default function Game({togglePreviousGameExist}:{togglePreviousGameExist:()=>void}) {
   const previousData = localStorage.getItem('game-data')
   const parsedPreviousData = previousData ? JSON.parse(previousData) : null;
   const previousRowIndex = parsedPreviousData ? parsedPreviousData?.guesses.findIndex(
@@ -345,6 +345,7 @@ const [cellStatuses, setCellStatuses] = useState(parsedPreviousData?.cellStatuse
   useEffect(()=>{
     if(isGuessing){
       localStorage.setItem('game-data',JSON.stringify({guesses,cellStatuses}))
+      togglePreviousGameExist()
     }
   },[cellStatuses])
 

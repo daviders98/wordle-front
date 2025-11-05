@@ -12,6 +12,8 @@ function App() {
   const wakeUpCalled = useRef(false);
   const [previousGameExist,setPreviousGameExist] = useState(false)
 
+  const togglePreviousGameExist:()=>void = ()=>setPreviousGameExist(prev=>!prev)
+
   useEffect(() => {
     if (wakeUpCalled.current) return;
     wakeUpCalled.current = true;
@@ -33,7 +35,7 @@ function App() {
         <Route path="/" element={<Onboarding previousGameExist={previousGameExist}/>} />
         <Route
           path="/play"
-          element={wakeUpDone ? <Game /> : <Loading />}
+          element={wakeUpDone ? <Game togglePreviousGameExist={togglePreviousGameExist}/> : <Loading />}
         />
         <Route
           path="/changelog"
