@@ -792,9 +792,23 @@
     "version": "v0.6.4",
     "commits": [
       {
+        "message": "chore: Sync backend changelog from main repo",
+        "author": "github-actions[bot]",
+        "date": "2025-11-05T05:31:26+00:00",
+        "version": "v0.3.6",
+        "source": "frontend"
+      },
+      {
+        "message": "chore: Sync backend changelog from main repo",
+        "author": "github-actions[bot]",
+        "date": "2025-11-05T05:40:21+00:00",
+        "version": "v0.3.6",
+        "source": "frontend"
+      },
+      {
         "message": "feat(WOP-14): Add endpoint to get past words",
         "author": "David Garcia",
-        "date": "2025-11-04T22:31:12-07:00",
+        "date": "2025-11-04T22:40:31-07:00",
         "version": "v0.2.8",
         "source": "backend"
       }
@@ -806,15 +820,27 @@
       {
         "message": "chore: Sync backend changelog from main repo",
         "author": "github-actions[bot]",
-        "date": "2025-11-05T05:31:26+00:00",
+        "date": "2025-11-05T05:40:43+00:00",
         "version": "v0.3.6",
         "source": "frontend"
       },
       {
         "message": "feat(WOR-30): Add current word number",
         "author": "David Garcia",
-        "date": "2025-11-04T22:52:32-07:00",
+        "date": "2025-11-04T22:52:35-07:00",
         "version": "v0.3.6",
+        "source": "frontend"
+      }
+    ]
+  },
+  {
+    "version": "v0.6.6",
+    "commits": [
+      {
+        "message": "Merge branch 'main' of https://github.com/daviders98/wordle-front into main",
+        "author": "David Garcia",
+        "date": "2025-11-04T22:52:39-07:00",
+        "version": "v0.3.7",
         "source": "frontend"
       }
     ]
