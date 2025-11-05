@@ -30,7 +30,7 @@
     "test": "react-scripts test",
     "eject": "react-scripts eject",
     "prepare": "husky",
-    "changelog": "node scripts/changelog.js"
+    "changelog": "node scripts/changelog.js && node scripts/combine_changelogs.js"
   },
   "eslintConfig": {
     "extends": [

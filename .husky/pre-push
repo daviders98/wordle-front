@@ -10,8 +10,8 @@ if [ $? -ne 0 ]; then
 fi
 
 if ! git diff --quiet public/changelog.json; then
-  echo "📄 Changelog updated — committing changes..."
-  git add public/changelog.json
+  echo "📄 Changelogs updated — committing changes..."
+  git add .
 
   git commit --amend --no-edit
 
