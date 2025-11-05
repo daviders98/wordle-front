@@ -770,8 +770,20 @@
       {
         "message": "fix(WOR-28): Refactor combination of changelogs to one timeline",
         "author": "David Garcia",
-        "date": "2025-11-04T21:19:13-07:00",
+        "date": "2025-11-04T21:19:17-07:00",
         "version": "v0.3.4",
+        "source": "frontend"
+      }
+    ]
+  },
+  {
+    "version": "v0.6.3",
+    "commits": [
+      {
+        "message": "fix(WOR-29): Fix changelog page to be compatible with combined json",
+        "author": "David Garcia",
+        "date": "2025-11-04T22:06:50-07:00",
+        "version": "v0.3.5",
         "source": "frontend"
       }
     ]

@@ -17,13 +17,7 @@ interface Commit {
   message: string;
   author: string;
   date: string;
-  source?: "front" | "backend";
-}
-
-interface CombinedVersion {
-  version: string;
-  front?: Commit[];
-  backend?: Commit[];
+  source?: "frontend" | "backend";
 }
 
 interface Version {
@@ -84,20 +78,13 @@ export default function Changelog() {
         if (!res.ok) throw new Error("Failed to fetch changelog");
         return res.json();
       })
-      .then((data: CombinedVersion[]) => {
-        const normalized = data.map((entry) => {
-          const front = (entry.front ?? []).map((c) => ({ ...c, source: "front" as const }));
-          const backend = (entry.backend ?? []).map((c) => ({ ...c, source: "backend" as const }));
-
-          const commits = [...front, ...backend].sort((a, b) => {
-            const da = new Date(a.date).getTime();
-            const db = new Date(b.date).getTime();
-            return db - da;
-          });
-
-          return { version: entry.version, commits };
-        });
-
+      .then((data: Version[]) => {
+        const normalized = data.map((entry) => ({
+          ...entry,
+          commits: entry.commits.sort(
+            (a, b) => new Date(b.date).getTime() - new Date(a.date).getTime()
+          ),
+        }));
         setChangelog(normalized.reverse());
         setLoading(false);
       })
@@ -128,8 +115,7 @@ export default function Changelog() {
 
   const formatMessage = (message: string) => {
     const parts = message.split(":");
-    if (parts.length <= 1) return message;
-    return parts.slice(1).join(":").trim();
+    return parts.length > 1 ? parts.slice(1).join(":").trim() : message;
   };
 
   return (
@@ -151,7 +137,9 @@ export default function Changelog() {
         </TitleContainer>
 
         {changelog.length === 0 && (
-          <Typography sx={{ textAlign: "center", mt: 4 }}>No changelog entries found.</Typography>
+          <Typography sx={{ textAlign: "center", mt: 4 }}>
+            No changelog entries found.
+          </Typography>
         )}
 
         {changelog.map((entry) => {
@@ -170,11 +158,16 @@ export default function Changelog() {
               }}
             >
               <AccordionSummary expandIcon={<ExpandMoreIcon />}>
-                <Typography variant="h6" sx={{ fontWeight: 600, color: "#0C100F" }}>
+                <div style={{display:'flex',flexDirection:'column'}}>
+                    <Typography variant="h6" sx={{ fontWeight: 600, color: "#0C100F" }}>
                   {entry.version}
                 </Typography>
+                <Typography variant="h6" sx={{ fontWeight: 400, color: "#0C100F" }}>
+                  {firstMsg.startsWith("feat") ? 'New Feature':firstMsg.startsWith("fix") ? 'Fix':'Chore'}
+                </Typography>
+                </div>
+                
               </AccordionSummary>
-
               <AccordionDetails>
                 {entry.commits.map((commit) => {
                   const key = `${commit.hash ?? commit.date}-${commit.message}`;
@@ -208,11 +201,13 @@ export default function Changelog() {
 
                         {commit.source && (
                           <Chip
-                            label={commit.source === "front" ? "frontend" : "backend"}
+                            label={commit.source}
                             size="small"
                             sx={{
-                              color: "#0C100F",
-                              borderColor: "#0C100F",
+                              color:
+                                commit.source === "backend" ? "#0C100F" : "#1E88E5",
+                              borderColor:
+                                commit.source === "backend" ? "#0C100F" : "#1E88E5",
                               fontWeight: 600,
                             }}
                           />
