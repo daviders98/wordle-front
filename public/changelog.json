@@ -405,7 +405,17 @@
       {
         "message": "Merge branch 'main' of https://github.com/daviders98/wordle-front into main",
         "author": "David Garcia",
-        "date": "2025-11-04T22:52:39-07:00"
+        "date": "2025-11-04T22:52:49-07:00"
+      }
+    ]
+  },
+  {
+    "version": "v0.3.8",
+    "commits": [
+      {
+        "message": "fix(WOR-31): fix changelog merges not showing correctly",
+        "author": "David Garcia",
+        "date": "2025-11-04T23:01:03-07:00"
       }
     ]
   }

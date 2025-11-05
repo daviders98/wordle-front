@@ -114,7 +114,7 @@ export default function Changelog() {
   };
 
   const formatMessage = (message: string) => {
-    const parts = message.split(":");
+    const parts = ['feat','fix','chore'].some((word)=>message.includes(word)) ? message.split(":"):[message];
     return parts.length > 1 ? parts.slice(1).join(":").trim() : message;
   };
 
