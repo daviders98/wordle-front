@@ -78,7 +78,9 @@ export default function Onboarding({previousGameExist}:{previousGameExist:boolea
         <ButtonsContainer>
           <MainButton onClick={() => navigate('/play')}>{previousGameExist ? 'Continue': 'Play'}</MainButton>
           <SecondaryButton onClick={toggleTutorialModal}>How to Play</SecondaryButton>
-          <UnderlinedText>View word History</UnderlinedText>
+          <UnderlinedText onClick={() => navigate('/history')}>
+            View Word History
+          </UnderlinedText>
           <UnderlinedText onClick={()=>navigate('/changelog')}>View App changelog</UnderlinedText>
         </ButtonsContainer>
 
