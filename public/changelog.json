@@ -350,7 +350,17 @@
       {
         "message": "feat(WOR-27): Combine back and front end changelogs",
         "author": "David Garcia",
-        "date": "2025-11-04T20:39:35-07:00"
+        "date": "2025-11-04T20:39:39-07:00"
+      }
+    ]
+  },
+  {
+    "version": "v0.3.4",
+    "commits": [
+      {
+        "message": "fix(WOR-28): Refactor combination of changelogs to one timeline",
+        "author": "David Garcia",
+        "date": "2025-11-04T21:19:13-07:00"
       }
     ]
   }

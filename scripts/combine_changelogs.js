@@ -16,31 +16,57 @@ function combineChangelogs() {
   const frontData = JSON.parse(fs.readFileSync(FRONT_CHANGELOG, "utf-8"));
   const backendData = JSON.parse(fs.readFileSync(BACKEND_CHANGELOG, "utf-8"));
 
-  const combined = {};
+  const frontCommits = frontData.flatMap(entry =>
+    entry.commits.map(commit => ({
+      ...commit,
+      version: entry.version,
+      source: "frontend"
+    }))
+  );
 
-  for (const entry of frontData) {
-    const { version, commits } = entry;
-    combined[version] = combined[version] || { version, front: [], backend: [] };
-    combined[version].front.push(...commits);
-  }
+  const backendCommits = backendData.flatMap(entry =>
+    entry.commits.map(commit => ({
+      ...commit,
+      version: entry.version,
+      source: "backend"
+    }))
+  );
 
-  for (const entry of backendData) {
-    const { version, commits } = entry;
-    combined[version] = combined[version] || { version, front: [], backend: [] };
-    combined[version].backend.push(...commits);
-  }
+  const allCommits = [...frontCommits, ...backendCommits].sort(
+    (a, b) => new Date(a.date) - new Date(b.date)
+  );
 
-  const sortedVersions = Object.values(combined).sort((a, b) => {
-    const vA = a.version.replace("v", "").split(".").map(Number);
-    const vB = b.version.replace("v", "").split(".").map(Number);
-    for (let i = 0; i < 3; i++) {
-      if (vA[i] !== vB[i]) return vA[i] - vB[i];
+  let version = "v0.0.0";
+  const changelog = [];
+  let currentCommits = [];
+
+  const bumpVersion = (ver) => {
+    const [major, minor, patch] = ver.replace("v", "").split(".").map(Number);
+    let [maj, min, pat] = [major, minor, patch + 1];
+    if (pat >= 10) { pat = 0; min += 1; }
+    if (min >= 10) { min = 0; maj += 1; }
+    return `v${maj}.${min}.${pat}`;
+  };
+
+  for (const commit of allCommits) {
+    const isChore = commit.message.startsWith("chore:");
+    currentCommits.push(commit);
+
+    if (!isChore) {
+      changelog.push({ version, commits: currentCommits });
+      version = bumpVersion(version);
+      currentCommits = [];
     }
-    return 0;
-  });
+  }
 
-  fs.writeFileSync(OUTPUT, JSON.stringify(sortedVersions, null, 2));
-  console.log(`✅ Combined changelog written to ${OUTPUT}`);
+  if (currentCommits.length > 0) {
+    changelog.push({ version, commits: currentCommits });
+  }
+
+  fs.mkdirSync(path.dirname(OUTPUT), { recursive: true });
+  fs.writeFileSync(OUTPUT, JSON.stringify(changelog, null, 2));
+
+  console.log(`✅ Combined changelog with ${allCommits.length} commits written to ${OUTPUT}`);
 }
 
 combineChangelogs();
