@@ -428,5 +428,25 @@
         "date": "2025-11-04T23:07:55-07:00"
       }
     ]
+  },
+  {
+    "version": "v0.4.0",
+    "commits": [
+      {
+        "message": "feat(WOR-32): Add word history page",
+        "author": "David Garcia",
+        "date": "2025-11-04T23:08:08-07:00"
+      }
+    ]
+  },
+  {
+    "version": "v0.4.1",
+    "commits": [
+      {
+        "message": "Merge branch 'main' of https://github.com/daviders98/wordle-front into main",
+        "author": "David Garcia",
+        "date": "2025-11-04T23:08:46-07:00"
+      }
+    ]
   }
 ]
