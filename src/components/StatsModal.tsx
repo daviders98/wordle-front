@@ -1,10 +1,15 @@
-import styled from 'styled-components';
-import CloseIcon from '@mui/icons-material/Close';
-import { useStats } from '../context/StatsContext';
+import styled from "styled-components";
+import CloseIcon from "@mui/icons-material/Close";
+import { useStats } from "../context/StatsContext";
 import {
-  Table, TableBody, TableCell, TableContainer, TableHead, TableRow,
-  Paper
-} from '@mui/material';
+  Table,
+  TableBody,
+  TableCell,
+  TableContainer,
+  TableHead,
+  TableRow,
+  Paper,
+} from "@mui/material";
 
 interface StatsModalProps {
   onClose: () => void;
@@ -15,7 +20,7 @@ export default function StatsModal({ onClose }: StatsModalProps) {
 
   const successRate = stats.gamesPlayed
     ? ((stats.gamesWon / stats.gamesPlayed) * 100).toFixed(1)
-    : '0';
+    : "0";
 
   return (
     <StatsModalContainer onClick={onClose}>
@@ -32,10 +37,10 @@ export default function StatsModal({ onClose }: StatsModalProps) {
         <TableContainer
           component={Paper}
           sx={{
-            backgroundColor: '#1e1e1f',
-            borderRadius: '12px',
-            overflow: 'hidden',
-            boxShadow: '0 2px 8px rgba(0,0,0,0.4)',
+            backgroundColor: "#1e1e1f",
+            borderRadius: "12px",
+            overflow: "hidden",
+            boxShadow: "0 2px 8px rgba(0,0,0,0.4)",
           }}
         >
           <Table size="small" aria-label="stats table">
@@ -90,8 +95,12 @@ const StatsModalContainer = styled.div`
   padding: 12px;
 
   @keyframes fadeIn {
-    from { opacity: 0; }
-    to { opacity: 1; }
+    from {
+      opacity: 0;
+    }
+    to {
+      opacity: 1;
+    }
   }
 `;
 
@@ -104,7 +113,7 @@ const StatsModalContent = styled.div`
   max-width: 520px;
   max-height: 90vh;
   overflow-y: auto;
-  box-shadow: 0 4px 12px rgba(0,0,0,0.4);
+  box-shadow: 0 4px 12px rgba(0, 0, 0, 0.4);
 
   @media (max-width: 480px) {
     padding: 18px;
@@ -126,7 +135,7 @@ const CloseButton = styled.button`
   z-index: 10;
 
   &:hover {
-    background-color: rgba(255,255,255,0.1);
+    background-color: rgba(255, 255, 255, 0.1);
   }
 `;
 
@@ -135,7 +144,7 @@ const StatsModalTitle = styled.h2`
   margin-top: 6px;
   margin-bottom: 8px;
   font-size: 2rem;
-  text-align:center;
+  text-align: center;
 `;
 
 const StatsModalSubHeading = styled.h3`
@@ -169,6 +178,6 @@ const StyledCell = styled(TableCell)`
 
 const StyledRow = styled(TableRow)`
   &:hover {
-    background-color: rgba(255,255,255,0.05);
+    background-color: rgba(255, 255, 255, 0.05);
   }
 `;

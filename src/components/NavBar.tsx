@@ -1,11 +1,16 @@
-import { BarChartOutlined, HelpOutline, Whatshot, AccessTime } from '@mui/icons-material';
-import { Tooltip } from '@mui/material';
-import { useState, useEffect } from 'react';
-import styled from 'styled-components';
-import StatsModal from './StatsModal';
-import TutorialModal from './TutorialModal';
-import { useNavigate } from 'react-router-dom';
-import { useStats } from '../context/StatsContext';
+import {
+  BarChartOutlined,
+  HelpOutline,
+  Whatshot,
+  AccessTime,
+} from "@mui/icons-material";
+import { Tooltip } from "@mui/material";
+import { useState, useEffect } from "react";
+import styled from "styled-components";
+import StatsModal from "./StatsModal";
+import TutorialModal from "./TutorialModal";
+import { useNavigate } from "react-router-dom";
+import { useStats } from "../context/StatsContext";
 
 export default function NavBar() {
   const [showStatsModal, setShowStatsModal] = useState(false);
@@ -15,8 +20,8 @@ export default function NavBar() {
 
   const [timeLeft, setTimeLeft] = useState(getTimeUntilNextWord());
 
-  const toggleStatsModal = () => setShowStatsModal(prev => !prev);
-  const toggleTutorialModal = () => setShowTutorialModal(prev => !prev);
+  const toggleStatsModal = () => setShowStatsModal((prev) => !prev);
+  const toggleTutorialModal = () => setShowTutorialModal((prev) => !prev);
 
   useEffect(() => {
     const interval = setInterval(() => {
@@ -32,29 +37,37 @@ export default function NavBar() {
       {showTutorialModal && <TutorialModal onClose={toggleTutorialModal} />}
 
       <NavContent>
-        <ImageLogo src="logo.png" alt="logo" onClick={() => navigate('/')} />
+        <ImageLogo src="logo.png" alt="logo" onClick={() => navigate("/")} />
 
         <RightIconsContainer>
-          <Tooltip title="Current streak in days" arrow slotProps={{
-                tooltip: {
+          <Tooltip
+            title="Current streak in days"
+            arrow
+            slotProps={{
+              tooltip: {
                 sx: {
-                    fontSize: '14px',
+                  fontSize: "14px",
                 },
-                },
-            }}>
+              },
+            }}
+          >
             <StreakContainer>
               <FireIcon />
               <StreakNumber>{stats.currentStreak}</StreakNumber>
             </StreakContainer>
           </Tooltip>
 
-          <Tooltip title="Next word coming up in..." arrow slotProps={{
-                tooltip: {
+          <Tooltip
+            title="Next word coming up in..."
+            arrow
+            slotProps={{
+              tooltip: {
                 sx: {
-                    fontSize: '14px',
+                  fontSize: "14px",
                 },
-                },
-            }}>
+              },
+            }}
+          >
             <CountdownContainer>
               <ClockIcon />
               <CountdownText>{timeLeft}</CountdownText>
@@ -71,19 +84,23 @@ export default function NavBar() {
 
 function getTimeUntilNextWord() {
   const now = new Date();
-  const nextUTC = new Date(Date.UTC(
-    now.getUTCFullYear(),
-    now.getUTCMonth(),
-    now.getUTCDate() + 1,
-    0, 0, 0
-  ));
+  const nextUTC = new Date(
+    Date.UTC(
+      now.getUTCFullYear(),
+      now.getUTCMonth(),
+      now.getUTCDate() + 1,
+      0,
+      0,
+      0,
+    ),
+  );
 
   const diff = nextUTC.getTime() - now.getTime();
   const hours = Math.floor(diff / 1000 / 60 / 60);
   const minutes = Math.floor((diff / 1000 / 60) % 60);
   const seconds = Math.floor((diff / 1000) % 60);
 
-  return `${hours.toString().padStart(2,'0')}:${minutes.toString().padStart(2,'0')}:${seconds.toString().padStart(2,'0')}`;
+  return `${hours.toString().padStart(2, "0")}:${minutes.toString().padStart(2, "0")}:${seconds.toString().padStart(2, "0")}`;
 }
 
 const NavBarContainer = styled.div`
@@ -203,6 +220,6 @@ const CountdownText = styled.span`
   font-size: 14px;
 
   @media (max-width: 600px) {
-    font-size:12px;
+    font-size: 12px;
   }
 `;

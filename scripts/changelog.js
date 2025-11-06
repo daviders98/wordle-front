@@ -26,7 +26,7 @@ function generateChangelog() {
   console.log("📦 Generating changelog...");
 
   const gitLog = execSync(
-    `git log --reverse --pretty=format:'{"message":"%s","author":"%an","date":"%cI"},'`
+    `git log --reverse --pretty=format:'{"message":"%s","author":"%an","date":"%cI"},'`,
   )
     .toString()
     .trim();

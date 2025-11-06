@@ -16,24 +16,24 @@ function combineChangelogs() {
   const frontData = JSON.parse(fs.readFileSync(FRONT_CHANGELOG, "utf-8"));
   const backendData = JSON.parse(fs.readFileSync(BACKEND_CHANGELOG, "utf-8"));
 
-  const frontCommits = frontData.flatMap(entry =>
-    entry.commits.map(commit => ({
+  const frontCommits = frontData.flatMap((entry) =>
+    entry.commits.map((commit) => ({
       ...commit,
       version: entry.version,
-      source: "frontend"
-    }))
+      source: "frontend",
+    })),
   );
 
-  const backendCommits = backendData.flatMap(entry =>
-    entry.commits.map(commit => ({
+  const backendCommits = backendData.flatMap((entry) =>
+    entry.commits.map((commit) => ({
       ...commit,
       version: entry.version,
-      source: "backend"
-    }))
+      source: "backend",
+    })),
   );
 
   const allCommits = [...frontCommits, ...backendCommits].sort(
-    (a, b) => new Date(a.date) - new Date(b.date)
+    (a, b) => new Date(a.date) - new Date(b.date),
   );
 
   let version = "v0.0.0";
@@ -43,8 +43,14 @@ function combineChangelogs() {
   const bumpVersion = (ver) => {
     const [major, minor, patch] = ver.replace("v", "").split(".").map(Number);
     let [maj, min, pat] = [major, minor, patch + 1];
-    if (pat >= 10) { pat = 0; min += 1; }
-    if (min >= 10) { min = 0; maj += 1; }
+    if (pat >= 10) {
+      pat = 0;
+      min += 1;
+    }
+    if (min >= 10) {
+      min = 0;
+      maj += 1;
+    }
     return `v${maj}.${min}.${pat}`;
   };
 
@@ -66,7 +72,9 @@ function combineChangelogs() {
   fs.mkdirSync(path.dirname(OUTPUT), { recursive: true });
   fs.writeFileSync(OUTPUT, JSON.stringify(changelog, null, 2));
 
-  console.log(`✅ Combined changelog with ${allCommits.length} commits written to ${OUTPUT}`);
+  console.log(
+    `✅ Combined changelog with ${allCommits.length} commits written to ${OUTPUT}`,
+  );
 }
 
 combineChangelogs();
