@@ -3,19 +3,14 @@
     "version": "v0.0.0",
     "commits": [
       {
-        "message": "fix(WOR-39): Improve loading time on guess",
-        "author": "David Garcia",
-        "date": "2025-11-05T22:05:00-07:00"
-      }
-    ]
-  },
-  {
-    "version": "v0.0.1",
-    "commits": [
+        "message": "chore: Sync backend changelog from main repo",
+        "author": "github-actions[bot]",
+        "date": "2025-11-06T05:23:28Z"
+      },
       {
         "message": "chore: auto-format code with Prettier",
         "author": "github-actions[bot]",
-        "date": "2025-11-06T05:05:40Z"
+        "date": "2025-11-06T05:24:03Z"
       }
     ]
   }
