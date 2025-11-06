@@ -28,7 +28,9 @@ const StatsContext = createContext<StatsContextType>({
   resetStats: () => {},
 });
 
-export const StatsProvider: React.FC<{ children: React.ReactNode }> = ({ children }) => {
+export const StatsProvider: React.FC<{ children: React.ReactNode }> = ({
+  children,
+}) => {
   const [stats, setStats] = useState<GameStats>(defaultStats);
 
   useEffect(() => {
@@ -44,7 +46,10 @@ export const StatsProvider: React.FC<{ children: React.ReactNode }> = ({ childre
       const yesterdayStr = yesterday.toISOString().split("T")[0];
 
       if (parsed.lastPlayedDate) {
-        if (parsed.lastPlayedDate !== todayStr && parsed.lastPlayedDate !== yesterdayStr) {
+        if (
+          parsed.lastPlayedDate !== todayStr &&
+          parsed.lastPlayedDate !== yesterdayStr
+        ) {
           parsed.currentStreak = 0;
           localStorage.removeItem("game-data");
         }
