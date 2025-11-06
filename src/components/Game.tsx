@@ -222,7 +222,10 @@ export default function Game({
       cellStatuses[rowIndex].every((status: string) => status === "correct")
     );
   };
-  const testWord = async (word: string, retry = true): Promise<{valid:boolean,letters:Array<any>}> => {
+  const testWord = async (
+    word: string,
+    retry = true,
+  ): Promise<{ valid: boolean; letters: Array<any> }> => {
     const response = await fetch(
       `${process.env.REACT_APP_RENDER_BASE_URL}/api/guess-word/`,
       {
@@ -241,7 +244,7 @@ export default function Game({
       return await testWord(word, false);
     }
     const data = await response.json();
-    return data
+    return data;
   };
 
   const mapResultToStatus = (
@@ -373,9 +376,9 @@ export default function Game({
   useEffect(() => {
     if (!isGuessing || !currentGuess) return;
     const guessing = async () => {
-      const {valid: isValidGuess,letters} = await testWord(currentGuess);
+      const { valid: isValidGuess, letters } = await testWord(currentGuess);
       if (isGuessing && isValidGuess && currentGuess) {
-        const resultArray = letters
+        const resultArray = letters;
         for (let i = 0; i < 5; i++) {
           const status = mapResultToStatus(resultArray)[i];
           setTimeout(() => {
