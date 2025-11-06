@@ -923,8 +923,20 @@
       {
         "message": "fix(WOR-35): Make keyboard bigger on mobile",
         "author": "David Garcia",
-        "date": "2025-11-05T19:54:37-07:00",
+        "date": "2025-11-05T19:54:40-07:00",
         "version": "v0.4.4",
+        "source": "frontend"
+      }
+    ]
+  },
+  {
+    "version": "v0.7.4",
+    "commits": [
+      {
+        "message": "feat(WOR-36): Add automatic formatter CI CD",
+        "author": "David Garcia",
+        "date": "2025-11-05T20:18:03-07:00",
+        "version": "v0.4.5",
         "source": "frontend"
       }
     ]
