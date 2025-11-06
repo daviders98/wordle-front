@@ -222,13 +222,13 @@ export default function Game({
       cellStatuses[rowIndex].every((status: string) => status === "correct")
     );
   };
-  const testWord = async (word: string, retry = true): Promise<boolean> => {
+  const testWord = async (word: string, retry = true): Promise<{valid:boolean,letters:Array<any>}> => {
     const response = await fetch(
-      `${process.env.REACT_APP_RENDER_BASE_URL}/api/validate-word/`,
+      `${process.env.REACT_APP_RENDER_BASE_URL}/api/guess-word/`,
       {
         method: "POST",
         body: JSON.stringify({
-          word: word,
+          guess: word,
         }),
         headers: {
           "Content-Type": "application/json",
@@ -241,29 +241,7 @@ export default function Game({
       return await testWord(word, false);
     }
     const data = await response.json();
-    return data.valid;
-  };
-  const compareWithSolution = async (
-    word: string,
-    retry = true,
-  ): Promise<Array<number>> => {
-    const response = await fetch(
-      `${process.env.REACT_APP_RENDER_BASE_URL}/api/check-guess/`,
-      {
-        method: "POST",
-        body: JSON.stringify({ guess: word }),
-        headers: {
-          "Content-Type": "application/json",
-          Authorization: `Bearer ${jwtValue}`,
-        },
-      },
-    );
-    if (response.status === 401) {
-      await getJWT();
-      return await compareWithSolution(word, false);
-    }
-    const data = await response.json();
-    return data.letters;
+    return data
   };
 
   const mapResultToStatus = (
@@ -395,9 +373,9 @@ export default function Game({
   useEffect(() => {
     if (!isGuessing || !currentGuess) return;
     const guessing = async () => {
-      const isValidGuess = await testWord(currentGuess);
+      const {valid: isValidGuess,letters} = await testWord(currentGuess);
       if (isGuessing && isValidGuess && currentGuess) {
-        const resultArray = await compareWithSolution(currentGuess);
+        const resultArray = letters
         for (let i = 0; i < 5; i++) {
           const status = mapResultToStatus(resultArray)[i];
           setTimeout(() => {
