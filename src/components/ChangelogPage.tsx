@@ -82,7 +82,7 @@ export default function Changelog() {
         const normalized = data.map((entry) => ({
           ...entry,
           commits: entry.commits.sort(
-            (a, b) => new Date(b.date).getTime() - new Date(a.date).getTime()
+            (a, b) => new Date(b.date).getTime() - new Date(a.date).getTime(),
           ),
         }));
         setChangelog(normalized.reverse());
@@ -109,12 +109,17 @@ export default function Changelog() {
   const getColors = (message: string) => {
     if (message.startsWith("feat")) return { bg: "#D9F7E3", border: "#34A853" };
     if (message.startsWith("fix")) return { bg: "#FFE8CC", border: "#FB8C00" };
-    if (message.startsWith("chore")) return { bg: "#F0F0F0", border: "#9E9E9E" };
+    if (message.startsWith("chore"))
+      return { bg: "#F0F0F0", border: "#9E9E9E" };
     return { bg: "#E3E2E0", border: "#0C100F" };
   };
 
   const formatMessage = (message: string) => {
-    const parts = ['feat','fix','chore'].some((word)=>message.includes(word)) ? message.split(":"):[message];
+    const parts = ["feat", "fix", "chore"].some((word) =>
+      message.includes(word),
+    )
+      ? message.split(":")
+      : [message];
     return parts.length > 1 ? parts.slice(1).join(":").trim() : message;
   };
 
@@ -131,7 +136,10 @@ export default function Changelog() {
       <Box sx={{ maxWidth: 700, mx: "auto" }}>
         <TitleContainer onClick={() => navigate("/")}>
           <Logo src={"/logo.png"} alt="wordle logo" />
-          <Typography variant="h4" sx={{ fontWeight: 700, mb: 3, textAlign: "center" }}>
+          <Typography
+            variant="h4"
+            sx={{ fontWeight: 700, mb: 3, textAlign: "center" }}
+          >
             Better Wordle Changelog
           </Typography>
         </TitleContainer>
@@ -143,7 +151,8 @@ export default function Changelog() {
         )}
 
         {changelog.map((entry) => {
-          const firstMsg = entry.commits.length > 0 ? entry.commits[0].message : "";
+          const firstMsg =
+            entry.commits.length > 0 ? entry.commits[0].message : "";
           const { bg, border } = getColors(firstMsg);
 
           return (
@@ -158,22 +167,34 @@ export default function Changelog() {
               }}
             >
               <AccordionSummary expandIcon={<ExpandMoreIcon />}>
-                <div style={{display:'flex',flexDirection:'column'}}>
-                    <Typography variant="h6" sx={{ fontWeight: 600, color: "#0C100F" }}>
-                  {entry.version}
-                </Typography>
-                <Typography variant="h6" sx={{ fontWeight: 400, color: "#0C100F" }}>
-                  {firstMsg.startsWith("feat") ? 'New Feature':firstMsg.startsWith("fix") ? 'Fix':'Chore'}
-                </Typography>
+                <div style={{ display: "flex", flexDirection: "column" }}>
+                  <Typography
+                    variant="h6"
+                    sx={{ fontWeight: 600, color: "#0C100F" }}
+                  >
+                    {entry.version}
+                  </Typography>
+                  <Typography
+                    variant="h6"
+                    sx={{ fontWeight: 400, color: "#0C100F" }}
+                  >
+                    {firstMsg.startsWith("feat")
+                      ? "New Feature"
+                      : firstMsg.startsWith("fix")
+                        ? "Fix"
+                        : "Chore"}
+                  </Typography>
                 </div>
-                
               </AccordionSummary>
               <AccordionDetails>
                 {entry.commits.map((commit) => {
                   const key = `${commit.hash ?? commit.date}-${commit.message}`;
                   return (
                     <Box key={key} sx={{ mb: 2 }}>
-                      <Typography variant="subtitle1" sx={{ fontWeight: 500, color: "#0C100F" }}>
+                      <Typography
+                        variant="subtitle1"
+                        sx={{ fontWeight: 500, color: "#0C100F" }}
+                      >
                         {formatMessage(commit.message)}
                       </Typography>
 
@@ -205,9 +226,13 @@ export default function Changelog() {
                             size="small"
                             sx={{
                               color:
-                                commit.source === "backend" ? "#0C100F" : "#1E88E5",
+                                commit.source === "backend"
+                                  ? "#0C100F"
+                                  : "#1E88E5",
                               borderColor:
-                                commit.source === "backend" ? "#0C100F" : "#1E88E5",
+                                commit.source === "backend"
+                                  ? "#0C100F"
+                                  : "#1E88E5",
                               fontWeight: 600,
                             }}
                           />

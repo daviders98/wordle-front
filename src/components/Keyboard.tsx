@@ -89,7 +89,7 @@ export default function Keyboard({ onKeyPress, keyStatuses }: KeyboardProps) {
               onClick={() => onKeyPress(key)}
               $status={keyStatuses[key]}
               style={{
-                flex: key === "ENTER"? "2" : key === "⌫"? '1.3'  : "1",
+                flex: key === "ENTER" ? "2" : key === "⌫" ? "1.3" : "1",
               }}
             >
               {key}

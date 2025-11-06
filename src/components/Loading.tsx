@@ -1,7 +1,7 @@
-import CircularProgress from '@mui/material/CircularProgress';
-import styled, { keyframes } from 'styled-components';
-import TutorialModal from './TutorialModal';
-import { useState } from 'react';
+import CircularProgress from "@mui/material/CircularProgress";
+import styled, { keyframes } from "styled-components";
+import TutorialModal from "./TutorialModal";
+import { useState } from "react";
 
 const fadeIn = keyframes`
   from { opacity: 0; transform: translateY(10px); }
@@ -30,7 +30,7 @@ const LoadingText = styled.p`
   animation: ${fadeIn} 1.2s ease-in-out forwards;
   text-align: center;
   letter-spacing: 0.3px;
-  padding: 0 14px 0 ;
+  padding: 0 14px 0;
 
   &:last-of-type {
     color: #bdbdbd;
@@ -46,13 +46,15 @@ const StyledSpinner = styled(CircularProgress)`
 `;
 
 function Loading() {
-    const [tutorialModalOpened, setTutorialModalOpened] = useState(true);
-      const toggleTutorialModal = () => setTutorialModalOpened(prev => !prev);
+  const [tutorialModalOpened, setTutorialModalOpened] = useState(true);
+  const toggleTutorialModal = () => setTutorialModalOpened((prev) => !prev);
   return (
     <LoadingContainer>
-        {tutorialModalOpened && <TutorialModal onClose={toggleTutorialModal} />}
-      <LoadingText>Server is waking up now, please wait a little bit.</LoadingText>
-      <LoadingText>Perfection takes time {'[:'}</LoadingText>
+      {tutorialModalOpened && <TutorialModal onClose={toggleTutorialModal} />}
+      <LoadingText>
+        Server is waking up now, please wait a little bit.
+      </LoadingText>
+      <LoadingText>Perfection takes time {"[:"}</LoadingText>
       <StyledSpinner size={60} thickness={4} />
     </LoadingContainer>
   );

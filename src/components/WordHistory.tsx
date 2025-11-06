@@ -28,22 +28,28 @@ export default function WordHistory() {
   const navigate = useNavigate();
 
   const getJWT = async () => {
-    const response = await fetch(`${process.env.REACT_APP_RENDER_BASE_URL}/api/get-jwt/`, {
-      method: "POST",
-      credentials: "include",
-    });
+    const response = await fetch(
+      `${process.env.REACT_APP_RENDER_BASE_URL}/api/get-jwt/`,
+      {
+        method: "POST",
+        credentials: "include",
+      },
+    );
     const jwt = await response.json();
     setJwtValue(jwt.token);
   };
 
   const getWords = async (retry = true): Promise<void> => {
-    const response = await fetch(`${process.env.REACT_APP_RENDER_BASE_URL}/api/list`, {
-      method: "GET",
-      headers: {
-        "Content-Type": "application/json",
-        Authorization: `Bearer ${jwtValue}`,
+    const response = await fetch(
+      `${process.env.REACT_APP_RENDER_BASE_URL}/api/list`,
+      {
+        method: "GET",
+        headers: {
+          "Content-Type": "application/json",
+          Authorization: `Bearer ${jwtValue}`,
+        },
       },
-    });
+    );
 
     if (response.status === 401 && retry) {
       await getJWT();
@@ -60,8 +66,8 @@ export default function WordHistory() {
   }, []);
 
   useEffect(() => {
-    if (jwtValue){
-        getWords();
+    if (jwtValue) {
+      getWords();
     }
   }, [jwtValue]);
 
@@ -92,7 +98,10 @@ export default function WordHistory() {
         alignItems: "center",
       }}
     >
-      <Typography variant="h4" sx={{ fontWeight: 700, mb: 3, color: "#0C100F" }}>
+      <Typography
+        variant="h4"
+        sx={{ fontWeight: 700, mb: 3, color: "#0C100F" }}
+      >
         Word History
       </Typography>
 
@@ -100,9 +109,15 @@ export default function WordHistory() {
         <Table>
           <TableHead>
             <TableRow>
-              <TableCell><b>#</b></TableCell>
-              <TableCell><b>Word</b></TableCell>
-              <TableCell><b>Date</b></TableCell>
+              <TableCell>
+                <b>#</b>
+              </TableCell>
+              <TableCell>
+                <b>Word</b>
+              </TableCell>
+              <TableCell>
+                <b>Date</b>
+              </TableCell>
             </TableRow>
           </TableHead>
           <TableBody>
@@ -110,7 +125,9 @@ export default function WordHistory() {
               <TableRow key={word.solution_number}>
                 <TableCell>{word.solution_number}</TableCell>
                 <TableCell>{word.solution}</TableCell>
-                <TableCell>{moment(word.solution_date).format("MMM DD, YYYY")}</TableCell>
+                <TableCell>
+                  {moment(word.solution_date).format("MMM DD, YYYY")}
+                </TableCell>
               </TableRow>
             ))}
           </TableBody>
