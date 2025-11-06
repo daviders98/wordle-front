@@ -1,6 +1,6 @@
-import styled from 'styled-components';
-import CloseIcon from '@mui/icons-material/Close';
-import WordExample from './ExampleWord';
+import styled from "styled-components";
+import CloseIcon from "@mui/icons-material/Close";
+import WordExample from "./ExampleWord";
 
 interface TutorialModalProps {
   onClose: () => void;
@@ -15,20 +15,39 @@ export default function TutorialModal({ onClose }: TutorialModalProps) {
         </CloseButton>
 
         <TutorialModalTitle>How to play</TutorialModalTitle>
-        <TutorialModalSubHeading>Guess the WORDLE in 6 tries.</TutorialModalSubHeading>
-        
+        <TutorialModalSubHeading>
+          Guess the WORDLE in 6 tries.
+        </TutorialModalSubHeading>
+
         <TutorialModalText>
-          Each guess must be a valid 5-letter word. Hit the enter button to submit.
+          Each guess must be a valid 5-letter word. Hit the enter button to
+          submit.
         </TutorialModalText>
         <TutorialModalText>
-          After each guess, the color of the tiles will change to show how close your guess was to the word.
+          After each guess, the color of the tiles will change to show how close
+          your guess was to the word.
         </TutorialModalText>
 
         <ExampleSection>
           <ExampleTitle>Examples</ExampleTitle>
-          <WordExample letterHighlight={'w'} word={'wordy'} type={'success'} explanation='is in the word and in the correct spot.' />
-          <WordExample letterHighlight={'i'} word={'light'} type={'present'} explanation='is in the word but in the wrong spot.'/>
-          <WordExample letterHighlight={'u'} word={'rogue'} type={'absent'} explanation='is not in the word in any spot.'/>
+          <WordExample
+            letterHighlight={"w"}
+            word={"wordy"}
+            type={"success"}
+            explanation="is in the word and in the correct spot."
+          />
+          <WordExample
+            letterHighlight={"i"}
+            word={"light"}
+            type={"present"}
+            explanation="is in the word but in the wrong spot."
+          />
+          <WordExample
+            letterHighlight={"u"}
+            word={"rogue"}
+            type={"absent"}
+            explanation="is not in the word in any spot."
+          />
         </ExampleSection>
 
         <TutorialEndingText>
@@ -51,8 +70,12 @@ const TutorialModalContainer = styled.div`
   padding: 12px;
 
   @keyframes fadeIn {
-    from { opacity: 0; }
-    to { opacity: 1; }
+    from {
+      opacity: 0;
+    }
+    to {
+      opacity: 1;
+    }
   }
 `;
 
@@ -65,7 +88,7 @@ const TutorialModalContent = styled.div`
   max-width: 500px;
   max-height: 90vh;
   overflow-y: auto;
-  box-shadow: 0 4px 12px rgba(0,0,0,0.3);
+  box-shadow: 0 4px 12px rgba(0, 0, 0, 0.3);
   -webkit-overflow-scrolling: touch;
 
   @media (max-width: 480px) {
@@ -93,7 +116,7 @@ const CloseButton = styled.button`
   z-index: 10;
 
   &:hover {
-    background-color: rgba(255,255,255,0.1);
+    background-color: rgba(255, 255, 255, 0.1);
   }
 
   @media (max-width: 480px) {

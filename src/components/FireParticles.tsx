@@ -16,9 +16,7 @@ const FireParticle = styled.div<{
   bottom: ${({ $y }) => $y}vh;
   left: ${({ $x }) => $x}%;
   font-size: ${({ $size }) => $size}rem;
-  animation: ${riseAndSway}
-    ${({ $duration }) => $duration}s
-    ease-in-out
+  animation: ${riseAndSway} ${({ $duration }) => $duration}s ease-in-out
     forwards;
   pointer-events: none;
   z-index: 100;

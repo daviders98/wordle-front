@@ -26,7 +26,9 @@ const StatsContext = createContext<StatsContextType>({
   resetStats: () => {},
 });
 
-export const StatsProvider: React.FC<{ children: React.ReactNode }> = ({ children }) => {
+export const StatsProvider: React.FC<{ children: React.ReactNode }> = ({
+  children,
+}) => {
   const [stats, setStats] = useState<GameStats>(defaultStats);
 
   useEffect(() => {
@@ -37,7 +39,7 @@ export const StatsProvider: React.FC<{ children: React.ReactNode }> = ({ childre
   }, []);
 
   const updateStats = (win: boolean) => {
-    setStats(prev => {
+    setStats((prev) => {
       const updated = {
         gamesPlayed: prev.gamesPlayed + 1,
         gamesWon: win ? prev.gamesWon + 1 : prev.gamesWon,

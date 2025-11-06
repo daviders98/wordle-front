@@ -1,5 +1,5 @@
-import { useEffect, useState } from 'react';
-import styled, { keyframes, css } from 'styled-components';
+import { useEffect, useState } from "react";
+import styled, { keyframes, css } from "styled-components";
 
 const spin = keyframes`
   0% { transform: rotateX(0deg); }
@@ -16,16 +16,17 @@ const CorrectLetter = styled.span<{ $animate: boolean }>`
   text-align: center;
   font-weight: bold;
   font-size: 24px;
-  background-color: #6aaa64; 
+  background-color: #6aaa64;
   color: white;
   border-radius: 4px;
   border: 2px solid #565758;
 
   ${({ $animate }) =>
-    $animate ?
-    css`
-      animation: ${spin} 2s ease-in-out;
-    `:''}
+    $animate
+      ? css`
+          animation: ${spin} 2s ease-in-out;
+        `
+      : ""}
 `;
 
 const WordContainer = styled.div`
@@ -68,16 +69,17 @@ const PresentLetter = styled.span<{ $animate: boolean }>`
   text-align: center;
   font-weight: bold;
   font-size: 24px;
-  background-color: #b59f3b; 
+  background-color: #b59f3b;
   color: white;
   border-radius: 4px;
   border: 2px solid #565758;
 
   ${({ $animate }) =>
-    $animate ?
-    css`
-      animation: ${spin} 2s ease-in-out;
-    `:''}
+    $animate
+      ? css`
+          animation: ${spin} 2s ease-in-out;
+        `
+      : ""}
 `;
 
 const AbscentLetter = styled.span<{ $animate: boolean }>`
@@ -93,19 +95,32 @@ const AbscentLetter = styled.span<{ $animate: boolean }>`
   color: white;
   border-radius: 4px;
   border: 2px solid #565758;
-  
+
   ${({ $animate }) =>
-    $animate ?
-    css`
-      animation: ${spin} 2s ease-in-out;
-    `:''}
+    $animate
+      ? css`
+          animation: ${spin} 2s ease-in-out;
+        `
+      : ""}
 `;
 
-
-function WordExample({ word, letterHighlight,type, explanation}: { letterHighlight:string, word: string, type: string, explanation: string }) {
+function WordExample({
+  word,
+  letterHighlight,
+  type,
+  explanation,
+}: {
+  letterHighlight: string;
+  word: string;
+  type: string;
+  explanation: string;
+}) {
   const letterHighlightUppercase = letterHighlight.toUpperCase();
-  const letters = word.toUpperCase().split('');
-  const correctLetter = letters.find(letter => letter.toUpperCase() === letterHighlight.toUpperCase()) || '';
+  const letters = word.toUpperCase().split("");
+  const correctLetter =
+    letters.find(
+      (letter) => letter.toUpperCase() === letterHighlight.toUpperCase(),
+    ) || "";
 
   const [animate, setAnimate] = useState(false);
 
@@ -115,20 +130,32 @@ function WordExample({ word, letterHighlight,type, explanation}: { letterHighlig
 
   return (
     <WordExampleContainer>
-    <WordContainer>
-      {letters.map((letter, index) => {
-        return letterHighlightUppercase === letter ? 
-          type ==='success' ?
-        <CorrectLetter key={index} $animate={animate}>{correctLetter}</CorrectLetter>
-        : type ==='present' ?
-        <PresentLetter key={index} $animate={animate}>{correctLetter}</PresentLetter>
-        : <AbscentLetter key={index} $animate={animate}>{correctLetter}</AbscentLetter>:
-        <RestLetters key={index}>{letter}</RestLetters>;
-      })}
-    </WordContainer>
-    <WordExplanation><b>{letterHighlightUppercase}</b> {explanation}</WordExplanation>
+      <WordContainer>
+        {letters.map((letter, index) => {
+          return letterHighlightUppercase === letter ? (
+            type === "success" ? (
+              <CorrectLetter key={index} $animate={animate}>
+                {correctLetter}
+              </CorrectLetter>
+            ) : type === "present" ? (
+              <PresentLetter key={index} $animate={animate}>
+                {correctLetter}
+              </PresentLetter>
+            ) : (
+              <AbscentLetter key={index} $animate={animate}>
+                {correctLetter}
+              </AbscentLetter>
+            )
+          ) : (
+            <RestLetters key={index}>{letter}</RestLetters>
+          );
+        })}
+      </WordContainer>
+      <WordExplanation>
+        <b>{letterHighlightUppercase}</b> {explanation}
+      </WordExplanation>
     </WordExampleContainer>
   );
 }
 
-export default WordExample
+export default WordExample;
