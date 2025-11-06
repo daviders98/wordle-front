@@ -899,8 +899,20 @@
       {
         "message": "fix(WOR-33): Change background color on loading animation",
         "author": "David Garcia",
-        "date": "2025-11-05T19:44:12-07:00",
+        "date": "2025-11-05T19:44:15-07:00",
         "version": "v0.4.2",
+        "source": "frontend"
+      }
+    ]
+  },
+  {
+    "version": "v0.7.2",
+    "commits": [
+      {
+        "message": "feat(WOR-34): Add npm and node version to package.json",
+        "author": "David Garcia",
+        "date": "2025-11-05T19:47:26-07:00",
+        "version": "v0.4.3",
         "source": "frontend"
       }
     ]
