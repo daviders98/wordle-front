@@ -3,19 +3,14 @@
     "version": "v0.0.0",
     "commits": [
       {
-        "message": "feat(WOR-37): Reset streak when not playing on consecutive days and page was closed in between",
-        "author": "David Garcia",
-        "date": "2025-11-05T21:14:31-07:00"
-      }
-    ]
-  },
-  {
-    "version": "v0.0.1",
-    "commits": [
+        "message": "chore: Sync backend changelog from main repo",
+        "author": "github-actions[bot]",
+        "date": "2025-11-06T04:45:41Z"
+      },
       {
         "message": "chore: auto-format code with Prettier",
         "author": "github-actions[bot]",
-        "date": "2025-11-06T04:15:11Z"
+        "date": "2025-11-06T04:46:18Z"
       }
     ]
   }
