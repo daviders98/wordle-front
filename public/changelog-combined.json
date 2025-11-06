@@ -911,8 +911,20 @@
       {
         "message": "feat(WOR-34): Add npm and node version to package.json",
         "author": "David Garcia",
-        "date": "2025-11-05T19:47:26-07:00",
+        "date": "2025-11-05T19:47:30-07:00",
         "version": "v0.4.3",
+        "source": "frontend"
+      }
+    ]
+  },
+  {
+    "version": "v0.7.3",
+    "commits": [
+      {
+        "message": "fix(WOR-35): Make keyboard bigger on mobile",
+        "author": "David Garcia",
+        "date": "2025-11-05T19:54:37-07:00",
+        "version": "v0.4.4",
         "source": "frontend"
       }
     ]
