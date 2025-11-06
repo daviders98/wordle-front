@@ -5,6 +5,7 @@ interface GameStats {
   gamesWon: number;
   currentStreak: number;
   maxStreak: number;
+  lastPlayedDate: string | null;
 }
 
 interface StatsContextType {
@@ -18,6 +19,7 @@ const defaultStats: GameStats = {
   gamesWon: 0,
   currentStreak: 0,
   maxStreak: 0,
+  lastPlayedDate: null,
 };
 
 const StatsContext = createContext<StatsContextType>({
@@ -26,19 +28,35 @@ const StatsContext = createContext<StatsContextType>({
   resetStats: () => {},
 });
 
-export const StatsProvider: React.FC<{ children: React.ReactNode }> = ({
-  children,
-}) => {
+export const StatsProvider: React.FC<{ children: React.ReactNode }> = ({ children }) => {
   const [stats, setStats] = useState<GameStats>(defaultStats);
 
   useEffect(() => {
     const stored = localStorage.getItem("wordle-stats");
     if (stored) {
-      setStats(JSON.parse(stored));
+      const parsed: GameStats = JSON.parse(stored);
+
+      const today = new Date();
+      const yesterday = new Date(today);
+      yesterday.setDate(today.getDate() - 1);
+
+      const todayStr = today.toISOString().split("T")[0];
+      const yesterdayStr = yesterday.toISOString().split("T")[0];
+
+      if (parsed.lastPlayedDate) {
+        if (parsed.lastPlayedDate !== todayStr && parsed.lastPlayedDate !== yesterdayStr) {
+          parsed.currentStreak = 0;
+          localStorage.removeItem("game-data");
+        }
+      }
+
+      setStats(parsed);
+      localStorage.setItem("wordle-stats", JSON.stringify(parsed));
     }
   }, []);
 
   const updateStats = (win: boolean) => {
+    const today = new Date().toISOString().split("T")[0];
     setStats((prev) => {
       const updated = {
         gamesPlayed: prev.gamesPlayed + 1,
@@ -47,6 +65,7 @@ export const StatsProvider: React.FC<{ children: React.ReactNode }> = ({
         maxStreak: win
           ? Math.max(prev.maxStreak, prev.currentStreak + 1)
           : prev.maxStreak,
+        lastPlayedDate: today,
       };
       localStorage.setItem("wordle-stats", JSON.stringify(updated));
       return updated;
