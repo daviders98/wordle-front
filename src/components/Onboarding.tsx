@@ -62,7 +62,7 @@ export default function Onboarding({previousGameExist}:{previousGameExist:boolea
   },[jwtValue])
 
   return (
-    <Container>
+    <Container loading={loading}>
       {tutorialModalOpened && <TutorialModal onClose={toggleTutorialModal} />}
       {loading ?<Loading/>:
       <OnboardingContainer>
@@ -94,14 +94,14 @@ export default function Onboarding({previousGameExist}:{previousGameExist:boolea
   );
 }
 
-const Container = styled.div`
+const Container = styled.div<{ loading: boolean }>`
   display: flex;
   flex-direction: column;
   align-items: center;
   justify-content: flex-start;
   min-height: 100vh;
   padding: 8px;
-  background-color: #e3e2e0;
+  background-color: ${({ loading }) => (loading ? "#1a1a1b" : "#e3e2e0")};
 `;
 
 const OnboardingContainer = styled.div`

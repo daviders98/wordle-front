@@ -887,8 +887,20 @@
       {
         "message": "Merge branch 'main' of https://github.com/daviders98/wordle-front into main",
         "author": "David Garcia",
-        "date": "2025-11-04T23:08:46-07:00",
+        "date": "2025-11-04T23:08:52-07:00",
         "version": "v0.4.1",
+        "source": "frontend"
+      }
+    ]
+  },
+  {
+    "version": "v0.7.1",
+    "commits": [
+      {
+        "message": "fix(WOR-33): Change background color on loading animation",
+        "author": "David Garcia",
+        "date": "2025-11-05T19:44:12-07:00",
+        "version": "v0.4.2",
         "source": "frontend"
       }
     ]
