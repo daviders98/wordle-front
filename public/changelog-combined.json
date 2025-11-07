@@ -1193,10 +1193,29 @@
     "version": "v0.8.4",
     "commits": [
       {
+        "message": "chore: auto-format code with Prettier (#13)",
+        "author": "github-actions[bot]",
+        "date": "2025-11-07T05:41:03+00:00",
+        "version": "v0.5.1",
+        "source": "frontend"
+      },
+      {
         "message": "fix(WOR-43): Fix changelog being partially deleted on prettier formatting",
         "author": "David Garcia",
-        "date": "2025-11-06T22:44:12-07:00",
+        "date": "2025-11-06T22:44:15-07:00",
         "version": "v0.5.1",
+        "source": "frontend"
+      }
+    ]
+  },
+  {
+    "version": "v0.8.5",
+    "commits": [
+      {
+        "message": "chore: solve conflicts",
+        "author": "David Garcia",
+        "date": "2025-11-06T22:45:17-07:00",
+        "version": "v0.5.2",
         "source": "frontend"
       }
     ]
