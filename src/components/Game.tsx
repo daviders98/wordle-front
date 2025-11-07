@@ -301,38 +301,38 @@ export default function Game({
   }, [gameStatus, didWin]);
 
   useEffect(() => {
-    if(gameStatus!== 'game-over'){
+    if (gameStatus !== "game-over") {
       setGuesses((prevGuesses: any[]) => {
-      const newGuesses = prevGuesses.map((row) => [...row]);
-      if (currentGuess.length > 5) return newGuesses;
+        const newGuesses = prevGuesses.map((row) => [...row]);
+        if (currentGuess.length > 5) return newGuesses;
 
-      for (let i = 0; i < 5; i++) {
-        newGuesses[currentRowIndex][i] = currentGuess[i] || "";
-      }
-
-      if (currentGuess.length > 0) {
-        const index = currentGuess.length - 1;
-        if (
-          currentGuess.length > prevGuesses[currentRowIndex].join("").length
-        ) {
-          setAnimatedCells((prev: any[][]) => {
-            const copy = prev.map((row) => [...row]);
-            copy[currentRowIndex][index] = true;
-            return copy;
-          });
+        for (let i = 0; i < 5; i++) {
+          newGuesses[currentRowIndex][i] = currentGuess[i] || "";
         }
 
-        setTimeout(() => {
-          setAnimatedCells((prev: any[][]) => {
-            const copy = prev.map((row) => [...row]);
-            copy[currentRowIndex][index] = false;
-            return copy;
-          });
-        }, 1500);
-      }
+        if (currentGuess.length > 0) {
+          const index = currentGuess.length - 1;
+          if (
+            currentGuess.length > prevGuesses[currentRowIndex].join("").length
+          ) {
+            setAnimatedCells((prev: any[][]) => {
+              const copy = prev.map((row) => [...row]);
+              copy[currentRowIndex][index] = true;
+              return copy;
+            });
+          }
 
-      return newGuesses;
-    });
+          setTimeout(() => {
+            setAnimatedCells((prev: any[][]) => {
+              const copy = prev.map((row) => [...row]);
+              copy[currentRowIndex][index] = false;
+              return copy;
+            });
+          }, 1500);
+        }
+
+        return newGuesses;
+      });
     }
   }, [currentGuess, currentRowIndex]);
 
