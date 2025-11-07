@@ -1,46 +1,181 @@
-# Getting Started with Create React App
+# 🧩 Better Wordle — Frontend
+A React frontend for **Better Wordle** — a mobile-first Wordle clone with a changelog, history, and JWT-protected API.
 
-This project was bootstrapped with [Create React App](https://github.com/facebook/create-react-app).
+---
 
-## Available Scripts
+## Demo  
+> Live demo: https://better-wordle.vercel.app/
 
-In the project directory, you can run:
+---
 
-### `npm start`
+## Features  
+- Mobile-first responsive UI built with React and Material UI  
+- Game board with animations and validation  
+- Local stats tracking with daily streak logic  
+- JWT authentication for protected API endpoints  
+- Word History + Changelog views  
+- Combined validation + guess API (`/api/combined-guess/`)  
+- Full-width keyboard optimized for touch devices  
 
-Runs the app in the development mode.\
-Open [http://localhost:3000](http://localhost:3000) to view it in the browser.
+---
 
-The page will reload if you make edits.\
-You will also see any lint errors in the console.
+## Tech stack  
+- React (Vite / CRA)  
+- TypeScript  
+- Material UI (MUI)  
+- styled-components  
+- moment / dayjs  
+- Hosted on Render / Vercel / Netlify  
+### ⚙️ Environment
+| Tool | Version |
+|------|----------|
+| Node.js | 22.15.0 |
+| npm | ≥10.0.0 |
+| React | 19.2.0 |
+| TypeScript | 4.9.5 |
 
-### `npm test`
+Make sure you’re using the correct Node and npm versions to avoid dependency issues.
+If you’re using **nvm**, run:
+```bash
+nvm install 22.15.0
+nvm use 22.15.0
+```
+Or manually check your versions:
+```bash
+node -v
+npm -v
+```
 
-Launches the test runner in the interactive watch mode.\
-See the section about [running tests](https://facebook.github.io/create-react-app/docs/running-tests) for more information.
+---
 
-### `npm run build`
+## Prerequisites  
+- Node.js v22.15.0 (or match deployment version)  
+- npm or yarn installed  
+- Backend API running and reachable  
 
-Builds the app for production to the `build` folder.\
-It correctly bundles React in production mode and optimizes the build for the best performance.
+---
 
-The build is minified and the filenames include the hashes.\
-Your app is ready to be deployed!
+## Environment variables  
+Create a `.env` file in the project root (ignored by git):
 
-See the section about [deployment](https://facebook.github.io/create-react-app/docs/deployment) for more information.
+```env
+Base URL of your backend API (no trailing slash)
+REACT_APP_RENDER_BASE_URL=https://your-backend.onrender.com
+```
 
-### `npm run eject`
+> The frontend automatically requests a JWT from `/api/get-jwt/`.
 
-**Note: this is a one-way operation. Once you `eject`, you can’t go back!**
+---
 
-If you aren’t satisfied with the build tool and configuration choices, you can `eject` at any time. This command will remove the single build dependency from your project.
+## Install & run locally  
+```bash
+install dependencies
+npm install
+or
+yarn
 
-Instead, it will copy all the configuration files and the transitive dependencies (webpack, Babel, ESLint, etc) right into your project so you have full control over them. All of the commands except `eject` will still work, but they will point to the copied scripts so you can tweak them. At this point you’re on your own.
+start dev server
+npm start
+or
+yarn start
+```
 
-You don’t have to ever use `eject`. The curated feature set is suitable for small and middle deployments, and you shouldn’t feel obligated to use this feature. However we understand that this tool wouldn’t be useful if you couldn’t customize it when you are ready for it.
+Build for production:
+```bash
+npm run build
+```
 
-## Learn More
+Preview locally:
+```bash
+npx serve build
+```
 
-You can learn more in the [Create React App documentation](https://facebook.github.io/create-react-app/docs/getting-started).
+---
 
-To learn React, check out the [React documentation](https://reactjs.org/).
+## Available scripts  
+- `start` — starts dev server  
+- `build` — builds production assets  
+- `test` — runs tests  
+- `prepare` — installs Husky hooks (if used)  
+
+---
+
+## App flow overview  
+
+### 1. Authentication  
+- Requests token via `/api/get-jwt/`  
+- Adds to header:  
+  `Authorization: Bearer <token>`  
+
+### 2. Guessing a word  
+Endpoint: `/api/combined-guess/`  
+Body:  
+```json
+{ "guess": "APPLE" }
+```
+Response (invalid):  
+```json
+{ "valid": false }
+```
+Response (valid):  
+```json
+{ "valid": true, "letters": [2,0,1,0,2] }
+```
+
+### 3. Word History  
+Endpoint: `/api/list/`  
+Returns all past words (before today).  
+
+### 4. Changelog  
+Fetches and displays version updates from a JSON file.  
+
+---
+
+## UI & UX notes  
+- Keyboard fills screen width on mobile  
+- `styled-components` for isolated styles  
+- Responsive and accessible (semantic buttons, focusable keys)  
+- Stats persist via localStorage  
+- Daily rollover logic resets streak if `lastPlayedDate` < yesterday  
+
+---
+
+## Styling  
+- MUI theme for colors and typography  
+- styled-components for custom UI  
+- Dark mode palette with Wordle-like tone  
+
+---
+
+## Deployment  
+1. Set environment variables in Render / Vercel Dashboard  
+2. Run `npm run build` (automatic for most hosts)  
+3. Ensure HTTPS (default for most static hosts)  
+
+---
+
+## Troubleshooting  
+❌ **Blank screen:** Check `REACT_APP_RENDER_BASE_URL`  
+🔒 **401 Unauthorized:** Token expired → frontend will refresh automatically  
+📱 **Tiny keyboard:** Ensure viewport width and `flex: 1` applied in CSS  
+🕒 **Wrong streak reset:** Check device timezone or force UTC dates  
+
+---
+
+## Testing tips  
+Simulate yesterday’s session:  
+- Open DevTools → localStorage → edit `lastPlayedDate`  
+- Set to `YYYY-MM-DD` (yesterday)  
+Use mobile device emulation in Chrome for touch testing.  
+
+---
+
+## Contributing  
+1. Fork repository  
+2. Create branch: `feat/your-feature`  
+3. Commit using `feat:` / `fix:` / `chore:` prefix  
+4. Open PR with screenshots if UI-related  
+
+---
+
+© 2025 DevGarcia – Better Wordle Project
