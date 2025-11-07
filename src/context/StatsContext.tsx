@@ -28,7 +28,9 @@ const StatsContext = createContext<StatsContextType>({
   resetStats: () => {},
 });
 
-export const StatsProvider: React.FC<{ children: React.ReactNode }> = ({ children }) => {
+export const StatsProvider: React.FC<{ children: React.ReactNode }> = ({
+  children,
+}) => {
   const [stats, setStats] = useState<GameStats>(defaultStats);
 
   useEffect(() => {
@@ -37,16 +39,22 @@ export const StatsProvider: React.FC<{ children: React.ReactNode }> = ({ childre
       const parsed: GameStats = JSON.parse(stored);
 
       const nowUTC = new Date();
-      const todayUTC = new Date(Date.UTC(nowUTC.getUTCFullYear(), nowUTC.getUTCMonth(), nowUTC.getUTCDate()));
+      const todayUTC = new Date(
+        Date.UTC(
+          nowUTC.getUTCFullYear(),
+          nowUTC.getUTCMonth(),
+          nowUTC.getUTCDate(),
+        ),
+      );
       const yesterdayUTC = new Date(todayUTC);
       yesterdayUTC.setUTCDate(todayUTC.getUTCDate() - 1);
       if (parsed.lastPlayedDate) {
         const lastPlayed = new Date(parsed.lastPlayedDate + "T00:00:00Z");
         const diffDays = Math.floor(
-          (todayUTC.getTime() - lastPlayed.getTime()) / (1000 * 60 * 60 * 24)
+          (todayUTC.getTime() - lastPlayed.getTime()) / (1000 * 60 * 60 * 24),
         );
-        if(diffDays===1){
-          localStorage.removeItem('game-data')
+        if (diffDays === 1) {
+          localStorage.removeItem("game-data");
         }
         if (diffDays > 1) {
           parsed.currentStreak = 0;
