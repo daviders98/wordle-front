@@ -630,7 +630,17 @@
       {
         "message": "fix(WOR-42): Fix changelog json file being deleted",
         "author": "David Garcia",
-        "date": "2025-11-06T22:40:18-07:00"
+        "date": "2025-11-06T22:40:21-07:00"
+      }
+    ]
+  },
+  {
+    "version": "v0.5.1",
+    "commits": [
+      {
+        "message": "fix(WOR-43): Fix changelog being partially deleted on prettier formatting",
+        "author": "David Garcia",
+        "date": "2025-11-06T22:44:12-07:00"
       }
     ]
   }
