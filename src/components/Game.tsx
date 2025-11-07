@@ -301,7 +301,8 @@ export default function Game({
   }, [gameStatus, didWin]);
 
   useEffect(() => {
-    setGuesses((prevGuesses: any[]) => {
+    if(gameStatus!== 'game-over'){
+      setGuesses((prevGuesses: any[]) => {
       const newGuesses = prevGuesses.map((row) => [...row]);
       if (currentGuess.length > 5) return newGuesses;
 
@@ -332,6 +333,7 @@ export default function Game({
 
       return newGuesses;
     });
+    }
   }, [currentGuess, currentRowIndex]);
 
   const handleKeyDown = useCallback(
