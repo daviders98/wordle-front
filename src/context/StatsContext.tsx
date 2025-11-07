@@ -28,9 +28,7 @@ const StatsContext = createContext<StatsContextType>({
   resetStats: () => {},
 });
 
-export const StatsProvider: React.FC<{ children: React.ReactNode }> = ({
-  children,
-}) => {
+export const StatsProvider: React.FC<{ children: React.ReactNode }> = ({ children }) => {
   const [stats, setStats] = useState<GameStats>(defaultStats);
 
   useEffect(() => {
@@ -38,18 +36,19 @@ export const StatsProvider: React.FC<{ children: React.ReactNode }> = ({
     if (stored) {
       const parsed: GameStats = JSON.parse(stored);
 
-      const today = new Date();
-      const yesterday = new Date(today);
-      yesterday.setDate(today.getDate() - 1);
-
-      const todayStr = today.toISOString().split("T")[0];
-      const yesterdayStr = yesterday.toISOString().split("T")[0];
-
+      const nowUTC = new Date();
+      const todayUTC = new Date(Date.UTC(nowUTC.getUTCFullYear(), nowUTC.getUTCMonth(), nowUTC.getUTCDate()));
+      const yesterdayUTC = new Date(todayUTC);
+      yesterdayUTC.setUTCDate(todayUTC.getUTCDate() - 1);
       if (parsed.lastPlayedDate) {
-        if (
-          parsed.lastPlayedDate !== todayStr &&
-          parsed.lastPlayedDate !== yesterdayStr
-        ) {
+        const lastPlayed = new Date(parsed.lastPlayedDate + "T00:00:00Z");
+        const diffDays = Math.floor(
+          (todayUTC.getTime() - lastPlayed.getTime()) / (1000 * 60 * 60 * 24)
+        );
+        if(diffDays===1){
+          localStorage.removeItem('game-data')
+        }
+        if (diffDays > 1) {
           parsed.currentStreak = 0;
           localStorage.removeItem("game-data");
         }
@@ -61,7 +60,9 @@ export const StatsProvider: React.FC<{ children: React.ReactNode }> = ({
   }, []);
 
   const updateStats = (win: boolean) => {
-    const today = new Date().toISOString().split("T")[0];
+    const todayUTC = new Date();
+    const todayStr = todayUTC.toISOString().split("T")[0];
+
     setStats((prev) => {
       const updated = {
         gamesPlayed: prev.gamesPlayed + 1,
@@ -70,7 +71,7 @@ export const StatsProvider: React.FC<{ children: React.ReactNode }> = ({
         maxStreak: win
           ? Math.max(prev.maxStreak, prev.currentStreak + 1)
           : prev.maxStreak,
-        lastPlayedDate: today,
+        lastPlayedDate: todayStr,
       };
       localStorage.setItem("wordle-stats", JSON.stringify(updated));
       return updated;
