@@ -1,4 +1,4 @@
-import { useEffect, useState } from "react";
+import { useCallback, useEffect, useState } from "react";
 import {
   Table,
   TableBody,
@@ -39,7 +39,7 @@ export default function WordHistory() {
     setJwtValue(jwt.token);
   };
 
-  const getWords = async (retry = true): Promise<void> => {
+  const getWords = useCallback(async (retry = true): Promise<void> => {
     const response = await fetch(
       `${process.env.REACT_APP_RENDER_BASE_URL}/api/list`,
       {
@@ -59,7 +59,7 @@ export default function WordHistory() {
     const data = await response.json();
     setWords(data);
     setLoading(false);
-  };
+  },[jwtValue]);
 
   useEffect(() => {
     getJWT();
@@ -69,7 +69,7 @@ export default function WordHistory() {
     if (jwtValue) {
       getWords();
     }
-  }, [jwtValue]);
+  }, [jwtValue,getWords]);
 
   if (loading)
     return (

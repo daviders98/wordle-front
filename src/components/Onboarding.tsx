@@ -1,5 +1,5 @@
 import moment from "moment";
-import { useEffect, useState } from "react";
+import { useCallback, useEffect, useState } from "react";
 import TutorialModal from "./TutorialModal";
 import styled from "styled-components";
 import { useNavigate } from "react-router-dom";
@@ -46,7 +46,7 @@ export default function Onboarding({
     return () => clearInterval(interval);
   }, []);
 
-  const getPastWords = async (retry = true): Promise<boolean> => {
+  const getPastWords = useCallback(async (retry = true): Promise<boolean> => {
     const response = await fetch(
       `${process.env.REACT_APP_RENDER_BASE_URL}/api/list`,
       {
@@ -65,13 +65,13 @@ export default function Onboarding({
     setLoading(false);
     setPastWords(data);
     return data;
-  };
+  },[jwtValue]);
 
   useEffect(() => {
     if (jwtValue) {
       getPastWords();
     }
-  }, [jwtValue]);
+  }, [jwtValue,getPastWords]);
 
   return (
     <Container loading={loading}>
