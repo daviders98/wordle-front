@@ -39,27 +39,30 @@ export default function WordHistory() {
     setJwtValue(jwt.token);
   };
 
-  const getWords = useCallback(async (retry = true): Promise<void> => {
-    const response = await fetch(
-      `${process.env.REACT_APP_RENDER_BASE_URL}/api/list`,
-      {
-        method: "GET",
-        headers: {
-          "Content-Type": "application/json",
-          Authorization: `Bearer ${jwtValue}`,
+  const getWords = useCallback(
+    async (retry = true): Promise<void> => {
+      const response = await fetch(
+        `${process.env.REACT_APP_RENDER_BASE_URL}/api/list`,
+        {
+          method: "GET",
+          headers: {
+            "Content-Type": "application/json",
+            Authorization: `Bearer ${jwtValue}`,
+          },
         },
-      },
-    );
+      );
 
-    if (response.status === 401 && retry) {
-      await getJWT();
-      return await getWords(false);
-    }
+      if (response.status === 401 && retry) {
+        await getJWT();
+        return await getWords(false);
+      }
 
-    const data = await response.json();
-    setWords(data);
-    setLoading(false);
-  },[jwtValue]);
+      const data = await response.json();
+      setWords(data);
+      setLoading(false);
+    },
+    [jwtValue],
+  );
 
   useEffect(() => {
     getJWT();
@@ -69,7 +72,7 @@ export default function WordHistory() {
     if (jwtValue) {
       getWords();
     }
-  }, [jwtValue,getWords]);
+  }, [jwtValue, getWords]);
 
   if (loading)
     return (
