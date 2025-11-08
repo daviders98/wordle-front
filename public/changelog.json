@@ -675,7 +675,17 @@
       {
         "message": "chore: Define loose node version",
         "author": "David Garcia",
-        "date": "2025-11-07T19:22:47-07:00"
+        "date": "2025-11-07T19:22:51-07:00"
+      },
+      {
+        "message": "chore: Sync backend changelog from main repo",
+        "author": "github-actions[bot]",
+        "date": "2025-11-08T02:47:20+00:00"
+      },
+      {
+        "message": "fix(WOR-44): Fix build errors",
+        "author": "David Garcia",
+        "date": "2025-11-07T19:48:24-07:00"
       }
     ]
   }

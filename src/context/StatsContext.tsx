@@ -1,4 +1,4 @@
-import React, { createContext, useContext, useEffect, useState } from "react";
+import React, { createContext, useCallback, useContext, useEffect, useState } from "react";
 
 interface GameStats {
   gamesPlayed: number;
@@ -67,10 +67,8 @@ export const StatsProvider: React.FC<{ children: React.ReactNode }> = ({
     }
   }, []);
 
-  const updateStats = (win: boolean) => {
-    const todayUTC = new Date();
-    const todayStr = todayUTC.toISOString().split("T")[0];
-
+  const updateStats = useCallback((win: boolean) => {
+    const todayStr = new Date().toISOString().split("T")[0];
     setStats((prev) => {
       const updated = {
         gamesPlayed: prev.gamesPlayed + 1,
@@ -84,8 +82,7 @@ export const StatsProvider: React.FC<{ children: React.ReactNode }> = ({
       localStorage.setItem("wordle-stats", JSON.stringify(updated));
       return updated;
     });
-  };
-
+  }, []);
   const resetStats = () => {
     localStorage.removeItem("wordle-stats");
     setStats(defaultStats);

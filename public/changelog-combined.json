@@ -1221,7 +1221,7 @@
       {
         "message": "feat(WOP-19): Increase server security",
         "author": "David Garcia",
-        "date": "2025-11-07T18:51:24-07:00",
+        "date": "2025-11-07T18:51:27-07:00",
         "version": "v0.3.4",
         "source": "backend"
       }
@@ -1254,7 +1254,33 @@
       {
         "message": "chore: Define loose node version",
         "author": "David Garcia",
-        "date": "2025-11-07T19:22:47-07:00",
+        "date": "2025-11-07T19:22:51-07:00",
+        "version": "v0.5.2",
+        "source": "frontend"
+      },
+      {
+        "message": "fix(WOP-20): Add more guesses to rate limiter",
+        "author": "David Garcia",
+        "date": "2025-11-07T19:46:55-07:00",
+        "version": "v0.3.5",
+        "source": "backend"
+      }
+    ]
+  },
+  {
+    "version": "v0.8.7",
+    "commits": [
+      {
+        "message": "chore: Sync backend changelog from main repo",
+        "author": "github-actions[bot]",
+        "date": "2025-11-08T02:47:20+00:00",
+        "version": "v0.5.2",
+        "source": "frontend"
+      },
+      {
+        "message": "fix(WOR-44): Fix build errors",
+        "author": "David Garcia",
+        "date": "2025-11-07T19:48:24-07:00",
         "version": "v0.5.2",
         "source": "frontend"
       }

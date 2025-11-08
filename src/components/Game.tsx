@@ -188,7 +188,7 @@ export default function Game({
   );
   const initialGameStatus =
     hasCorrectRow || allRowsFilled ? "game-over" : "start";
-  const [hasPreviousData, setHasPreviousData] = useState(previousData);
+  const [hasPreviousData] = useState(previousData);
   const [guesses, setGuesses] = useState(
     parsedPreviousData?.guesses || initialArray,
   );
@@ -222,7 +222,7 @@ export default function Game({
       cellStatuses[rowIndex].every((status: string) => status === "correct")
     );
   };
-  const testWord = async (
+  const testWord = useCallback(async (
     word: string,
     retry = true,
   ): Promise<{ valid: boolean; letters: Array<any> }> => {
@@ -245,7 +245,7 @@ export default function Game({
     }
     const data = await response.json();
     return data;
-  };
+  },[jwtValue]);
 
   const mapResultToStatus = (
     result: number[],
@@ -298,7 +298,7 @@ export default function Game({
         setShowStatsModal(true);
       }, 900);
     }
-  }, [gameStatus, didWin]);
+  }, [gameStatus, didWin,hasPreviousData,updateStats]);
 
   useEffect(() => {
     if (gameStatus !== "game-over") {
@@ -334,7 +334,7 @@ export default function Game({
         return newGuesses;
       });
     }
-  }, [currentGuess, currentRowIndex]);
+  }, [currentGuess, currentRowIndex,gameStatus]);
 
   const handleKeyDown = useCallback(
     (event: KeyboardEvent) => {
@@ -373,7 +373,7 @@ export default function Game({
       );
       togglePreviousGameExist();
     }
-  }, [cellStatuses]);
+  }, [cellStatuses,guesses,isGuessing,togglePreviousGameExist]);
 
   useEffect(() => {
     if (!isGuessing || !currentGuess) return;
@@ -425,7 +425,7 @@ export default function Game({
       }
     };
     guessing();
-  }, [isGuessing, currentRowIndex]);
+  }, [isGuessing, currentRowIndex,currentGuess,testWord]);
 
   useEffect(() => {
     window.addEventListener("keydown", handleKeyDown);
