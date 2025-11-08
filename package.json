@@ -1,8 +1,8 @@
 {
   "name": "wordle-front",
   "engines": {
-  "node": "22",
-  "npm": ">=10"
+    "node": "22",
+    "npm": ">=10"
   },
   "version": "0.1.0",
   "private": true,

@@ -1240,7 +1240,21 @@
       {
         "message": "chore: update package-lock.json",
         "author": "David Garcia",
-        "date": "2025-11-07T18:59:26-07:00",
+        "date": "2025-11-07T18:59:29-07:00",
+        "version": "v0.5.2",
+        "source": "frontend"
+      },
+      {
+        "message": "chore: Define loose node version",
+        "author": "David Garcia",
+        "date": "2025-11-07T19:22:33-07:00",
+        "version": "v0.5.2",
+        "source": "frontend"
+      },
+      {
+        "message": "chore: Define loose node version",
+        "author": "David Garcia",
+        "date": "2025-11-07T19:22:47-07:00",
         "version": "v0.5.2",
         "source": "frontend"
       }
