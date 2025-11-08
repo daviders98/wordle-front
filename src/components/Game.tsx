@@ -222,30 +222,33 @@ export default function Game({
       cellStatuses[rowIndex].every((status: string) => status === "correct")
     );
   };
-  const testWord = useCallback(async (
-    word: string,
-    retry = true,
-  ): Promise<{ valid: boolean; letters: Array<any> }> => {
-    const response = await fetch(
-      `${process.env.REACT_APP_RENDER_BASE_URL}/api/guess-word/`,
-      {
-        method: "POST",
-        body: JSON.stringify({
-          guess: word,
-        }),
-        headers: {
-          "Content-Type": "application/json",
-          Authorization: `Bearer ${jwtValue}`,
+  const testWord = useCallback(
+    async (
+      word: string,
+      retry = true,
+    ): Promise<{ valid: boolean; letters: Array<any> }> => {
+      const response = await fetch(
+        `${process.env.REACT_APP_RENDER_BASE_URL}/api/guess-word/`,
+        {
+          method: "POST",
+          body: JSON.stringify({
+            guess: word,
+          }),
+          headers: {
+            "Content-Type": "application/json",
+            Authorization: `Bearer ${jwtValue}`,
+          },
         },
-      },
-    );
-    if (response.status === 401 && retry) {
-      await getJWT();
-      return await testWord(word, false);
-    }
-    const data = await response.json();
-    return data;
-  },[jwtValue]);
+      );
+      if (response.status === 401 && retry) {
+        await getJWT();
+        return await testWord(word, false);
+      }
+      const data = await response.json();
+      return data;
+    },
+    [jwtValue],
+  );
 
   const mapResultToStatus = (
     result: number[],
@@ -298,7 +301,7 @@ export default function Game({
         setShowStatsModal(true);
       }, 900);
     }
-  }, [gameStatus, didWin,hasPreviousData,updateStats]);
+  }, [gameStatus, didWin, hasPreviousData, updateStats]);
 
   useEffect(() => {
     if (gameStatus !== "game-over") {
@@ -334,7 +337,7 @@ export default function Game({
         return newGuesses;
       });
     }
-  }, [currentGuess, currentRowIndex,gameStatus]);
+  }, [currentGuess, currentRowIndex, gameStatus]);
 
   const handleKeyDown = useCallback(
     (event: KeyboardEvent) => {
@@ -373,7 +376,7 @@ export default function Game({
       );
       togglePreviousGameExist();
     }
-  }, [cellStatuses,guesses,isGuessing,togglePreviousGameExist]);
+  }, [cellStatuses, guesses, isGuessing, togglePreviousGameExist]);
 
   useEffect(() => {
     if (!isGuessing || !currentGuess) return;
@@ -425,7 +428,7 @@ export default function Game({
       }
     };
     guessing();
-  }, [isGuessing, currentRowIndex,currentGuess,testWord]);
+  }, [isGuessing, currentRowIndex, currentGuess, testWord]);
 
   useEffect(() => {
     window.addEventListener("keydown", handleKeyDown);
