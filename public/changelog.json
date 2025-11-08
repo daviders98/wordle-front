@@ -695,7 +695,17 @@
       {
         "message": "fix(WOR-45): Fix es-lint build errors",
         "author": "David Garcia",
-        "date": "2025-11-07T20:01:46-07:00"
+        "date": "2025-11-07T20:01:50-07:00"
+      }
+    ]
+  },
+  {
+    "version": "v0.5.4",
+    "commits": [
+      {
+        "message": "fix(WOR-45): Fix es-lint build errors",
+        "author": "David Garcia",
+        "date": "2025-11-07T20:03:23-07:00"
       }
     ]
   }
