@@ -46,32 +46,35 @@ export default function Onboarding({
     return () => clearInterval(interval);
   }, []);
 
-  const getPastWords = useCallback(async (retry = true): Promise<boolean> => {
-    const response = await fetch(
-      `${process.env.REACT_APP_RENDER_BASE_URL}/api/list`,
-      {
-        method: "GET",
-        headers: {
-          "Content-Type": "application/json",
-          Authorization: `Bearer ${jwtValue}`,
+  const getPastWords = useCallback(
+    async (retry = true): Promise<boolean> => {
+      const response = await fetch(
+        `${process.env.REACT_APP_RENDER_BASE_URL}/api/list`,
+        {
+          method: "GET",
+          headers: {
+            "Content-Type": "application/json",
+            Authorization: `Bearer ${jwtValue}`,
+          },
         },
-      },
-    );
-    if (response.status === 401 && retry) {
-      await getJWT();
-      return await getPastWords(false);
-    }
-    const data = await response.json();
-    setLoading(false);
-    setPastWords(data);
-    return data;
-  },[jwtValue]);
+      );
+      if (response.status === 401 && retry) {
+        await getJWT();
+        return await getPastWords(false);
+      }
+      const data = await response.json();
+      setLoading(false);
+      setPastWords(data);
+      return data;
+    },
+    [jwtValue],
+  );
 
   useEffect(() => {
     if (jwtValue) {
       getPastWords();
     }
-  }, [jwtValue,getPastWords]);
+  }, [jwtValue, getPastWords]);
 
   return (
     <Container loading={loading}>
