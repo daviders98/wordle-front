@@ -655,7 +655,17 @@
       {
         "message": "chore: solve conflicts",
         "author": "David Garcia",
-        "date": "2025-11-06T22:45:17-07:00"
+        "date": "2025-11-06T22:45:20-07:00"
+      },
+      {
+        "message": "chore: Sync backend changelog from main repo",
+        "author": "github-actions[bot]",
+        "date": "2025-11-08T01:51:35+00:00"
+      },
+      {
+        "message": "chore: update package-lock.json",
+        "author": "David Garcia",
+        "date": "2025-11-07T18:59:26-07:00"
       }
     ]
   }

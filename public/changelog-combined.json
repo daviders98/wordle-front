@@ -1096,7 +1096,7 @@
       {
         "message": "chore: Add readme",
         "author": "David Garcia",
-        "date": "2025-11-06T21:29:56-07:00",
+        "date": "2025-11-06T21:30:15-07:00",
         "version": "v0.3.3",
         "source": "backend"
       },
@@ -1214,7 +1214,33 @@
       {
         "message": "chore: solve conflicts",
         "author": "David Garcia",
-        "date": "2025-11-06T22:45:17-07:00",
+        "date": "2025-11-06T22:45:20-07:00",
+        "version": "v0.5.2",
+        "source": "frontend"
+      },
+      {
+        "message": "feat(WOP-19): Increase server security",
+        "author": "David Garcia",
+        "date": "2025-11-07T18:51:24-07:00",
+        "version": "v0.3.4",
+        "source": "backend"
+      }
+    ]
+  },
+  {
+    "version": "v0.8.6",
+    "commits": [
+      {
+        "message": "chore: Sync backend changelog from main repo",
+        "author": "github-actions[bot]",
+        "date": "2025-11-08T01:51:35+00:00",
+        "version": "v0.5.2",
+        "source": "frontend"
+      },
+      {
+        "message": "chore: update package-lock.json",
+        "author": "David Garcia",
+        "date": "2025-11-07T18:59:26-07:00",
         "version": "v0.5.2",
         "source": "frontend"
       }
