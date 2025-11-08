@@ -1290,6 +1290,13 @@
     "version": "v0.8.8",
     "commits": [
       {
+        "message": "chore: auto-format code with Prettier (#14)",
+        "author": "github-actions[bot]",
+        "date": "2025-11-08T02:49:03+00:00",
+        "version": "v0.5.3",
+        "source": "frontend"
+      },
+      {
         "message": "fix(WOR-45): Fix es-lint build errors",
         "author": "David Garcia",
         "date": "2025-11-07T20:01:50-07:00",
@@ -1304,8 +1311,20 @@
       {
         "message": "fix(WOR-45): Fix es-lint build errors",
         "author": "David Garcia",
-        "date": "2025-11-07T20:03:23-07:00",
+        "date": "2025-11-07T20:03:25-07:00",
         "version": "v0.5.4",
+        "source": "frontend"
+      }
+    ]
+  },
+  {
+    "version": "v0.9.0",
+    "commits": [
+      {
+        "message": "chore: solve conflicts",
+        "author": "David Garcia",
+        "date": "2025-11-07T20:04:04-07:00",
+        "version": "v0.5.5",
         "source": "frontend"
       }
     ]
