@@ -738,9 +738,24 @@
         "date": "2025-11-07T20:16:42-07:00"
       },
       {
+        "message": "chore: Sync backend changelog from main repo",
+        "author": "github-actions[bot]",
+        "date": "2025-11-08T03:48:05+00:00"
+      },
+      {
         "message": "fix(WOR-46): Fix meta tags, change favico",
         "author": "David Garcia",
-        "date": "2025-11-09T10:25:14-07:00"
+        "date": "2025-11-09T10:25:18-07:00"
+      }
+    ]
+  },
+  {
+    "version": "v0.5.6",
+    "commits": [
+      {
+        "message": "Merge branch 'main' of https://github.com/daviders98/wordle-front into main",
+        "author": "David Garcia",
+        "date": "2025-11-09T10:25:31-07:00"
       }
     ]
   }
