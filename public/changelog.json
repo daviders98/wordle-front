@@ -735,7 +735,12 @@
       {
         "message": "chore: update changelog",
         "author": "David Garcia",
-        "date": "2025-11-07T20:16:38-07:00"
+        "date": "2025-11-07T20:16:42-07:00"
+      },
+      {
+        "message": "fix(WOR-46): Fix meta tags, change favico",
+        "author": "David Garcia",
+        "date": "2025-11-09T10:25:14-07:00"
       }
     ]
   }
