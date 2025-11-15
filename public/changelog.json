@@ -755,7 +755,17 @@
       {
         "message": "Merge branch 'main' of https://github.com/daviders98/wordle-front into main",
         "author": "David Garcia",
-        "date": "2025-11-09T10:25:31-07:00"
+        "date": "2025-11-09T10:25:44-07:00"
+      }
+    ]
+  },
+  {
+    "version": "v0.5.7",
+    "commits": [
+      {
+        "message": "feat(WOR-47): Add CSP",
+        "author": "David Garcia",
+        "date": "2025-11-15T12:07:07-07:00"
       }
     ]
   }
