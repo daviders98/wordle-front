@@ -395,7 +395,17 @@
       {
         "message": "feat(WOP-24): Replace API by self-hosted words file",
         "author": "David Garcia",
-        "date": "2025-11-21T11:22:10-07:00"
+        "date": "2025-11-21T11:22:14-07:00"
+      }
+    ]
+  },
+  {
+    "version": "v0.4.0",
+    "commits": [
+      {
+        "message": "a",
+        "author": "David Garcia",
+        "date": "2025-11-21T11:41:24-07:00"
       }
     ]
   }
