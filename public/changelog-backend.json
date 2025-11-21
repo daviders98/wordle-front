@@ -393,19 +393,9 @@
     "version": "v0.3.9",
     "commits": [
       {
-        "message": "feat(WOP-24): Replace API by self-hosted words file",
+        "message": "fix(WOP-24): Add self-hosted list of words",
         "author": "David Garcia",
-        "date": "2025-11-21T11:22:14-07:00"
-      }
-    ]
-  },
-  {
-    "version": "v0.4.0",
-    "commits": [
-      {
-        "message": "a",
-        "author": "David Garcia",
-        "date": "2025-11-21T11:41:24-07:00"
+        "date": "2025-11-21T11:54:25-07:00"
       }
     ]
   }
