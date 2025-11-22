@@ -18,14 +18,17 @@ function App() {
   const togglePreviousGameExist: () => void = () =>
     setPreviousGameExist((prev) => !prev);
   const getJWT = useCallback(async () => {
-  const response = await fetch(`${process.env.REACT_APP_RENDER_BASE_URL}/api/get-jwt/`, {
-    method: "POST",
-    credentials: "include",
-  });
-  const jwt = await response.json();
-  setJwtValue(jwt.token);
-  return jwt.token || null;
-}, []);
+    const response = await fetch(
+      `${process.env.REACT_APP_RENDER_BASE_URL}/api/get-jwt/`,
+      {
+        method: "POST",
+        credentials: "include",
+      },
+    );
+    const jwt = await response.json();
+    setJwtValue(jwt.token);
+    return jwt.token || null;
+  }, []);
 
   useEffect(() => {
     getJWT();
