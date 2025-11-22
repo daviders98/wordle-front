@@ -825,7 +825,12 @@
       {
         "message": "chore: update changelog",
         "author": "David Garcia",
-        "date": "2025-11-21T20:06:49-07:00"
+        "date": "2025-11-21T20:06:53-07:00"
+      },
+      {
+        "message": "feat(WOR-49): Minor mobile UX improvements",
+        "author": "David Garcia",
+        "date": "2025-11-21T20:32:18-07:00"
       }
     ]
   }

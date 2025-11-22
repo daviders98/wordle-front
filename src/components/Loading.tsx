@@ -40,8 +40,8 @@ const CellFront = styled.div`
   display: flex;
   align-items: center;
   justify-content: center;
-  font-weight: bold;
-  font-size: clamp(16px, 4vw, 24px);
+  font-weight: 900;
+  font-size: clamp(22px, 5vw, 24px);
   color: #d7dadc;
   background-color: #3a3a3c;
   backface-visibility: hidden;

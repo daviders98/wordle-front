@@ -8,7 +8,7 @@ const KeyboardContainer = styled.div`
   align-items: center;
   justify-content: center;
   gap: 8px;
-  padding: 12px 8px 16px;
+  padding: 4px 2px 2px;
   box-sizing: border-box;
   z-index: 5;
 
@@ -18,7 +18,7 @@ const KeyboardContainer = styled.div`
 
   @media (max-width: 600px) {
     gap: 10px;
-    padding: 10px 6px 20px;
+    padding: 10px 4px 12px;
   }
 `;
 

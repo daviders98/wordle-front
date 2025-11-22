@@ -45,7 +45,8 @@ const Message = styled.div`
 `;
 
 const PageContainer = styled.div`
-  height: 100vh;
+  height: 100dvh;
+  height: calc(var(--vh, 1vh) * 100);
   display: flex;
   flex-direction: column;
   background-color: #121213;
@@ -59,16 +60,16 @@ const GameContainer = styled.div`
   justify-content: space-evenly;
   width: 100%;
   background-color: #121213;
-  padding: 12px 0;
+  padding: 8px 0 4px;
 `;
 
 const Board = styled.div`
   display: flex;
   flex-direction: column;
-  gap: 2vh;
+  gap: 1.5vh;
 
   @media (max-width: 600px) {
-    gap: 1.5vh;
+    gap: 1vh;
   }
 `;
 
@@ -94,11 +95,12 @@ const CellContainer = styled.div<{
   $win?: boolean;
   $winDelay?: number;
 }>`
-  width: 12vw;
-  height: 12vw;
-  max-width: 60px;
-  max-height: 60px;
+  width: 14vw;
+  height: 14vw;
+  max-width: 70px;
+  max-height: 70px;
   perspective: 400px;
+  margin-bottom:4px;
 
   ${({ $animate }) =>
     $animate &&
@@ -113,8 +115,10 @@ const CellContainer = styled.div<{
     `}
 
   @media (max-width: 600px) {
-    width: 14vw;
-    height: 14vw;
+    width: 17vw;
+    height: 16vw;
+    max-width: none;
+    max-height: none;
   }
 `;
 
@@ -145,8 +149,8 @@ const CellFront = styled.div`
   display: flex;
   align-items: center;
   justify-content: center;
-  font-size: clamp(16px, 4vw, 24px);
-  font-weight: bold;
+  font-size: clamp(22px, 4vw, 24px);
+  font-weight: 900;
   color: #d7dadc;
   background-color: #121213;
   backface-visibility: hidden;
@@ -451,6 +455,18 @@ export default function Game({
   useEffect(() => {
     getJWT();
   }, []);
+  useEffect(() => {
+  const updateVh = () => {
+    const vh = window.innerHeight * 0.01;
+    document.documentElement.style.setProperty('--vh', `${vh}px`);
+  };
+
+  updateVh();
+  window.addEventListener("resize", updateVh);
+
+  return () => window.removeEventListener("resize", updateVh);
+}, []);
+
   const computeKeyStatuses = (
     cellStatuses: ("absent" | "present" | "correct" | undefined)[][],
     guesses: string[][],
