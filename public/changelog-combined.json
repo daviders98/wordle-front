@@ -1536,8 +1536,20 @@
       {
         "message": "fix(WOR-50): change height css on mobile",
         "author": "David Garcia",
-        "date": "2025-11-21T20:44:08-07:00",
+        "date": "2025-11-21T20:44:12-07:00",
         "version": "v0.6.0",
+        "source": "frontend"
+      }
+    ]
+  },
+  {
+    "version": "v1.0.0",
+    "commits": [
+      {
+        "message": "fix(WOR-51): Fix small mobile scroll issues",
+        "author": "David Garcia",
+        "date": "2025-11-21T21:14:19-07:00",
+        "version": "v0.6.1",
         "source": "frontend"
       }
     ]

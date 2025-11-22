@@ -45,32 +45,31 @@ const Message = styled.div`
 `;
 
 const PageContainer = styled.div`
-  height: 100dvh;
+  height: 100%;
   display: flex;
   flex-direction: column;
   background-color: #121213;
-
-  @supports not (height: 100dvh) {
-    height: calc(var(--vh, 1vh) * 100);
-  }
 `;
 
 const GameContainer = styled.div`
   flex: 1;
   display: flex;
   flex-direction: column;
+  justify-content: space-between;
   align-items: center;
-  justify-content: space-evenly;
   width: 100%;
-  background-color: #121213;
-  padding: 8px 0 4px;
+  margin:4px 0 8px;
 `;
 
 const Board = styled.div`
   display: flex;
   flex-direction: column;
-  gap: 1.5vh;
+  gap: clamp(6px, 1.2vh, 10px);
 
+  transform: scale(
+    clamp(1, 0.0025 * 100vh, 1.25)
+  );
+  transform-origin: top center;
   @media (max-width: 600px) {
     gap: 1vh;
   }
@@ -78,8 +77,8 @@ const Board = styled.div`
 
 const Row = styled.div<{ $shake: boolean }>`
   display: flex;
-  gap: 0.5vw;
   justify-content: center;
+  gap: clamp(4px, 1.5vw, 8px);
 
   ${({ $shake }) =>
     $shake &&
@@ -98,12 +97,10 @@ const CellContainer = styled.div<{
   $win?: boolean;
   $winDelay?: number;
 }>`
-  width: 14vw;
-  height: 14vw;
-  max-width: 70px;
-  max-height: 70px;
-  perspective: 400px;
+  width: clamp(72px, 17vw, 80px);
+  height: clamp(72px, 17vw, 80px);
   margin-bottom: 4px;
+  perspective: 400px;
 
   ${({ $animate }) =>
     $animate &&
@@ -118,8 +115,8 @@ const CellContainer = styled.div<{
     `}
 
   @media (max-width: 600px) {
-    width: 17vw;
-    height: 16vw;
+    width: 14vw;
+    height: 14vw;
     max-width: none;
     max-height: none;
   }
@@ -458,19 +455,6 @@ export default function Game({
   useEffect(() => {
     getJWT();
   }, []);
-  useEffect(() => {
-  if (CSS.supports("height: 100dvh")) return;
-
-  const updateVh = () => {
-    const vh = window.innerHeight * 0.01;
-    document.documentElement.style.setProperty("--vh", `${vh}px`);
-  };
-
-  updateVh();
-  window.addEventListener("resize", updateVh);
-
-  return () => window.removeEventListener("resize", updateVh);
-}, []);
 
   const computeKeyStatuses = (
     cellStatuses: ("absent" | "present" | "correct" | undefined)[][],
