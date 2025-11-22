@@ -1,17 +1,15 @@
 import moment from "moment";
-import { useCallback, useEffect, useState } from "react";
+import { useEffect, useState } from "react";
 import TutorialModal from "./TutorialModal";
 import styled from "styled-components";
 import { useNavigate } from "react-router-dom";
 
 export default function Onboarding({
   previousGameExist,
-  jwtValue,
-  getJWT,
+  pastWords
 }: {
   previousGameExist: boolean;
-  jwtValue: string | null;
-  getJWT: () => Promise<string | null>;
+  pastWords: Array<any>;
 }) {
   const navigate = useNavigate();
   const [tutorialModalOpened, setTutorialModalOpened] = useState(false);
@@ -22,44 +20,13 @@ export default function Onboarding({
       moment().utc().add(1, "days").startOf("day").diff(moment().utc()),
     ),
   );
-  const [pastWords, setPastWords] = useState(null);
   const [mounted, setMounted] = useState(false);
 
   useEffect(() => {
     setMounted(true);
   }, []);
 
-  const getPastWords = useCallback(
-    async ({
-      retry = true,
-      token = null,
-    }: {
-      retry: boolean;
-      token: string | null;
-    }): Promise<any> => {
-      const response = await fetch(
-        `${process.env.REACT_APP_RENDER_BASE_URL}/api/list`,
-        {
-          method: "GET",
-          headers: {
-            "Content-Type": "application/json",
-            Authorization: `Bearer ${token}`,
-          },
-        },
-      );
-      if (response.status === 401 && retry) {
-        const token = await getJWT();
-        return await getPastWords({ retry: false, token: token });
-      }
-      const data = await response.json();
-
-      setPastWords(data);
-      return data;
-    },
-    [getJWT],
-  );
   useEffect(() => {
-    getPastWords({ retry: false, token: jwtValue || null });
     const interval = setInterval(() => {
       const diff = moment.duration(
         moment().utc().add(1, "days").startOf("day").diff(moment().utc()),
@@ -68,7 +35,7 @@ export default function Onboarding({
     }, 1000);
 
     return () => clearInterval(interval);
-  }, [jwtValue, getPastWords]);
+  }, []);
 
   return (
     <FadeInContainer mounted={mounted}>

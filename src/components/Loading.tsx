@@ -103,7 +103,7 @@ const Loading = ({ animationEnded }: { animationEnded: () => void }) => {
           setFlippedCells(
             Array.from({ length: rows }, () => Array(cols).fill(false)),
           );
-          runAnimation(400);
+          runAnimation(500);
         } else {
           animationEnded();
         }
