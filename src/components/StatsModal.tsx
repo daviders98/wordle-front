@@ -53,7 +53,9 @@ export default function StatsModal({ onClose }: StatsModalProps) {
             <TableBody>
               <StyledRow>
                 <StyledCell>Current Streak</StyledCell>
-                <StyledCell align="right">{stats.currentStreak || 0}</StyledCell>
+                <StyledCell align="right">
+                  {stats.currentStreak || 0}
+                </StyledCell>
               </StyledRow>
               <StyledRow>
                 <StyledCell>Max Streak</StyledCell>
