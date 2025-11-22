@@ -1546,10 +1546,29 @@
     "version": "v1.0.0",
     "commits": [
       {
+        "message": "chore: auto-format code with Prettier (#18)",
+        "author": "github-actions[bot]",
+        "date": "2025-11-22T03:44:48+00:00",
+        "version": "v0.6.1",
+        "source": "frontend"
+      },
+      {
         "message": "fix(WOR-51): Fix small mobile scroll issues",
         "author": "David Garcia",
-        "date": "2025-11-21T21:14:19-07:00",
+        "date": "2025-11-21T21:14:22-07:00",
         "version": "v0.6.1",
+        "source": "frontend"
+      }
+    ]
+  },
+  {
+    "version": "v1.0.1",
+    "commits": [
+      {
+        "message": "chore: solve conflicts",
+        "author": "David Garcia",
+        "date": "2025-11-21T21:15:14-07:00",
+        "version": "v0.6.2",
         "source": "frontend"
       }
     ]
