@@ -224,6 +224,12 @@ export default function Game({
       cellStatuses[rowIndex].every((status: string) => status === "correct")
     );
   };
+  const updateLastPlayedDate = () =>{
+    const stored = localStorage.getItem("wordle-stats");
+    const parsedPreviousGameData = stored ? JSON.parse(stored) : null;
+    const today = new Date().toISOString().split("T")[0];
+    localStorage.setItem('wordle-stats',JSON.stringify({...(parsedPreviousGameData  || {}),lastPlayedDate: today}))
+  }
   const testWord = useCallback(
     async (
       word: string,
@@ -356,7 +362,8 @@ export default function Game({
           setCurrentGuess((prev) => prev.slice(0, -1));
         }
       } else if (key === "Enter") {
-        setCurrentGuess((prev) => {
+        if(gameStatus !== "game-over"){
+          setCurrentGuess((prev) => {
           if (prev.length === 5) {
             setIsGuessing(true);
           } else {
@@ -365,6 +372,7 @@ export default function Game({
           }
           return prev;
         });
+        }
       }
     },
     [gameStatus, currentRowIndex],
@@ -420,6 +428,7 @@ export default function Game({
               return prevCurrentRowIndex + 1;
             });
             setIsGuessing(false);
+            updateLastPlayedDate()
           },
           5 * 300 + 500,
         );

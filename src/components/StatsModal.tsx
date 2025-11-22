@@ -53,23 +53,23 @@ export default function StatsModal({ onClose }: StatsModalProps) {
             <TableBody>
               <StyledRow>
                 <StyledCell>Current Streak</StyledCell>
-                <StyledCell align="right">{stats.currentStreak}</StyledCell>
+                <StyledCell align="right">{stats.currentStreak || 0}</StyledCell>
               </StyledRow>
               <StyledRow>
                 <StyledCell>Max Streak</StyledCell>
-                <StyledCell align="right">{stats.maxStreak}</StyledCell>
+                <StyledCell align="right">{stats.maxStreak || 0}</StyledCell>
               </StyledRow>
               <StyledRow>
                 <StyledCell>Games Played</StyledCell>
-                <StyledCell align="right">{stats.gamesPlayed}</StyledCell>
+                <StyledCell align="right">{stats.gamesPlayed || 0}</StyledCell>
               </StyledRow>
               <StyledRow>
                 <StyledCell>Games Won</StyledCell>
-                <StyledCell align="right">{stats.gamesWon}</StyledCell>
+                <StyledCell align="right">{stats.gamesWon || 0}</StyledCell>
               </StyledRow>
               <StyledRow>
                 <StyledCell>Success Rate</StyledCell>
-                <StyledCell align="right">{successRate}%</StyledCell>
+                <StyledCell align="right">{successRate || 0}%</StyledCell>
               </StyledRow>
             </TableBody>
           </Table>

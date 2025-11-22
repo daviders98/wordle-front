@@ -53,7 +53,7 @@ export default function NavBar() {
           >
             <StreakContainer>
               <FireIcon />
-              <StreakNumber>{stats.currentStreak}</StreakNumber>
+              <StreakNumber>{stats.currentStreak || 0}</StreakNumber>
             </StreakContainer>
           </Tooltip>
 

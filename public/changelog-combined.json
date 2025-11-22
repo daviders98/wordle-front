@@ -1581,8 +1581,20 @@
       {
         "message": "fix(WOR-52): Delete global background colour",
         "author": "David Garcia",
-        "date": "2025-11-21T21:17:44-07:00",
+        "date": "2025-11-21T21:17:47-07:00",
         "version": "v0.6.2",
+        "source": "frontend"
+      }
+    ]
+  },
+  {
+    "version": "v1.0.2",
+    "commits": [
+      {
+        "message": "fix(WOR-53): Fix localstorage issues",
+        "author": "David Garcia",
+        "date": "2025-11-21T22:42:34-07:00",
+        "version": "v0.6.3",
         "source": "frontend"
       }
     ]
