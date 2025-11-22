@@ -46,10 +46,13 @@ const Message = styled.div`
 
 const PageContainer = styled.div`
   height: 100dvh;
-  height: calc(var(--vh, 1vh) * 100);
   display: flex;
   flex-direction: column;
   background-color: #121213;
+
+  @supports not (height: 100dvh) {
+    height: calc(var(--vh, 1vh) * 100);
+  }
 `;
 
 const GameContainer = styled.div`
@@ -456,16 +459,18 @@ export default function Game({
     getJWT();
   }, []);
   useEffect(() => {
-    const updateVh = () => {
-      const vh = window.innerHeight * 0.01;
-      document.documentElement.style.setProperty("--vh", `${vh}px`);
-    };
+  if (CSS.supports("height: 100dvh")) return;
 
-    updateVh();
-    window.addEventListener("resize", updateVh);
+  const updateVh = () => {
+    const vh = window.innerHeight * 0.01;
+    document.documentElement.style.setProperty("--vh", `${vh}px`);
+  };
 
-    return () => window.removeEventListener("resize", updateVh);
-  }, []);
+  updateVh();
+  window.addEventListener("resize", updateVh);
+
+  return () => window.removeEventListener("resize", updateVh);
+}, []);
 
   const computeKeyStatuses = (
     cellStatuses: ("absent" | "present" | "correct" | undefined)[][],
