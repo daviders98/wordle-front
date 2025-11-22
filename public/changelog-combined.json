@@ -1695,8 +1695,20 @@
       {
         "message": "fix(WOR-58): Loading animation fix",
         "author": "David Garcia",
-        "date": "2025-11-22T10:31:26-07:00",
+        "date": "2025-11-22T10:31:29-07:00",
         "version": "v0.6.8",
+        "source": "frontend"
+      }
+    ]
+  },
+  {
+    "version": "v1.0.8",
+    "commits": [
+      {
+        "message": "fix(WOR-58): Add callback to prevent multiple rerenders",
+        "author": "David Garcia",
+        "date": "2025-11-22T10:54:10-07:00",
+        "version": "v0.6.9",
         "source": "frontend"
       }
     ]

@@ -1,4 +1,4 @@
-import { useEffect, useState, useRef } from "react";
+import { useEffect, useState } from "react";
 import styled from "styled-components";
 
 const LoadingContainer = styled.div`
@@ -71,57 +71,62 @@ const Loading = ({ animationEnded }: { animationEnded: () => void }) => {
     Array.from({ length: rows }, () => Array(cols).fill(undefined)),
   );
 
-  const phaseRef = useRef<"yellow" | "green">("yellow");
+const sleep = (ms: number) => new Promise((res) => setTimeout(res, ms));
 
-  useEffect(() => {
-    const animateCell = (rowIdx: number, colIdx: number) => {
-      setFlippedCells((prev) => {
-        const newArr = prev.map((r) => [...r]);
-        newArr[rowIdx][colIdx] = true;
-        return newArr;
-      });
+useEffect(() => {
+  let mounted = true;
+  const phaseRef = { current: "yellow" as "yellow" | "green" };
 
-      setCellStatuses((prev) => {
-        const newArr = prev.map((r) => [...r]);
-        newArr[rowIdx][colIdx] =
-          phaseRef.current === "yellow" ? "present" : "correct";
-        return newArr;
-      });
-    };
+  const animateCell = (rowIdx: number, colIdx: number, status: "present" | "correct") => {
+    setFlippedCells((prev) => {
+      const copy = prev.map((r) => [...r]);
+      copy[rowIdx][colIdx] = true;
+      return copy;
+    });
+    setCellStatuses((prev) => {
+      const copy = prev.map((r) => [...r]);
+      copy[rowIdx][colIdx] = status;
+      return copy;
+    });
+  };
 
-    const runAnimation = (delayMs = 0) => {
-      let delay = delayMs;
+  const run = async (startDelay = 0) => {
+    if (startDelay) await sleep(startDelay);
 
-      for (let rowIdx = 0; rowIdx < rows; rowIdx++) {
-        const word = words[rowIdx];
-        for (let colIdx = 0; colIdx < word.length; colIdx++) {
-          setTimeout(() => animateCell(rowIdx, colIdx), delay);
-          delay += 200;
-        }
+    for (let rowIdx = 0; rowIdx < rows && mounted; rowIdx++) {
+      const word = words[rowIdx];
+      for (let colIdx = 0; colIdx < word.length && mounted; colIdx++) {
+        const status = phaseRef.current === "yellow" ? "present" : "correct";
+        animateCell(rowIdx, colIdx, status);
+        await sleep(200);
       }
+    }
+  };
 
-      setTimeout(() => {
-        if (phaseRef.current === "yellow") {
-            phaseRef.current = "green";
+  (async () => {
+    await run(0);
 
-            setFlippedCells(
-              Array.from({ length: rows }, () => Array(cols).fill(false))
-            );
+    await sleep(600 + 50);
 
-            setCellStatuses(
-              Array.from({ length: rows }, () => Array(cols).fill(undefined))
-            );
+    if (!mounted) return;
 
-            runAnimation(600);
-          } else if (delayMs) {
-            animationEnded();
-          }
+    if (phaseRef.current === "yellow") {
+      phaseRef.current = "green";
+      setFlippedCells(Array.from({ length: rows }, () => Array(cols).fill(false)));
+      setCellStatuses(Array.from({ length: rows }, () => Array(cols).fill(undefined)));
 
-      }, delay + 600);
-    };
+      await run(0);
+      await sleep(600 + 100);
+      if (mounted) animationEnded();
+    } else {
+      animationEnded();
+    }
+  })();
+  return () => {
+    mounted = false;
+  };
+}, [animationEnded]);
 
-    runAnimation();
-  }, [animationEnded]);
 
   return (
     <LoadingContainer>

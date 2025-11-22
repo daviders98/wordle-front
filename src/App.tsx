@@ -77,7 +77,9 @@ function App() {
   }, [jwtValue, getPastWords]);
 
   useMidnightUTCReset();
-  const finishedLoading = () => setLoadingFinished(true);
+  const finishedLoading = useCallback(()=>{
+    setLoadingFinished(true);
+  },[setLoadingFinished]) 
 
   return (
     <BrowserRouter>
