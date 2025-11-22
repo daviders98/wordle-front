@@ -1,4 +1,4 @@
-import { useState, useEffect, useRef } from "react";
+import { useState, useEffect, useRef, useCallback } from "react";
 import { BrowserRouter, Routes, Route } from "react-router-dom";
 import Onboarding from "./components/Onboarding";
 import Game from "./components/Game";
@@ -17,6 +17,15 @@ function App() {
 
   const togglePreviousGameExist: () => void = () =>
     setPreviousGameExist((prev) => !prev);
+  const getJWT = useCallback(async () => {
+  const response = await fetch(`${process.env.REACT_APP_RENDER_BASE_URL}/api/get-jwt/`, {
+    method: "POST",
+    credentials: "include",
+  });
+  const jwt = await response.json();
+  setJwtValue(jwt.token);
+  return jwt.token || null;
+}, []);
 
   useEffect(() => {
     getJWT();
@@ -29,19 +38,7 @@ function App() {
 
     const previousData = localStorage.getItem("game-data");
     setPreviousGameExist(!!previousData);
-  }, []);
-  const getJWT = async (): Promise<string | null> => {
-    const response = await fetch(
-      `${process.env.REACT_APP_RENDER_BASE_URL}/api/get-jwt/`,
-      {
-        method: "POST",
-        credentials: "include",
-      },
-    );
-    const jwt = await response.json();
-    setJwtValue(jwt.token);
-    return jwt.token || null;
-  };
+  }, [getJWT]);
 
   useMidnightUTCReset();
   const finishedLoading = () => setLoadingFinished(true);

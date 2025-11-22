@@ -216,6 +216,7 @@ export default function Game({
   const lastMessage = useRef("");
   const shakeCooldown = useRef(Array(6).fill(false));
   const shakingRowsRef = useRef(Array(6).fill(false));
+  const needsSave = useRef(false);
   const { updateStats } = useStats();
   const toggleStatsModal = () => setShowStatsModal((prev) => !prev);
   const isWinningRow = (rowIndex: number) => {
@@ -385,23 +386,20 @@ export default function Game({
   );
 
   useEffect(() => {
-    if (!isGuessing && currentGuess === "") {
-      localStorage.setItem(
-        "game-data",
-        JSON.stringify({
-          guesses,
-          cellStatuses,
-        }),
-      );
-      togglePreviousGameExist();
-    }
-  }, [
-    isGuessing,
-    currentGuess,
-    guesses,
-    cellStatuses,
-    togglePreviousGameExist,
-  ]);
+  if (!needsSave.current) return;
+
+  const id = setTimeout(() => {
+    localStorage.setItem(
+      "game-data",
+      JSON.stringify({
+        guesses,
+        cellStatuses,
+      })
+    );
+    needsSave.current = false;
+  }, 200);
+  return () => clearTimeout(id);
+}, [guesses, cellStatuses]);
 
   useEffect(() => {
     if (!isGuessing || !currentGuess) return;
@@ -444,6 +442,7 @@ export default function Game({
             });
             setIsGuessing(false);
             updateLastPlayedDate();
+            needsSave.current = true;
           },
           5 * 300 + 500,
         );
