@@ -14,12 +14,29 @@ import {
 } from "@mui/material";
 import moment from "moment";
 import { useNavigate } from "react-router-dom";
+import styled from "styled-components";
 
 interface WordEntry {
   solution: string;
   solution_date: string;
   solution_number: number;
 }
+const Logo = styled.img`
+  width: 64px;
+  height: 64px;
+  margin: 10px 0;
+
+  @media (max-width: 400px) {
+    width: 48px;
+    height: 48px;
+  }
+`;
+const TitleContainer = styled.div`
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  cursor: pointer;
+`;
 
 export default function WordHistory() {
   const [words, setWords] = useState<WordEntry[]>([]);
@@ -101,12 +118,15 @@ export default function WordHistory() {
         alignItems: "center",
       }}
     >
-      <Typography
-        variant="h4"
-        sx={{ fontWeight: 700, mb: 3, color: "#0C100F" }}
-      >
-        Word History
-      </Typography>
+      <TitleContainer onClick={() => navigate("/")}>
+        <Logo src={"/logo.png"} alt="wordle logo" />
+        <Typography
+          variant="h4"
+          sx={{ fontWeight: 700, mb: 3, textAlign: "center" }}
+        >
+          Word History
+        </Typography>
+      </TitleContainer>
 
       <TableContainer component={Paper} sx={{ maxWidth: 600, borderRadius: 3 }}>
         <Table>

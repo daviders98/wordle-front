@@ -3,12 +3,15 @@ import { useCallback, useEffect, useState } from "react";
 import TutorialModal from "./TutorialModal";
 import styled from "styled-components";
 import { useNavigate } from "react-router-dom";
-import Loading from "./Loading";
 
 export default function Onboarding({
   previousGameExist,
+  jwtValue,
+  getJWT
 }: {
   previousGameExist: boolean;
+  jwtValue: string | null;
+  getJWT: ()=>Promise<string | null>
 }) {
   const navigate = useNavigate();
   const [tutorialModalOpened, setTutorialModalOpened] = useState(false);
@@ -19,23 +22,38 @@ export default function Onboarding({
       moment().utc().add(1, "days").startOf("day").diff(moment().utc()),
     ),
   );
-  const [jwtValue, setJwtValue] = useState<string | null>(null);
-  const [loading, setLoading] = useState(true);
   const [pastWords, setPastWords] = useState(null);
+  const [mounted, setMounted] = useState(false);
 
-  const getJWT = async function () {
-    const response = await fetch(
-      `${process.env.REACT_APP_RENDER_BASE_URL}/api/get-jwt/`,
-      {
-        method: "POST",
-        credentials: "include",
-      },
-    );
-    const jwt = await response.json();
-    setJwtValue(jwt.token);
-  };
+useEffect(() => {
+  setMounted(true);
+}, []);
+  
+  const getPastWords = useCallback(
+    async ({retry = true,token=null}:{retry:boolean; token: string | null;}): Promise<any> => {
+      const response = await fetch(
+        `${process.env.REACT_APP_RENDER_BASE_URL}/api/list`,
+        {
+          method: "GET",
+          headers: {
+            "Content-Type": "application/json",
+            Authorization: `Bearer ${token}`,
+          },
+        },
+      );
+      if (response.status === 401 && retry) {
+        const token = await getJWT()
+        return await getPastWords({retry:false,token:token});
+      }
+      const data = await response.json();
+
+      setPastWords(data);
+      return data;
+    },
+    [getJWT],
+  );
   useEffect(() => {
-    getJWT();
+    getPastWords({retry:false,token:jwtValue || null});
     const interval = setInterval(() => {
       const diff = moment.duration(
         moment().utc().add(1, "days").startOf("day").diff(moment().utc()),
@@ -44,44 +62,12 @@ export default function Onboarding({
     }, 1000);
 
     return () => clearInterval(interval);
-  }, []);
-
-  const getPastWords = useCallback(
-    async (retry = true): Promise<boolean> => {
-      const response = await fetch(
-        `${process.env.REACT_APP_RENDER_BASE_URL}/api/list`,
-        {
-          method: "GET",
-          headers: {
-            "Content-Type": "application/json",
-            Authorization: `Bearer ${jwtValue}`,
-          },
-        },
-      );
-      if (response.status === 401 && retry) {
-        await getJWT();
-        return await getPastWords(false);
-      }
-      const data = await response.json();
-      setLoading(false);
-      setPastWords(data);
-      return data;
-    },
-    [jwtValue],
-  );
-
-  useEffect(() => {
-    if (jwtValue) {
-      getPastWords();
-    }
-  }, [jwtValue, getPastWords]);
+  }, [jwtValue,getPastWords]);
 
   return (
-    <Container loading={loading}>
+    <FadeInContainer mounted={mounted}>
+      <Container>
       {tutorialModalOpened && <TutorialModal onClose={toggleTutorialModal} />}
-      {loading ? (
-        <Loading />
-      ) : (
         <OnboardingContainer>
           <NextWordText>
             Next word coming in: {nextWordDiff.hours()}h{" "}
@@ -115,19 +101,24 @@ export default function Onboarding({
           <EditedByText>Edited by David Garcia</EditedByText>
           <DevLogo src={"/logo-devgarcia.png"} alt="devgarcia logo" />
         </OnboardingContainer>
-      )}
     </Container>
+    </FadeInContainer>
   );
 }
 
-const Container = styled.div<{ loading: boolean }>`
+const Container = styled.div`
   display: flex;
   flex-direction: column;
   align-items: center;
   justify-content: flex-start;
   min-height: 100vh;
   padding: 8px;
-  background-color: ${({ loading }) => (loading ? "#1a1a1b" : "#e3e2e0")};
+`;
+
+const FadeInContainer = styled.div<{ mounted: boolean }>`
+  opacity: ${props => (props.mounted ? 1 : 0)};
+  transition: opacity 2s ease-in-out;
+  width: 100%;
 `;
 
 const OnboardingContainer = styled.div`

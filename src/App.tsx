@@ -12,11 +12,14 @@ function App() {
   const [wakeUpDone, setWakeUpDone] = useState(false);
   const wakeUpCalled = useRef(false);
   const [previousGameExist, setPreviousGameExist] = useState(false);
+  const [loadingFinished, setLoadingFinished] = useState(false)
+  const [jwtValue, setJwtValue] = useState<string | null>(null);
 
   const togglePreviousGameExist: () => void = () =>
     setPreviousGameExist((prev) => !prev);
 
   useEffect(() => {
+    getJWT()
     if (wakeUpCalled.current) return;
     wakeUpCalled.current = true;
 
@@ -27,8 +30,21 @@ function App() {
     const previousData = localStorage.getItem("game-data");
     setPreviousGameExist(!!previousData);
   }, []);
+  const getJWT = async (): Promise<string | null> => {
+  const response = await fetch(
+    `${process.env.REACT_APP_RENDER_BASE_URL}/api/get-jwt/`,
+    {
+      method: "POST",
+      credentials: "include",
+    },
+  );
+  const jwt = await response.json();
+  setJwtValue(jwt.token);
+  return jwt.token || null;
+};
 
   useMidnightUTCReset();
+  const finishedLoading = ()=> setLoadingFinished(true)
 
   return (
     <BrowserRouter>
@@ -36,15 +52,25 @@ function App() {
         <Routes>
           <Route
             path="/"
-            element={<Onboarding previousGameExist={previousGameExist} />}
+            element={
+              loadingFinished && wakeUpDone && jwtValue ? (
+                <Onboarding
+                  previousGameExist={previousGameExist}
+                  jwtValue={jwtValue}
+                  getJWT={getJWT}
+                />
+              ) : (
+                <Loading animationEnded={finishedLoading} />
+              )
+            }
           />
           <Route
             path="/play"
             element={
-              wakeUpDone ? (
+              wakeUpDone && loadingFinished ? (
                 <Game togglePreviousGameExist={togglePreviousGameExist} />
               ) : (
-                <Loading />
+                <Loading animationEnded={finishedLoading}/>
               )
             }
           />

@@ -1351,7 +1351,7 @@
       {
         "message": "fix(WOP-21): Fix render deployment",
         "author": "David Garcia",
-        "date": "2025-11-07T20:44:33-07:00",
+        "date": "2025-11-07T20:47:57-07:00",
         "version": "v0.3.6",
         "source": "backend"
       }
@@ -1394,8 +1394,105 @@
       {
         "message": "feat(WOR-47): Add CSP",
         "author": "David Garcia",
-        "date": "2025-11-15T12:07:07-07:00",
+        "date": "2025-11-15T12:07:10-07:00",
         "version": "v0.5.7",
+        "source": "frontend"
+      }
+    ]
+  },
+  {
+    "version": "v0.9.4",
+    "commits": [
+      {
+        "message": "fix(WOP-22): Change CSP",
+        "author": "David Garcia",
+        "date": "2025-11-15T12:18:12-07:00",
+        "version": "v0.3.7",
+        "source": "backend"
+      }
+    ]
+  },
+  {
+    "version": "v0.9.5",
+    "commits": [
+      {
+        "message": "chore: Sync backend changelog from main repo",
+        "author": "github-actions[bot]",
+        "date": "2025-11-15T19:18:21+00:00",
+        "version": "v0.5.8",
+        "source": "frontend"
+      },
+      {
+        "message": "feat(WOP-23): Add 404",
+        "author": "David Garcia",
+        "date": "2025-11-15T12:25:06-07:00",
+        "version": "v0.3.8",
+        "source": "backend"
+      }
+    ]
+  },
+  {
+    "version": "v0.9.6",
+    "commits": [
+      {
+        "message": "chore: Sync backend changelog from main repo",
+        "author": "github-actions[bot]",
+        "date": "2025-11-15T19:25:15+00:00",
+        "version": "v0.5.8",
+        "source": "frontend"
+      },
+      {
+        "message": "chore: Sync backend changelog from main repo",
+        "author": "github-actions[bot]",
+        "date": "2025-11-21T18:22:23+00:00",
+        "version": "v0.5.8",
+        "source": "frontend"
+      },
+      {
+        "message": "chore: Sync backend changelog from main repo",
+        "author": "github-actions[bot]",
+        "date": "2025-11-21T18:41:37+00:00",
+        "version": "v0.5.8",
+        "source": "frontend"
+      },
+      {
+        "message": "chore: Sync backend changelog from main repo",
+        "author": "github-actions[bot]",
+        "date": "2025-11-21T18:54:38+00:00",
+        "version": "v0.5.8",
+        "source": "frontend"
+      },
+      {
+        "message": "chore: Sync backend changelog from main repo",
+        "author": "github-actions[bot]",
+        "date": "2025-11-21T18:58:40+00:00",
+        "version": "v0.5.8",
+        "source": "frontend"
+      },
+      {
+        "message": "fix(WOP-24): Add self-hosted list of words",
+        "author": "David Garcia",
+        "date": "2025-11-21T12:04:57-07:00",
+        "version": "v0.3.9",
+        "source": "backend"
+      }
+    ]
+  },
+  {
+    "version": "v0.9.7",
+    "commits": [
+      {
+        "message": "chore: Sync backend changelog from main repo",
+        "author": "github-actions[bot]",
+        "date": "2025-11-21T19:05:10+00:00",
+        "version": "v0.5.8",
+        "source": "frontend"
+      },
+      {
+        "message": "feat(WOR-48): Change loading animation and logic",
+        "author": "David Garcia",
+        "date": "2025-11-21T20:00:57-07:00",
+        "version": "v0.5.8",
         "source": "frontend"
       }
     ]

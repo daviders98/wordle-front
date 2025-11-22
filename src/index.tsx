@@ -4,10 +4,15 @@ import "./index.css";
 import App from "./App";
 
 const root = ReactDOM.createRoot(
-  document.getElementById("root") as HTMLElement,
+  document.getElementById("root") as HTMLElement
 );
-root.render(
-  <React.StrictMode>
-    <App />
-  </React.StrictMode>,
-);
+
+const app = process.env.REACT_APP_ENV === "development"
+  ? (
+      <React.StrictMode>
+        <App />
+      </React.StrictMode>
+    )
+  : <App />;
+
+root.render(app);
