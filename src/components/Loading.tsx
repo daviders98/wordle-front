@@ -102,21 +102,20 @@ const Loading = ({ animationEnded }: { animationEnded: () => void }) => {
 
       setTimeout(() => {
         if (phaseRef.current === "yellow") {
-            phaseRef.current = "green";
+          phaseRef.current = "green";
 
-            setFlippedCells(
-              Array.from({ length: rows }, () => Array(cols).fill(false))
-            );
+          setFlippedCells(
+            Array.from({ length: rows }, () => Array(cols).fill(false)),
+          );
 
-            setCellStatuses(
-              Array.from({ length: rows }, () => Array(cols).fill(undefined))
-            );
+          setCellStatuses(
+            Array.from({ length: rows }, () => Array(cols).fill(undefined)),
+          );
 
-            runAnimation(600);
-          } else if (delayMs) {
-            animationEnded();
-          }
-
+          runAnimation(600);
+        } else if (delayMs) {
+          animationEnded();
+        }
       }, delay + 600);
     };
 
