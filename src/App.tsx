@@ -12,14 +12,14 @@ function App() {
   const [wakeUpDone, setWakeUpDone] = useState(false);
   const wakeUpCalled = useRef(false);
   const [previousGameExist, setPreviousGameExist] = useState(false);
-  const [loadingFinished, setLoadingFinished] = useState(false)
+  const [loadingFinished, setLoadingFinished] = useState(false);
   const [jwtValue, setJwtValue] = useState<string | null>(null);
 
   const togglePreviousGameExist: () => void = () =>
     setPreviousGameExist((prev) => !prev);
 
   useEffect(() => {
-    getJWT()
+    getJWT();
     if (wakeUpCalled.current) return;
     wakeUpCalled.current = true;
 
@@ -31,20 +31,20 @@ function App() {
     setPreviousGameExist(!!previousData);
   }, []);
   const getJWT = async (): Promise<string | null> => {
-  const response = await fetch(
-    `${process.env.REACT_APP_RENDER_BASE_URL}/api/get-jwt/`,
-    {
-      method: "POST",
-      credentials: "include",
-    },
-  );
-  const jwt = await response.json();
-  setJwtValue(jwt.token);
-  return jwt.token || null;
-};
+    const response = await fetch(
+      `${process.env.REACT_APP_RENDER_BASE_URL}/api/get-jwt/`,
+      {
+        method: "POST",
+        credentials: "include",
+      },
+    );
+    const jwt = await response.json();
+    setJwtValue(jwt.token);
+    return jwt.token || null;
+  };
 
   useMidnightUTCReset();
-  const finishedLoading = ()=> setLoadingFinished(true)
+  const finishedLoading = () => setLoadingFinished(true);
 
   return (
     <BrowserRouter>
@@ -70,7 +70,7 @@ function App() {
               wakeUpDone && loadingFinished ? (
                 <Game togglePreviousGameExist={togglePreviousGameExist} />
               ) : (
-                <Loading animationEnded={finishedLoading}/>
+                <Loading animationEnded={finishedLoading} />
               )
             }
           />

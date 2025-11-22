@@ -7,11 +7,11 @@ import { useNavigate } from "react-router-dom";
 export default function Onboarding({
   previousGameExist,
   jwtValue,
-  getJWT
+  getJWT,
 }: {
   previousGameExist: boolean;
   jwtValue: string | null;
-  getJWT: ()=>Promise<string | null>
+  getJWT: () => Promise<string | null>;
 }) {
   const navigate = useNavigate();
   const [tutorialModalOpened, setTutorialModalOpened] = useState(false);
@@ -25,12 +25,18 @@ export default function Onboarding({
   const [pastWords, setPastWords] = useState(null);
   const [mounted, setMounted] = useState(false);
 
-useEffect(() => {
-  setMounted(true);
-}, []);
-  
+  useEffect(() => {
+    setMounted(true);
+  }, []);
+
   const getPastWords = useCallback(
-    async ({retry = true,token=null}:{retry:boolean; token: string | null;}): Promise<any> => {
+    async ({
+      retry = true,
+      token = null,
+    }: {
+      retry: boolean;
+      token: string | null;
+    }): Promise<any> => {
       const response = await fetch(
         `${process.env.REACT_APP_RENDER_BASE_URL}/api/list`,
         {
@@ -42,8 +48,8 @@ useEffect(() => {
         },
       );
       if (response.status === 401 && retry) {
-        const token = await getJWT()
-        return await getPastWords({retry:false,token:token});
+        const token = await getJWT();
+        return await getPastWords({ retry: false, token: token });
       }
       const data = await response.json();
 
@@ -53,7 +59,7 @@ useEffect(() => {
     [getJWT],
   );
   useEffect(() => {
-    getPastWords({retry:false,token:jwtValue || null});
+    getPastWords({ retry: false, token: jwtValue || null });
     const interval = setInterval(() => {
       const diff = moment.duration(
         moment().utc().add(1, "days").startOf("day").diff(moment().utc()),
@@ -62,12 +68,12 @@ useEffect(() => {
     }, 1000);
 
     return () => clearInterval(interval);
-  }, [jwtValue,getPastWords]);
+  }, [jwtValue, getPastWords]);
 
   return (
     <FadeInContainer mounted={mounted}>
       <Container>
-      {tutorialModalOpened && <TutorialModal onClose={toggleTutorialModal} />}
+        {tutorialModalOpened && <TutorialModal onClose={toggleTutorialModal} />}
         <OnboardingContainer>
           <NextWordText>
             Next word coming in: {nextWordDiff.hours()}h{" "}
@@ -101,7 +107,7 @@ useEffect(() => {
           <EditedByText>Edited by David Garcia</EditedByText>
           <DevLogo src={"/logo-devgarcia.png"} alt="devgarcia logo" />
         </OnboardingContainer>
-    </Container>
+      </Container>
     </FadeInContainer>
   );
 }
@@ -116,7 +122,7 @@ const Container = styled.div`
 `;
 
 const FadeInContainer = styled.div<{ mounted: boolean }>`
-  opacity: ${props => (props.mounted ? 1 : 0)};
+  opacity: ${(props) => (props.mounted ? 1 : 0)};
   transition: opacity 2s ease-in-out;
   width: 100%;
 `;
