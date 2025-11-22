@@ -385,17 +385,23 @@ export default function Game({
   );
 
   useEffect(() => {
-  if (!isGuessing && currentGuess === "") {
-    localStorage.setItem(
-      "game-data",
-      JSON.stringify({
-        guesses,
-        cellStatuses
-      })
-    );
-    togglePreviousGameExist();
-  }
-}, [isGuessing, currentGuess, guesses, cellStatuses,togglePreviousGameExist]);
+    if (!isGuessing && currentGuess === "") {
+      localStorage.setItem(
+        "game-data",
+        JSON.stringify({
+          guesses,
+          cellStatuses,
+        }),
+      );
+      togglePreviousGameExist();
+    }
+  }, [
+    isGuessing,
+    currentGuess,
+    guesses,
+    cellStatuses,
+    togglePreviousGameExist,
+  ]);
 
   useEffect(() => {
     if (!isGuessing || !currentGuess) return;
