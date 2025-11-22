@@ -224,12 +224,18 @@ export default function Game({
       cellStatuses[rowIndex].every((status: string) => status === "correct")
     );
   };
-  const updateLastPlayedDate = () =>{
+  const updateLastPlayedDate = () => {
     const stored = localStorage.getItem("wordle-stats");
     const parsedPreviousGameData = stored ? JSON.parse(stored) : null;
     const today = new Date().toISOString().split("T")[0];
-    localStorage.setItem('wordle-stats',JSON.stringify({...(parsedPreviousGameData  || {}),lastPlayedDate: today}))
-  }
+    localStorage.setItem(
+      "wordle-stats",
+      JSON.stringify({
+        ...(parsedPreviousGameData || {}),
+        lastPlayedDate: today,
+      }),
+    );
+  };
   const testWord = useCallback(
     async (
       word: string,
@@ -362,16 +368,16 @@ export default function Game({
           setCurrentGuess((prev) => prev.slice(0, -1));
         }
       } else if (key === "Enter") {
-        if(gameStatus !== "game-over"){
+        if (gameStatus !== "game-over") {
           setCurrentGuess((prev) => {
-          if (prev.length === 5) {
-            setIsGuessing(true);
-          } else {
-            showMessage("Not enough letters.");
-            shakeRow(currentRowIndex);
-          }
-          return prev;
-        });
+            if (prev.length === 5) {
+              setIsGuessing(true);
+            } else {
+              showMessage("Not enough letters.");
+              shakeRow(currentRowIndex);
+            }
+            return prev;
+          });
         }
       }
     },
@@ -428,7 +434,7 @@ export default function Game({
               return prevCurrentRowIndex + 1;
             });
             setIsGuessing(false);
-            updateLastPlayedDate()
+            updateLastPlayedDate();
           },
           5 * 300 + 500,
         );
