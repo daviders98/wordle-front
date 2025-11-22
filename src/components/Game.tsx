@@ -58,7 +58,7 @@ const GameContainer = styled.div`
   justify-content: space-between;
   align-items: center;
   width: 100%;
-  margin:4px 0 8px;
+  margin: 4px 0 8px;
 `;
 
 const Board = styled.div`
@@ -66,9 +66,7 @@ const Board = styled.div`
   flex-direction: column;
   gap: clamp(6px, 1.2vh, 10px);
 
-  transform: scale(
-    clamp(1, 0.0025 * 100vh, 1.25)
-  );
+  transform: scale(clamp(1, 0.0025 * 100vh, 1.25));
   transform-origin: top center;
   @media (max-width: 600px) {
     gap: 1vh;
