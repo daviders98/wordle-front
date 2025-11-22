@@ -32,34 +32,34 @@ function App() {
   }, []);
 
   const getPastWords = useCallback(
-      async ({
-        retry = true,
-        token = null,
-      }: {
-        retry: boolean;
-        token: string | null;
-      }): Promise<any> => {
-        const response = await fetch(
-          `${process.env.REACT_APP_RENDER_BASE_URL}/api/list`,
-          {
-            method: "GET",
-            headers: {
-              "Content-Type": "application/json",
-              Authorization: `Bearer ${token}`,
-            },
+    async ({
+      retry = true,
+      token = null,
+    }: {
+      retry: boolean;
+      token: string | null;
+    }): Promise<any> => {
+      const response = await fetch(
+        `${process.env.REACT_APP_RENDER_BASE_URL}/api/list`,
+        {
+          method: "GET",
+          headers: {
+            "Content-Type": "application/json",
+            Authorization: `Bearer ${token}`,
           },
-        );
-        if (response.status === 401 && retry) {
-          const token = await getJWT();
-          return await getPastWords({ retry: false, token: token });
-        }
-        const data = await response.json();
-  
-        setPastWords(data);
-        return data;
-      },
-      [getJWT],
-    );
+        },
+      );
+      if (response.status === 401 && retry) {
+        const token = await getJWT();
+        return await getPastWords({ retry: false, token: token });
+      }
+      const data = await response.json();
+
+      setPastWords(data);
+      return data;
+    },
+    [getJWT],
+  );
   useEffect(() => {
     getJWT();
     if (wakeUpCalled.current) return;
@@ -73,8 +73,8 @@ function App() {
     setPreviousGameExist(!!previousData);
   }, [getJWT]);
   useEffect(() => {
-      getPastWords({ retry: true, token: jwtValue || null });
-    }, [jwtValue, getPastWords]);
+    getPastWords({ retry: true, token: jwtValue || null });
+  }, [jwtValue, getPastWords]);
 
   useMidnightUTCReset();
   const finishedLoading = () => setLoadingFinished(true);

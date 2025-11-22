@@ -5,85 +5,6 @@
       {
         "message": "Initial commit",
         "author": "David García",
-        "date": "2025-10-26T08:51:20-07:00",
-        "version": "v0.0.0",
-        "source": "frontend"
-      }
-    ]
-  },
-  {
-    "version": "v0.0.1",
-    "commits": [
-      {
-        "message": "chore: initial React.js app with TypeScript",
-        "author": "David Garcia",
-        "date": "2025-10-26T09:01:29-07:00",
-        "version": "v0.0.1",
-        "source": "frontend"
-      },
-      {
-        "message": "feat(WOR-1): Add Onboarding and tutorial modal",
-        "author": "David Garcia",
-        "date": "2025-10-26T11:49:28-07:00",
-        "version": "v0.0.1",
-        "source": "frontend"
-      }
-    ]
-  },
-  {
-    "version": "v0.0.2",
-    "commits": [
-      {
-        "message": "feat(WOR-1): Add Success word example, add help menu toggle",
-        "author": "David Garcia",
-        "date": "2025-10-26T12:32:45-07:00",
-        "version": "v0.0.2",
-        "source": "frontend"
-      }
-    ]
-  },
-  {
-    "version": "v0.0.3",
-    "commits": [
-      {
-        "message": "feat(WOR-1): Refactor examples section",
-        "author": "David Garcia",
-        "date": "2025-10-26T13:51:38-07:00",
-        "version": "v0.0.3",
-        "source": "frontend"
-      }
-    ]
-  },
-  {
-    "version": "v0.0.4",
-    "commits": [
-      {
-        "message": "feat(WOR-1): Finish onboarding section, add react router and new route",
-        "author": "David Garcia",
-        "date": "2025-10-26T14:13:12-07:00",
-        "version": "v0.0.4",
-        "source": "frontend"
-      }
-    ]
-  },
-  {
-    "version": "v0.0.5",
-    "commits": [
-      {
-        "message": "feat(WOR-2): Improve responsiveness, Add Game base",
-        "author": "David Garcia",
-        "date": "2025-10-26T14:51:03-07:00",
-        "version": "v0.0.5",
-        "source": "frontend"
-      }
-    ]
-  },
-  {
-    "version": "v0.0.6",
-    "commits": [
-      {
-        "message": "Initial commit",
-        "author": "David García",
         "date": "2025-10-27T21:08:26-07:00",
         "version": "v0.0.0",
         "source": "backend"
@@ -91,31 +12,7 @@
     ]
   },
   {
-    "version": "v0.0.7",
-    "commits": [
-      {
-        "message": "feat(WOR-3): Add Main game component, change gitignore, fix undefined pngs errors",
-        "author": "David Garcia",
-        "date": "2025-10-30T23:32:05-07:00",
-        "version": "v0.0.6",
-        "source": "frontend"
-      }
-    ]
-  },
-  {
-    "version": "v0.0.8",
-    "commits": [
-      {
-        "message": "feat(WOR-3): Prevent stacking animations, add revealed cells animation",
-        "author": "David Garcia",
-        "date": "2025-10-31T22:50:31-07:00",
-        "version": "v0.0.7",
-        "source": "frontend"
-      }
-    ]
-  },
-  {
-    "version": "v0.0.9",
+    "version": "v0.0.1",
     "commits": [
       {
         "message": "feat(WOP): Add basic configuration",
@@ -127,7 +24,7 @@
     ]
   },
   {
-    "version": "v0.1.0",
+    "version": "v0.0.2",
     "commits": [
       {
         "message": "feat(WOP-1): Add supabase connection, import model",
@@ -139,7 +36,7 @@
     ]
   },
   {
-    "version": "v0.1.1",
+    "version": "v0.0.3",
     "commits": [
       {
         "message": "feat(WOP-2): Add check word endpoint and serverless function",
@@ -151,7 +48,7 @@
     ]
   },
   {
-    "version": "v0.1.2",
+    "version": "v0.0.4",
     "commits": [
       {
         "message": "feat(WOP-3): Add word validator endpoint",
@@ -163,7 +60,7 @@
     ]
   },
   {
-    "version": "v0.1.3",
+    "version": "v0.0.5",
     "commits": [
       {
         "message": "feat(WOP-4): Add jwt decorator and jwt endpoint",
@@ -175,7 +72,7 @@
     ]
   },
   {
-    "version": "v0.1.4",
+    "version": "v0.0.6",
     "commits": [
       {
         "message": "feat(WOP-5): Add settings for vercel deployment",
@@ -187,7 +84,7 @@
     ]
   },
   {
-    "version": "v0.1.5",
+    "version": "v0.0.7",
     "commits": [
       {
         "message": "feat(WOP-5): Deploy only serverless",
@@ -199,7 +96,7 @@
     ]
   },
   {
-    "version": "v0.1.6",
+    "version": "v0.0.8",
     "commits": [
       {
         "message": "feat(WOP-6): Change directories for deployment",
@@ -211,7 +108,7 @@
     ]
   },
   {
-    "version": "v0.1.7",
+    "version": "v0.0.9",
     "commits": [
       {
         "message": "feat(WOP-6): Delete json config file",
@@ -223,7 +120,7 @@
     ]
   },
   {
-    "version": "v0.1.8",
+    "version": "v0.1.0",
     "commits": [
       {
         "message": "feat(WOP-6): Change serverless function",
@@ -235,7 +132,7 @@
     ]
   },
   {
-    "version": "v0.1.9",
+    "version": "v0.1.1",
     "commits": [
       {
         "message": "feat(WOP-6): Change serverless function to class, add vercel file",
@@ -247,7 +144,7 @@
     ]
   },
   {
-    "version": "v0.2.0",
+    "version": "v0.1.2",
     "commits": [
       {
         "message": "feat(WOP-6): Add test logs",
@@ -259,7 +156,7 @@
     ]
   },
   {
-    "version": "v0.2.1",
+    "version": "v0.1.3",
     "commits": [
       {
         "message": "feat(WOP-6): Change vercel.json",
@@ -271,7 +168,7 @@
     ]
   },
   {
-    "version": "v0.2.2",
+    "version": "v0.1.4",
     "commits": [
       {
         "message": "Delete version",
@@ -283,7 +180,7 @@
     ]
   },
   {
-    "version": "v0.2.3",
+    "version": "v0.1.5",
     "commits": [
       {
         "message": "feat(WOP-6): Added cron wrapper to include secret header",
@@ -295,7 +192,7 @@
     ]
   },
   {
-    "version": "v0.2.4",
+    "version": "v0.1.6",
     "commits": [
       {
         "message": "feat(WOP-6): Delete verison in json file",
@@ -307,7 +204,7 @@
     ]
   },
   {
-    "version": "v0.2.5",
+    "version": "v0.1.7",
     "commits": [
       {
         "message": "feat(WOP-7): Add solution_number field and be able to generate multiple words a day",
@@ -319,7 +216,7 @@
     ]
   },
   {
-    "version": "v0.2.6",
+    "version": "v0.1.8",
     "commits": [
       {
         "message": "feat(WOP-8): Add set up for render",
@@ -331,7 +228,7 @@
     ]
   },
   {
-    "version": "v0.2.7",
+    "version": "v0.1.9",
     "commits": [
       {
         "message": "feat(WOP-8): Add set up for render",
@@ -343,7 +240,7 @@
     ]
   },
   {
-    "version": "v0.2.8",
+    "version": "v0.2.0",
     "commits": [
       {
         "message": "feat(WOP-8): Add set up for render",
@@ -355,7 +252,7 @@
     ]
   },
   {
-    "version": "v0.2.9",
+    "version": "v0.2.1",
     "commits": [
       {
         "message": "feat(WOP-9): Add health check endpoint",
@@ -367,7 +264,7 @@
     ]
   },
   {
-    "version": "v0.3.0",
+    "version": "v0.2.2",
     "commits": [
       {
         "message": "feat(WOP-10): Add CORS allowed origins",
@@ -379,43 +276,7 @@
     ]
   },
   {
-    "version": "v0.3.1",
-    "commits": [
-      {
-        "message": "feat(WOR-4): Add waking up backend server component",
-        "author": "David Garcia",
-        "date": "2025-11-01T22:13:49-07:00",
-        "version": "v0.0.8",
-        "source": "frontend"
-      }
-    ]
-  },
-  {
-    "version": "v0.3.2",
-    "commits": [
-      {
-        "message": "feat(WOR-5): Add jwt endpoint call and change component to load once per page load",
-        "author": "David Garcia",
-        "date": "2025-11-01T22:55:35-07:00",
-        "version": "v0.0.9",
-        "source": "frontend"
-      }
-    ]
-  },
-  {
-    "version": "v0.3.3",
-    "commits": [
-      {
-        "message": "feat(WOR-5): Add loading animation, refactor wake up logic",
-        "author": "David Garcia",
-        "date": "2025-11-01T23:11:00-07:00",
-        "version": "v0.1.0",
-        "source": "frontend"
-      }
-    ]
-  },
-  {
-    "version": "v0.3.4",
+    "version": "v0.2.3",
     "commits": [
       {
         "message": "fix(WOP-11): Fix DB connection",
@@ -427,19 +288,7 @@
     ]
   },
   {
-    "version": "v0.3.5",
-    "commits": [
-      {
-        "message": "feat(WOR-6): Change loading animation, use render endpoint for word validation.",
-        "author": "David Garcia",
-        "date": "2025-11-02T08:37:03-07:00",
-        "version": "v0.1.1",
-        "source": "frontend"
-      }
-    ]
-  },
-  {
-    "version": "v0.3.6",
+    "version": "v0.2.4",
     "commits": [
       {
         "message": "fix(WOP-11): Change DB connection and query to supabase",
@@ -451,7 +300,7 @@
     ]
   },
   {
-    "version": "v0.3.7",
+    "version": "v0.2.5",
     "commits": [
       {
         "message": "fix(WOP-12): Change solution logic",
@@ -463,223 +312,7 @@
     ]
   },
   {
-    "version": "v0.3.8",
-    "commits": [
-      {
-        "message": "feat(WOR-7): Refactor cells to have 2 sides, add letter colours on guess",
-        "author": "David Garcia",
-        "date": "2025-11-02T11:48:34-07:00",
-        "version": "v0.1.2",
-        "source": "frontend"
-      }
-    ]
-  },
-  {
-    "version": "v0.3.9",
-    "commits": [
-      {
-        "message": "feat(WOR-8): Add tutorial modal in loading screen",
-        "author": "David Garcia",
-        "date": "2025-11-02T12:12:50-07:00",
-        "version": "v0.1.3",
-        "source": "frontend"
-      }
-    ]
-  },
-  {
-    "version": "v0.4.0",
-    "commits": [
-      {
-        "message": "feat(WOR-9): Add winning animation",
-        "author": "David Garcia",
-        "date": "2025-11-02T12:42:46-07:00",
-        "version": "v0.1.4",
-        "source": "frontend"
-      }
-    ]
-  },
-  {
-    "version": "v0.4.1",
-    "commits": [
-      {
-        "message": "fix(WOR-10): Fix TypeScript warnings",
-        "author": "David Garcia",
-        "date": "2025-11-02T13:10:21-07:00",
-        "version": "v0.1.5",
-        "source": "frontend"
-      }
-    ]
-  },
-  {
-    "version": "v0.4.2",
-    "commits": [
-      {
-        "message": "fix(WOR-11): Improve responsiveness",
-        "author": "David Garcia",
-        "date": "2025-11-02T13:19:11-07:00",
-        "version": "v0.1.6",
-        "source": "frontend"
-      }
-    ]
-  },
-  {
-    "version": "v0.4.3",
-    "commits": [
-      {
-        "message": "fix(WOR-12): Add bottom keyboard",
-        "author": "David Garcia",
-        "date": "2025-11-02T15:19:12-07:00",
-        "version": "v0.1.7",
-        "source": "frontend"
-      }
-    ]
-  },
-  {
-    "version": "v0.4.4",
-    "commits": [
-      {
-        "message": "feat(WOR-13): Add stats",
-        "author": "David Garcia",
-        "date": "2025-11-02T20:03:35-07:00",
-        "version": "v0.1.8",
-        "source": "frontend"
-      }
-    ]
-  },
-  {
-    "version": "v0.4.5",
-    "commits": [
-      {
-        "message": "feat(WORD-14): Add navbar",
-        "author": "David Garcia",
-        "date": "2025-11-02T21:34:46-07:00",
-        "version": "v0.1.9",
-        "source": "frontend"
-      }
-    ]
-  },
-  {
-    "version": "v0.4.6",
-    "commits": [
-      {
-        "message": "fix(WORD-15): Improve responsiveness",
-        "author": "David Garcia",
-        "date": "2025-11-03T20:12:45-07:00",
-        "version": "v0.2.0",
-        "source": "frontend"
-      }
-    ]
-  },
-  {
-    "version": "v0.4.7",
-    "commits": [
-      {
-        "message": "feat(WOR-16): Add continue feature and refetch JWT on expire",
-        "author": "David Garcia",
-        "date": "2025-11-03T22:31:56-07:00",
-        "version": "v0.2.1",
-        "source": "frontend"
-      }
-    ]
-  },
-  {
-    "version": "v0.4.8",
-    "commits": [
-      {
-        "message": "feat(WOR-17): Add fire particles on win",
-        "author": "David Garcia",
-        "date": "2025-11-03T22:49:24-07:00",
-        "version": "v0.2.2",
-        "source": "frontend"
-      }
-    ]
-  },
-  {
-    "version": "v0.4.9",
-    "commits": [
-      {
-        "message": "fix(WOR-18): Fix fire particles, fix bug that prevented to delete the first letter of every row, fix bug that allowed to type after game over on saved game",
-        "author": "David Garcia",
-        "date": "2025-11-03T23:15:15-07:00",
-        "version": "v0.2.3",
-        "source": "frontend"
-      }
-    ]
-  },
-  {
-    "version": "v0.5.0",
-    "commits": [
-      {
-        "message": "feat(WOR-19): Add timer to refresh at midnight, handle UI on existing games",
-        "author": "David Garcia",
-        "date": "2025-11-04T08:36:37-07:00",
-        "version": "v0.2.4",
-        "source": "frontend"
-      }
-    ]
-  },
-  {
-    "version": "v0.5.1",
-    "commits": [
-      {
-        "message": "fix(WOR-20): Fix bug when previous game was played, stats were increasing.",
-        "author": "David Garcia",
-        "date": "2025-11-04T08:44:31-07:00",
-        "version": "v0.2.5",
-        "source": "frontend"
-      }
-    ]
-  },
-  {
-    "version": "v0.5.2",
-    "commits": [
-      {
-        "message": "feat(WOR-21): Add changelog page",
-        "author": "David Garcia",
-        "date": "2025-11-04T13:26:05-07:00",
-        "version": "v0.2.6",
-        "source": "frontend"
-      }
-    ]
-  },
-  {
-    "version": "v0.5.3",
-    "commits": [
-      {
-        "message": "fix(WOR-22): Fixed bug when incomplete previous game was considered game over",
-        "author": "David Garcia",
-        "date": "2025-11-04T13:31:03-07:00",
-        "version": "v0.2.7",
-        "source": "frontend"
-      }
-    ]
-  },
-  {
-    "version": "v0.5.4",
-    "commits": [
-      {
-        "message": "feat(WOR-23): Add husky to automatically run changelog",
-        "author": "David Garcia",
-        "date": "2025-11-04T16:43:08-07:00",
-        "version": "v0.2.8",
-        "source": "frontend"
-      }
-    ]
-  },
-  {
-    "version": "v0.5.5",
-    "commits": [
-      {
-        "message": "feat(WOR-24): Refactor midnight UTC reset and fixed bug where current streak was not reset at midnight",
-        "author": "David Garcia",
-        "date": "2025-11-04T19:12:11-07:00",
-        "version": "v0.2.9",
-        "source": "frontend"
-      }
-    ]
-  },
-  {
-    "version": "v0.5.6",
+    "version": "v0.2.6",
     "commits": [
       {
         "message": "feat(WOP-13): Add changelog",
@@ -691,31 +324,7 @@
     ]
   },
   {
-    "version": "v0.5.7",
-    "commits": [
-      {
-        "message": "feat(WOR-25): Fix bug where finishing a game did not update the onboarding screen",
-        "author": "David Garcia",
-        "date": "2025-11-04T20:19:16-07:00",
-        "version": "v0.3.0",
-        "source": "frontend"
-      }
-    ]
-  },
-  {
-    "version": "v0.5.8",
-    "commits": [
-      {
-        "message": "feat(WOR-25): Fix bug where finishing a game did not update the onboarding screen",
-        "author": "David Garcia",
-        "date": "2025-11-04T20:19:26-07:00",
-        "version": "v0.3.1",
-        "source": "frontend"
-      }
-    ]
-  },
-  {
-    "version": "v0.5.9",
+    "version": "v0.2.7",
     "commits": [
       {
         "message": "feat(WOP-13): Add CI/CD to move changelog file to front end app",
@@ -727,84 +336,8 @@
     ]
   },
   {
-    "version": "v0.6.0",
+    "version": "v0.2.8",
     "commits": [
-      {
-        "message": "chore: Sync backend changelog from main repo",
-        "author": "github-actions[bot]",
-        "date": "2025-11-05T03:21:06+00:00",
-        "version": "v0.3.2",
-        "source": "frontend"
-      },
-      {
-        "message": "chore: solve conflicts",
-        "author": "David Garcia",
-        "date": "2025-11-04T20:26:28-07:00",
-        "version": "v0.3.2",
-        "source": "frontend"
-      },
-      {
-        "message": "fix(WOR-26): Change chores in changelog to not increase version",
-        "author": "David Garcia",
-        "date": "2025-11-04T20:30:35-07:00",
-        "version": "v0.3.2",
-        "source": "frontend"
-      }
-    ]
-  },
-  {
-    "version": "v0.6.1",
-    "commits": [
-      {
-        "message": "feat(WOR-27): Combine back and front end changelogs",
-        "author": "David Garcia",
-        "date": "2025-11-04T20:39:39-07:00",
-        "version": "v0.3.3",
-        "source": "frontend"
-      }
-    ]
-  },
-  {
-    "version": "v0.6.2",
-    "commits": [
-      {
-        "message": "fix(WOR-28): Refactor combination of changelogs to one timeline",
-        "author": "David Garcia",
-        "date": "2025-11-04T21:19:17-07:00",
-        "version": "v0.3.4",
-        "source": "frontend"
-      }
-    ]
-  },
-  {
-    "version": "v0.6.3",
-    "commits": [
-      {
-        "message": "fix(WOR-29): Fix changelog page to be compatible with combined json",
-        "author": "David Garcia",
-        "date": "2025-11-04T22:06:53-07:00",
-        "version": "v0.3.5",
-        "source": "frontend"
-      }
-    ]
-  },
-  {
-    "version": "v0.6.4",
-    "commits": [
-      {
-        "message": "chore: Sync backend changelog from main repo",
-        "author": "github-actions[bot]",
-        "date": "2025-11-05T05:31:26+00:00",
-        "version": "v0.3.6",
-        "source": "frontend"
-      },
-      {
-        "message": "chore: Sync backend changelog from main repo",
-        "author": "github-actions[bot]",
-        "date": "2025-11-05T05:40:21+00:00",
-        "version": "v0.3.6",
-        "source": "frontend"
-      },
       {
         "message": "feat(WOP-14): Add endpoint to get past words",
         "author": "David Garcia",
@@ -815,161 +348,8 @@
     ]
   },
   {
-    "version": "v0.6.5",
+    "version": "v0.2.9",
     "commits": [
-      {
-        "message": "chore: Sync backend changelog from main repo",
-        "author": "github-actions[bot]",
-        "date": "2025-11-05T05:40:43+00:00",
-        "version": "v0.3.6",
-        "source": "frontend"
-      },
-      {
-        "message": "feat(WOR-30): Add current word number",
-        "author": "David Garcia",
-        "date": "2025-11-04T22:52:35-07:00",
-        "version": "v0.3.6",
-        "source": "frontend"
-      }
-    ]
-  },
-  {
-    "version": "v0.6.6",
-    "commits": [
-      {
-        "message": "Merge branch 'main' of https://github.com/daviders98/wordle-front into main",
-        "author": "David Garcia",
-        "date": "2025-11-04T22:52:49-07:00",
-        "version": "v0.3.7",
-        "source": "frontend"
-      }
-    ]
-  },
-  {
-    "version": "v0.6.7",
-    "commits": [
-      {
-        "message": "fix(WOR-31): fix changelog merges not showing correctly",
-        "author": "David Garcia",
-        "date": "2025-11-04T23:01:06-07:00",
-        "version": "v0.3.8",
-        "source": "frontend"
-      }
-    ]
-  },
-  {
-    "version": "v0.6.8",
-    "commits": [
-      {
-        "message": "feat(WOR-32): Add word history page",
-        "author": "David Garcia",
-        "date": "2025-11-04T23:07:55-07:00",
-        "version": "v0.3.9",
-        "source": "frontend"
-      }
-    ]
-  },
-  {
-    "version": "v0.6.9",
-    "commits": [
-      {
-        "message": "feat(WOR-32): Add word history page",
-        "author": "David Garcia",
-        "date": "2025-11-04T23:08:08-07:00",
-        "version": "v0.4.0",
-        "source": "frontend"
-      }
-    ]
-  },
-  {
-    "version": "v0.7.0",
-    "commits": [
-      {
-        "message": "Merge branch 'main' of https://github.com/daviders98/wordle-front into main",
-        "author": "David Garcia",
-        "date": "2025-11-04T23:08:52-07:00",
-        "version": "v0.4.1",
-        "source": "frontend"
-      }
-    ]
-  },
-  {
-    "version": "v0.7.1",
-    "commits": [
-      {
-        "message": "fix(WOR-33): Change background color on loading animation",
-        "author": "David Garcia",
-        "date": "2025-11-05T19:44:15-07:00",
-        "version": "v0.4.2",
-        "source": "frontend"
-      }
-    ]
-  },
-  {
-    "version": "v0.7.2",
-    "commits": [
-      {
-        "message": "feat(WOR-34): Add npm and node version to package.json",
-        "author": "David Garcia",
-        "date": "2025-11-05T19:47:30-07:00",
-        "version": "v0.4.3",
-        "source": "frontend"
-      }
-    ]
-  },
-  {
-    "version": "v0.7.3",
-    "commits": [
-      {
-        "message": "fix(WOR-35): Make keyboard bigger on mobile",
-        "author": "David Garcia",
-        "date": "2025-11-05T19:54:40-07:00",
-        "version": "v0.4.4",
-        "source": "frontend"
-      }
-    ]
-  },
-  {
-    "version": "v0.7.4",
-    "commits": [
-      {
-        "message": "feat(WOR-36): Add automatic formatter CI CD",
-        "author": "David Garcia",
-        "date": "2025-11-05T20:18:06-07:00",
-        "version": "v0.4.5",
-        "source": "frontend"
-      }
-    ]
-  },
-  {
-    "version": "v0.7.5",
-    "commits": [
-      {
-        "message": "chore: auto-format code with Prettier (#1)",
-        "author": "github-actions[bot]",
-        "date": "2025-11-06T03:23:38+00:00",
-        "version": "v0.4.6",
-        "source": "frontend"
-      },
-      {
-        "message": "feat(WOR-37): Reset streak when not playing on consecutive days and page was closed in between",
-        "author": "David Garcia",
-        "date": "2025-11-05T21:14:31-07:00",
-        "version": "v0.4.6",
-        "source": "frontend"
-      }
-    ]
-  },
-  {
-    "version": "v0.7.6",
-    "commits": [
-      {
-        "message": "chore: auto-format code with Prettier (#2)",
-        "author": "github-actions[bot]",
-        "date": "2025-11-06T04:15:15+00:00",
-        "version": "v0.4.7",
-        "source": "frontend"
-      },
       {
         "message": "fix(WOP-15): Improve performance by reducing 2 API calls to 1",
         "author": "David Garcia",
@@ -980,22 +360,8 @@
     ]
   },
   {
-    "version": "v0.7.7",
+    "version": "v0.3.0",
     "commits": [
-      {
-        "message": "chore: Sync backend changelog from main repo",
-        "author": "github-actions[bot]",
-        "date": "2025-11-06T04:45:41+00:00",
-        "version": "v0.4.7",
-        "source": "frontend"
-      },
-      {
-        "message": "chore: auto-format code with Prettier (#3)",
-        "author": "github-actions[bot]",
-        "date": "2025-11-06T04:46:21+00:00",
-        "version": "v0.4.7",
-        "source": "frontend"
-      },
       {
         "message": "fix(WOP-16): Add missing import",
         "author": "David Garcia",
@@ -1006,22 +372,8 @@
     ]
   },
   {
-    "version": "v0.7.8",
+    "version": "v0.3.1",
     "commits": [
-      {
-        "message": "chore: Sync backend changelog from main repo",
-        "author": "github-actions[bot]",
-        "date": "2025-11-06T04:49:57+00:00",
-        "version": "v0.4.7",
-        "source": "frontend"
-      },
-      {
-        "message": "chore: auto-format code with Prettier (#4)",
-        "author": "github-actions[bot]",
-        "date": "2025-11-06T04:50:38+00:00",
-        "version": "v0.4.7",
-        "source": "frontend"
-      },
       {
         "message": "fix(WOP-17): Change url on new endpoint",
         "author": "David Garcia",
@@ -1032,41 +384,8 @@
     ]
   },
   {
-    "version": "v0.7.9",
+    "version": "v0.3.2",
     "commits": [
-      {
-        "message": "chore: Sync backend changelog from main repo",
-        "author": "github-actions[bot]",
-        "date": "2025-11-06T04:54:12+00:00",
-        "version": "v0.4.7",
-        "source": "frontend"
-      },
-      {
-        "message": "chore: auto-format code with Prettier (#5)",
-        "author": "github-actions[bot]",
-        "date": "2025-11-06T04:54:53+00:00",
-        "version": "v0.4.7",
-        "source": "frontend"
-      },
-      {
-        "message": "fix(WOR-39): Improve loading time on guess",
-        "author": "David Garcia",
-        "date": "2025-11-05T22:05:00-07:00",
-        "version": "v0.4.7",
-        "source": "frontend"
-      }
-    ]
-  },
-  {
-    "version": "v0.8.0",
-    "commits": [
-      {
-        "message": "chore: auto-format code with Prettier (#6)",
-        "author": "github-actions[bot]",
-        "date": "2025-11-06T05:05:47+00:00",
-        "version": "v0.4.8",
-        "source": "frontend"
-      },
       {
         "message": "feat(WOP-18): Increase server security, delete admin endpoint",
         "author": "David Garcia",
@@ -1077,146 +396,14 @@
     ]
   },
   {
-    "version": "v0.8.1",
+    "version": "v0.3.3",
     "commits": [
-      {
-        "message": "chore: Sync backend changelog from main repo",
-        "author": "github-actions[bot]",
-        "date": "2025-11-06T05:23:28+00:00",
-        "version": "v0.4.8",
-        "source": "frontend"
-      },
-      {
-        "message": "chore: auto-format code with Prettier (#7)",
-        "author": "github-actions[bot]",
-        "date": "2025-11-06T05:24:06+00:00",
-        "version": "v0.4.8",
-        "source": "frontend"
-      },
       {
         "message": "chore: Add readme",
         "author": "David Garcia",
         "date": "2025-11-06T21:30:15-07:00",
         "version": "v0.3.3",
         "source": "backend"
-      },
-      {
-        "message": "chore: Sync backend changelog from main repo",
-        "author": "github-actions[bot]",
-        "date": "2025-11-07T04:30:24+00:00",
-        "version": "v0.4.8",
-        "source": "frontend"
-      },
-      {
-        "message": "chore: auto-format code with Prettier (#8)",
-        "author": "github-actions[bot]",
-        "date": "2025-11-07T04:31:05+00:00",
-        "version": "v0.4.8",
-        "source": "frontend"
-      },
-      {
-        "message": "chore: Add README.md",
-        "author": "David Garcia",
-        "date": "2025-11-06T21:43:24-07:00",
-        "version": "v0.4.8",
-        "source": "frontend"
-      },
-      {
-        "message": "chore: auto-format code with Prettier (#9)",
-        "author": "github-actions[bot]",
-        "date": "2025-11-07T04:44:05+00:00",
-        "version": "v0.4.8",
-        "source": "frontend"
-      },
-      {
-        "message": "fix(WOR-40): Fix error when getting word in last attempt and reloading page",
-        "author": "David Garcia",
-        "date": "2025-11-06T22:07:44-07:00",
-        "version": "v0.4.8",
-        "source": "frontend"
-      }
-    ]
-  },
-  {
-    "version": "v0.8.2",
-    "commits": [
-      {
-        "message": "chore: auto-format code with Prettier (#10)",
-        "author": "github-actions[bot]",
-        "date": "2025-11-07T05:08:29+00:00",
-        "version": "v0.4.9",
-        "source": "frontend"
-      },
-      {
-        "message": "fix(WOR-41): Fix error of streak resetting next day even when getting the word the previous day.",
-        "author": "David Garcia",
-        "date": "2025-11-06T22:10:34-07:00",
-        "version": "v0.4.9",
-        "source": "frontend"
-      }
-    ]
-  },
-  {
-    "version": "v0.8.3",
-    "commits": [
-      {
-        "message": "chore: auto-format code with Prettier (#11)",
-        "author": "github-actions[bot]",
-        "date": "2025-11-07T05:11:16+00:00",
-        "version": "v0.5.0",
-        "source": "frontend"
-      },
-      {
-        "message": "chore: update changelog",
-        "author": "David Garcia",
-        "date": "2025-11-06T22:30:29-07:00",
-        "version": "v0.5.0",
-        "source": "frontend"
-      },
-      {
-        "message": "chore: auto-format code with Prettier (#12)",
-        "author": "github-actions[bot]",
-        "date": "2025-11-07T05:31:11+00:00",
-        "version": "v0.5.0",
-        "source": "frontend"
-      },
-      {
-        "message": "fix(WOR-42): Fix changelog json file being deleted",
-        "author": "David Garcia",
-        "date": "2025-11-06T22:40:21-07:00",
-        "version": "v0.5.0",
-        "source": "frontend"
-      }
-    ]
-  },
-  {
-    "version": "v0.8.4",
-    "commits": [
-      {
-        "message": "chore: auto-format code with Prettier (#13)",
-        "author": "github-actions[bot]",
-        "date": "2025-11-07T05:41:03+00:00",
-        "version": "v0.5.1",
-        "source": "frontend"
-      },
-      {
-        "message": "fix(WOR-43): Fix changelog being partially deleted on prettier formatting",
-        "author": "David Garcia",
-        "date": "2025-11-06T22:44:15-07:00",
-        "version": "v0.5.1",
-        "source": "frontend"
-      }
-    ]
-  },
-  {
-    "version": "v0.8.5",
-    "commits": [
-      {
-        "message": "chore: solve conflicts",
-        "author": "David Garcia",
-        "date": "2025-11-06T22:45:20-07:00",
-        "version": "v0.5.2",
-        "source": "frontend"
       },
       {
         "message": "feat(WOP-19): Increase server security",
@@ -1228,36 +415,8 @@
     ]
   },
   {
-    "version": "v0.8.6",
+    "version": "v0.3.4",
     "commits": [
-      {
-        "message": "chore: Sync backend changelog from main repo",
-        "author": "github-actions[bot]",
-        "date": "2025-11-08T01:51:35+00:00",
-        "version": "v0.5.2",
-        "source": "frontend"
-      },
-      {
-        "message": "chore: update package-lock.json",
-        "author": "David Garcia",
-        "date": "2025-11-07T18:59:29-07:00",
-        "version": "v0.5.2",
-        "source": "frontend"
-      },
-      {
-        "message": "chore: Define loose node version",
-        "author": "David Garcia",
-        "date": "2025-11-07T19:22:33-07:00",
-        "version": "v0.5.2",
-        "source": "frontend"
-      },
-      {
-        "message": "chore: Define loose node version",
-        "author": "David Garcia",
-        "date": "2025-11-07T19:22:51-07:00",
-        "version": "v0.5.2",
-        "source": "frontend"
-      },
       {
         "message": "fix(WOP-20): Add more guesses to rate limiter",
         "author": "David Garcia",
@@ -1268,86 +427,8 @@
     ]
   },
   {
-    "version": "v0.8.7",
+    "version": "v0.3.5",
     "commits": [
-      {
-        "message": "chore: Sync backend changelog from main repo",
-        "author": "github-actions[bot]",
-        "date": "2025-11-08T02:47:20+00:00",
-        "version": "v0.5.2",
-        "source": "frontend"
-      },
-      {
-        "message": "fix(WOR-44): Fix build errors",
-        "author": "David Garcia",
-        "date": "2025-11-07T19:48:28-07:00",
-        "version": "v0.5.2",
-        "source": "frontend"
-      }
-    ]
-  },
-  {
-    "version": "v0.8.8",
-    "commits": [
-      {
-        "message": "chore: auto-format code with Prettier (#14)",
-        "author": "github-actions[bot]",
-        "date": "2025-11-08T02:49:03+00:00",
-        "version": "v0.5.3",
-        "source": "frontend"
-      },
-      {
-        "message": "fix(WOR-45): Fix es-lint build errors",
-        "author": "David Garcia",
-        "date": "2025-11-07T20:01:50-07:00",
-        "version": "v0.5.3",
-        "source": "frontend"
-      }
-    ]
-  },
-  {
-    "version": "v0.8.9",
-    "commits": [
-      {
-        "message": "fix(WOR-45): Fix es-lint build errors",
-        "author": "David Garcia",
-        "date": "2025-11-07T20:03:25-07:00",
-        "version": "v0.5.4",
-        "source": "frontend"
-      }
-    ]
-  },
-  {
-    "version": "v0.9.0",
-    "commits": [
-      {
-        "message": "chore: solve conflicts",
-        "author": "David Garcia",
-        "date": "2025-11-07T20:04:07-07:00",
-        "version": "v0.5.5",
-        "source": "frontend"
-      },
-      {
-        "message": "chore: auto-format code with Prettier (#15)",
-        "author": "github-actions[bot]",
-        "date": "2025-11-08T03:04:41+00:00",
-        "version": "v0.5.5",
-        "source": "frontend"
-      },
-      {
-        "message": "chore: auto-format code with Prettier (#15)",
-        "author": "github-actions[bot]",
-        "date": "2025-11-07T20:11:01-07:00",
-        "version": "v0.5.5",
-        "source": "frontend"
-      },
-      {
-        "message": "chore: update changelog",
-        "author": "David Garcia",
-        "date": "2025-11-07T20:16:42-07:00",
-        "version": "v0.5.5",
-        "source": "frontend"
-      },
       {
         "message": "fix(WOP-21): Fix render deployment",
         "author": "David Garcia",
@@ -1358,50 +439,7 @@
     ]
   },
   {
-    "version": "v0.9.1",
-    "commits": [
-      {
-        "message": "chore: Sync backend changelog from main repo",
-        "author": "github-actions[bot]",
-        "date": "2025-11-08T03:48:05+00:00",
-        "version": "v0.5.5",
-        "source": "frontend"
-      },
-      {
-        "message": "fix(WOR-46): Fix meta tags, change favico",
-        "author": "David Garcia",
-        "date": "2025-11-09T10:25:18-07:00",
-        "version": "v0.5.5",
-        "source": "frontend"
-      }
-    ]
-  },
-  {
-    "version": "v0.9.2",
-    "commits": [
-      {
-        "message": "Merge branch 'main' of https://github.com/daviders98/wordle-front into main",
-        "author": "David Garcia",
-        "date": "2025-11-09T10:25:44-07:00",
-        "version": "v0.5.6",
-        "source": "frontend"
-      }
-    ]
-  },
-  {
-    "version": "v0.9.3",
-    "commits": [
-      {
-        "message": "feat(WOR-47): Add CSP",
-        "author": "David Garcia",
-        "date": "2025-11-15T12:07:10-07:00",
-        "version": "v0.5.7",
-        "source": "frontend"
-      }
-    ]
-  },
-  {
-    "version": "v0.9.4",
+    "version": "v0.3.6",
     "commits": [
       {
         "message": "fix(WOP-22): Change CSP",
@@ -1413,15 +451,8 @@
     ]
   },
   {
-    "version": "v0.9.5",
+    "version": "v0.3.7",
     "commits": [
-      {
-        "message": "chore: Sync backend changelog from main repo",
-        "author": "github-actions[bot]",
-        "date": "2025-11-15T19:18:21+00:00",
-        "version": "v0.5.8",
-        "source": "frontend"
-      },
       {
         "message": "feat(WOP-23): Add 404",
         "author": "David Garcia",
@@ -1432,43 +463,8 @@
     ]
   },
   {
-    "version": "v0.9.6",
+    "version": "v0.3.8",
     "commits": [
-      {
-        "message": "chore: Sync backend changelog from main repo",
-        "author": "github-actions[bot]",
-        "date": "2025-11-15T19:25:15+00:00",
-        "version": "v0.5.8",
-        "source": "frontend"
-      },
-      {
-        "message": "chore: Sync backend changelog from main repo",
-        "author": "github-actions[bot]",
-        "date": "2025-11-21T18:22:23+00:00",
-        "version": "v0.5.8",
-        "source": "frontend"
-      },
-      {
-        "message": "chore: Sync backend changelog from main repo",
-        "author": "github-actions[bot]",
-        "date": "2025-11-21T18:41:37+00:00",
-        "version": "v0.5.8",
-        "source": "frontend"
-      },
-      {
-        "message": "chore: Sync backend changelog from main repo",
-        "author": "github-actions[bot]",
-        "date": "2025-11-21T18:54:38+00:00",
-        "version": "v0.5.8",
-        "source": "frontend"
-      },
-      {
-        "message": "chore: Sync backend changelog from main repo",
-        "author": "github-actions[bot]",
-        "date": "2025-11-21T18:58:40+00:00",
-        "version": "v0.5.8",
-        "source": "frontend"
-      },
       {
         "message": "fix(WOP-24): Add self-hosted list of words",
         "author": "David Garcia",
@@ -1479,179 +475,25 @@
     ]
   },
   {
-    "version": "v0.9.7",
+    "version": "v0.3.9",
     "commits": [
-      {
-        "message": "chore: Sync backend changelog from main repo",
-        "author": "github-actions[bot]",
-        "date": "2025-11-21T19:05:10+00:00",
-        "version": "v0.5.8",
-        "source": "frontend"
-      },
-      {
-        "message": "feat(WOR-48): Change loading animation and logic",
-        "author": "David Garcia",
-        "date": "2025-11-21T20:01:00-07:00",
-        "version": "v0.5.8",
-        "source": "frontend"
-      }
-    ]
-  },
-  {
-    "version": "v0.9.8",
-    "commits": [
-      {
-        "message": "chore: auto-format code with Prettier (#16)",
-        "author": "github-actions[bot]",
-        "date": "2025-11-22T03:01:37+00:00",
-        "version": "v0.5.9",
-        "source": "frontend"
-      },
-      {
-        "message": "chore: update changelog",
-        "author": "David Garcia",
-        "date": "2025-11-21T20:06:53-07:00",
-        "version": "v0.5.9",
-        "source": "frontend"
-      },
-      {
-        "message": "feat(WOR-49): Minor mobile UX improvements",
-        "author": "David Garcia",
-        "date": "2025-11-21T20:32:22-07:00",
-        "version": "v0.5.9",
-        "source": "frontend"
-      }
-    ]
-  },
-  {
-    "version": "v0.9.9",
-    "commits": [
-      {
-        "message": "chore: auto-format code with Prettier (#17)",
-        "author": "github-actions[bot]",
-        "date": "2025-11-22T03:32:57+00:00",
-        "version": "v0.6.0",
-        "source": "frontend"
-      },
-      {
-        "message": "fix(WOR-50): change height css on mobile",
-        "author": "David Garcia",
-        "date": "2025-11-21T20:44:12-07:00",
-        "version": "v0.6.0",
-        "source": "frontend"
-      }
-    ]
-  },
-  {
-    "version": "v1.0.0",
-    "commits": [
-      {
-        "message": "chore: auto-format code with Prettier (#18)",
-        "author": "github-actions[bot]",
-        "date": "2025-11-22T03:44:48+00:00",
-        "version": "v0.6.1",
-        "source": "frontend"
-      },
-      {
-        "message": "fix(WOR-51): Fix small mobile scroll issues",
-        "author": "David Garcia",
-        "date": "2025-11-21T21:14:22-07:00",
-        "version": "v0.6.1",
-        "source": "frontend"
-      }
-    ]
-  },
-  {
-    "version": "v1.0.1",
-    "commits": [
-      {
-        "message": "chore: solve conflicts",
-        "author": "David Garcia",
-        "date": "2025-11-21T21:15:18-07:00",
-        "version": "v0.6.2",
-        "source": "frontend"
-      },
-      {
-        "message": "chore: auto-format code with Prettier (#19)",
-        "author": "github-actions[bot]",
-        "date": "2025-11-22T04:15:57+00:00",
-        "version": "v0.6.2",
-        "source": "frontend"
-      },
-      {
-        "message": "fix(WOR-52): Delete global background colour",
-        "author": "David Garcia",
-        "date": "2025-11-21T21:17:47-07:00",
-        "version": "v0.6.2",
-        "source": "frontend"
-      }
-    ]
-  },
-  {
-    "version": "v1.0.2",
-    "commits": [
-      {
-        "message": "fix(WOR-53): Fix localstorage issues",
-        "author": "David Garcia",
-        "date": "2025-11-21T22:42:37-07:00",
-        "version": "v0.6.3",
-        "source": "frontend"
-      }
-    ]
-  },
-  {
-    "version": "v1.0.3",
-    "commits": [
-      {
-        "message": "chore: auto-format code with Prettier (#20)",
-        "author": "github-actions[bot]",
-        "date": "2025-11-22T05:43:14+00:00",
-        "version": "v0.6.4",
-        "source": "frontend"
-      },
-      {
-        "message": "fix(WOR-54): Fix bug when reloading page while animation was playing",
-        "author": "David Garcia",
-        "date": "2025-11-21T23:54:18-07:00",
-        "version": "v0.6.4",
-        "source": "frontend"
-      }
-    ]
-  },
-  {
-    "version": "v1.0.4",
-    "commits": [
-      {
-        "message": "chore: auto-format code with Prettier (#21)",
-        "author": "github-actions[bot]",
-        "date": "2025-11-22T06:54:54+00:00",
-        "version": "v0.6.5",
-        "source": "frontend"
-      },
-      {
-        "message": "fix(WOR-55): Fix bug when reloading page while animation was playing and fix infinite mounting components",
-        "author": "David Garcia",
-        "date": "2025-11-22T00:54:19-07:00",
-        "version": "v0.6.5",
-        "source": "frontend"
-      }
-    ]
-  },
-  {
-    "version": "v1.0.5",
-    "commits": [
-      {
-        "message": "chore: auto-format code with Prettier (#22)",
-        "author": "github-actions[bot]",
-        "date": "2025-11-22T07:54:59+00:00",
-        "version": "v0.6.6",
-        "source": "frontend"
-      },
       {
         "message": "fix(WOR-56): Fix word number flickering",
         "author": "David Garcia",
-        "date": "2025-11-22T09:29:54-07:00",
-        "version": "v0.6.6",
+        "date": "2025-11-22T09:29:58-07:00",
+        "version": "v0.0.0",
+        "source": "frontend"
+      }
+    ]
+  },
+  {
+    "version": "v0.4.0",
+    "commits": [
+      {
+        "message": "chore: auto-format code with Prettier",
+        "author": "github-actions[bot]",
+        "date": "2025-11-22T16:30:30Z",
+        "version": "v0.0.1",
         "source": "frontend"
       }
     ]

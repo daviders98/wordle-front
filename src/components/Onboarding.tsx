@@ -6,7 +6,7 @@ import { useNavigate } from "react-router-dom";
 
 export default function Onboarding({
   previousGameExist,
-  pastWords
+  pastWords,
 }: {
   previousGameExist: boolean;
   pastWords: Array<any>;
