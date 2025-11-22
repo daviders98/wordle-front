@@ -102,15 +102,22 @@ const Loading = ({ animationEnded }: { animationEnded: () => void }) => {
 
       setTimeout(() => {
         if (phaseRef.current === "yellow") {
-          phaseRef.current = "green";
-          setFlippedCells(
-            Array.from({ length: rows }, () => Array(cols).fill(false)),
-          );
-          runAnimation(500);
-        } else if (delayMs) {
-          animationEnded();
-        }
-      }, delay + 400);
+            phaseRef.current = "green";
+
+            setFlippedCells(
+              Array.from({ length: rows }, () => Array(cols).fill(false))
+            );
+
+            setCellStatuses(
+              Array.from({ length: rows }, () => Array(cols).fill(undefined))
+            );
+
+            runAnimation(600);
+          } else if (delayMs) {
+            animationEnded();
+          }
+
+      }, delay + 600);
     };
 
     runAnimation();

@@ -1688,7 +1688,14 @@
       {
         "message": "chore: update changelog",
         "author": "David Garcia",
-        "date": "2025-11-22T10:14:23-07:00",
+        "date": "2025-11-22T10:14:26-07:00",
+        "version": "v0.6.8",
+        "source": "frontend"
+      },
+      {
+        "message": "fix(WOR-58): Loading animation fix",
+        "author": "David Garcia",
+        "date": "2025-11-22T10:31:26-07:00",
         "version": "v0.6.8",
         "source": "frontend"
       }
