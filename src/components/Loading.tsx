@@ -51,7 +51,11 @@ const CellFront = styled.div`
 const CellBack = styled(CellFront)<{ $status?: "present" | "correct" }>`
   transform: rotateX(-180deg);
   background-color: ${({ $status }) =>
-    $status === "correct" ? "#538d4e" : $status === "present" ? "#b59f3b" : "#3a3a3c"};
+    $status === "correct"
+      ? "#538d4e"
+      : $status === "present"
+        ? "#b59f3b"
+        : "#3a3a3c"};
   color: #fff;
 `;
 
@@ -59,54 +63,55 @@ const words = ["BETTER", "WORDLE"];
 const rows = words.length;
 const cols = Math.max(...words.map((w) => w.length));
 
-const Loading = ({animationEnded}:{animationEnded:()=>void}) => {
+const Loading = ({ animationEnded }: { animationEnded: () => void }) => {
   const [flippedCells, setFlippedCells] = useState(
-    Array.from({ length: rows }, () => Array(cols).fill(false))
+    Array.from({ length: rows }, () => Array(cols).fill(false)),
   );
   const [cellStatuses, setCellStatuses] = useState(
-    Array.from({ length: rows }, () => Array(cols).fill(undefined))
+    Array.from({ length: rows }, () => Array(cols).fill(undefined)),
   );
 
   useEffect(() => {
-  let phase: "yellow" | "green" = "yellow";
+    let phase: "yellow" | "green" = "yellow";
 
-  const animateRow = (rowIdx: number, colIdx: number) => {
-    setFlippedCells((prev) => {
-      const newArr = prev.map((r) => [...r]);
-      newArr[rowIdx][colIdx] = true;
-      return newArr;
-    });
+    const animateRow = (rowIdx: number, colIdx: number) => {
+      setFlippedCells((prev) => {
+        const newArr = prev.map((r) => [...r]);
+        newArr[rowIdx][colIdx] = true;
+        return newArr;
+      });
 
-    setCellStatuses((prev) => {
-      const newArr = prev.map((r) => [...r]);
-      newArr[rowIdx][colIdx] = phase === "yellow" ? "present" : "correct";
-      return newArr;
-    });
-  };
+      setCellStatuses((prev) => {
+        const newArr = prev.map((r) => [...r]);
+        newArr[rowIdx][colIdx] = phase === "yellow" ? "present" : "correct";
+        return newArr;
+      });
+    };
 
-  const runAnimation = (delayMs = 0) => {
-    let delay = delayMs;
-    for (let rowIdx = 0; rowIdx < rows; rowIdx++) {
-      const word = words[rowIdx];
-      for (let col = 0; col < word.length; col++) {
-        setTimeout(() => animateRow(rowIdx, col), delay);
-        delay += 200;
+    const runAnimation = (delayMs = 0) => {
+      let delay = delayMs;
+      for (let rowIdx = 0; rowIdx < rows; rowIdx++) {
+        const word = words[rowIdx];
+        for (let col = 0; col < word.length; col++) {
+          setTimeout(() => animateRow(rowIdx, col), delay);
+          delay += 200;
+        }
       }
-    }
-    setTimeout(() => {
-      if (phase === "yellow") {
-        phase = "green";
-        setFlippedCells(Array.from({ length: rows }, () => Array(cols).fill(false)));
-        runAnimation(400);
-      } else {
-        animationEnded();
-      }
-    }, delay + 400);
-  };
+      setTimeout(() => {
+        if (phase === "yellow") {
+          phase = "green";
+          setFlippedCells(
+            Array.from({ length: rows }, () => Array(cols).fill(false)),
+          );
+          runAnimation(400);
+        } else {
+          animationEnded();
+        }
+      }, delay + 400);
+    };
 
-  runAnimation();
-}, [animationEnded]);
-
+    runAnimation();
+  }, [animationEnded]);
 
   return (
     <LoadingContainer>
@@ -116,7 +121,9 @@ const Loading = ({animationEnded}:{animationEnded:()=>void}) => {
             <CellContainer key={colIdx}>
               <CellInner $flip={flippedCells[rowIdx][colIdx]}>
                 <CellFront>{letter}</CellFront>
-                <CellBack $status={cellStatuses[rowIdx][colIdx]}>{letter}</CellBack>
+                <CellBack $status={cellStatuses[rowIdx][colIdx]}>
+                  {letter}
+                </CellBack>
               </CellInner>
             </CellContainer>
           ))}
