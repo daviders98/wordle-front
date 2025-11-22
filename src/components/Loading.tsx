@@ -104,12 +104,10 @@ const Loading = ({ animationEnded }: { animationEnded: () => void }) => {
         if (phaseRef.current === "yellow") {
           phaseRef.current = "green";
           setFlippedCells(
-            Array.from({ length: rows }, () =>
-              Array(cols).fill(false),
-            ),
+            Array.from({ length: rows }, () => Array(cols).fill(false)),
           );
           runAnimation(500);
-        } else if(delayMs){
+        } else if (delayMs) {
           animationEnded();
         }
       }, delay + 400);
