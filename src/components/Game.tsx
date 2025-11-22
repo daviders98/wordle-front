@@ -310,13 +310,18 @@ export default function Game({
     if (gameStatus === "game-over") {
       showMessage(didWin ? "Splendid! 🎉" : "Better luck next time 🥲");
       setTimeout(() => {
-        if (!hasPreviousData) {
+        if(!hasPreviousData){
           updateStats(didWin);
         }
+          
+          localStorage.setItem('game-data',JSON.stringify({
+            guesses: guesses,
+            cellStatuses: cellStatuses
+          }))
         setShowStatsModal(true);
       }, 900);
     }
-  }, [gameStatus, didWin, hasPreviousData, updateStats]);
+  }, [gameStatus, didWin, hasPreviousData, updateStats, guesses, cellStatuses]);
 
   useEffect(() => {
     if (gameStatus !== "game-over") {
@@ -396,10 +401,11 @@ export default function Game({
           cellStatuses,
         }),
       );
+      togglePreviousGameExist()
       needsSave.current = false;
     }, 200);
     return () => clearTimeout(id);
-  }, [guesses, cellStatuses]);
+  }, [guesses, cellStatuses,togglePreviousGameExist,needsSave]);
 
   useEffect(() => {
     if (!isGuessing || !currentGuess) return;

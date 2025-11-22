@@ -77,12 +77,12 @@ export const StatsProvider: React.FC<{ children: React.ReactNode }> = ({
     const todayStr = new Date().toISOString().split("T")[0];
     setStats((prev) => {
       const updated = {
-        gamesPlayed: prev.gamesPlayed + 1,
-        gamesWon: win ? prev.gamesWon + 1 : prev.gamesWon,
-        currentStreak: win ? prev.currentStreak + 1 : 0,
+        gamesPlayed: prev && prev.gamesPlayed + 1,
+        gamesWon: win ? prev && prev.gamesWon + 1 : prev && prev.gamesWon,
+        currentStreak: win ? prev && prev.currentStreak + 1 : 0,
         maxStreak: win
-          ? Math.max(prev.maxStreak, prev.currentStreak + 1)
-          : prev.maxStreak,
+          ? Math.max(prev && prev.maxStreak, prev && prev.currentStreak + 1)
+          : prev && prev.maxStreak,
         lastPlayedDate: todayStr,
       };
       localStorage.setItem("wordle-stats", JSON.stringify(updated));
