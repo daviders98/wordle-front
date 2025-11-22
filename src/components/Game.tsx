@@ -100,7 +100,7 @@ const CellContainer = styled.div<{
   max-width: 70px;
   max-height: 70px;
   perspective: 400px;
-  margin-bottom:4px;
+  margin-bottom: 4px;
 
   ${({ $animate }) =>
     $animate &&
@@ -456,16 +456,16 @@ export default function Game({
     getJWT();
   }, []);
   useEffect(() => {
-  const updateVh = () => {
-    const vh = window.innerHeight * 0.01;
-    document.documentElement.style.setProperty('--vh', `${vh}px`);
-  };
+    const updateVh = () => {
+      const vh = window.innerHeight * 0.01;
+      document.documentElement.style.setProperty("--vh", `${vh}px`);
+    };
 
-  updateVh();
-  window.addEventListener("resize", updateVh);
+    updateVh();
+    window.addEventListener("resize", updateVh);
 
-  return () => window.removeEventListener("resize", updateVh);
-}, []);
+    return () => window.removeEventListener("resize", updateVh);
+  }, []);
 
   const computeKeyStatuses = (
     cellStatuses: ("absent" | "present" | "correct" | undefined)[][],
