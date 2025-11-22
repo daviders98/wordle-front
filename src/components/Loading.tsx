@@ -1,4 +1,4 @@
-import { useEffect, useState } from "react";
+import { useEffect, useState, useRef } from "react";
 import styled from "styled-components";
 
 const LoadingContainer = styled.div`
@@ -71,10 +71,10 @@ const Loading = ({ animationEnded }: { animationEnded: () => void }) => {
     Array.from({ length: rows }, () => Array(cols).fill(undefined)),
   );
 
-  useEffect(() => {
-    let phase: "yellow" | "green" = "yellow";
+  const phaseRef = useRef<"yellow" | "green">("yellow");
 
-    const animateRow = (rowIdx: number, colIdx: number) => {
+  useEffect(() => {
+    const animateCell = (rowIdx: number, colIdx: number) => {
       setFlippedCells((prev) => {
         const newArr = prev.map((r) => [...r]);
         newArr[rowIdx][colIdx] = true;
@@ -83,28 +83,33 @@ const Loading = ({ animationEnded }: { animationEnded: () => void }) => {
 
       setCellStatuses((prev) => {
         const newArr = prev.map((r) => [...r]);
-        newArr[rowIdx][colIdx] = phase === "yellow" ? "present" : "correct";
+        newArr[rowIdx][colIdx] =
+          phaseRef.current === "yellow" ? "present" : "correct";
         return newArr;
       });
     };
 
     const runAnimation = (delayMs = 0) => {
       let delay = delayMs;
+
       for (let rowIdx = 0; rowIdx < rows; rowIdx++) {
         const word = words[rowIdx];
-        for (let col = 0; col < word.length; col++) {
-          setTimeout(() => animateRow(rowIdx, col), delay);
+        for (let colIdx = 0; colIdx < word.length; colIdx++) {
+          setTimeout(() => animateCell(rowIdx, colIdx), delay);
           delay += 200;
         }
       }
+
       setTimeout(() => {
-        if (phase === "yellow") {
-          phase = "green";
+        if (phaseRef.current === "yellow") {
+          phaseRef.current = "green";
           setFlippedCells(
-            Array.from({ length: rows }, () => Array(cols).fill(false)),
+            Array.from({ length: rows }, () =>
+              Array(cols).fill(false),
+            ),
           );
           runAnimation(500);
-        } else {
+        } else if(delayMs){
           animationEnded();
         }
       }, delay + 400);
