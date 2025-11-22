@@ -459,18 +459,18 @@ export default function Game({
     getJWT();
   }, []);
   useEffect(() => {
-  if (CSS.supports("height: 100dvh")) return;
+    if (CSS.supports("height: 100dvh")) return;
 
-  const updateVh = () => {
-    const vh = window.innerHeight * 0.01;
-    document.documentElement.style.setProperty("--vh", `${vh}px`);
-  };
+    const updateVh = () => {
+      const vh = window.innerHeight * 0.01;
+      document.documentElement.style.setProperty("--vh", `${vh}px`);
+    };
 
-  updateVh();
-  window.addEventListener("resize", updateVh);
+    updateVh();
+    window.addEventListener("resize", updateVh);
 
-  return () => window.removeEventListener("resize", updateVh);
-}, []);
+    return () => window.removeEventListener("resize", updateVh);
+  }, []);
 
   const computeKeyStatuses = (
     cellStatuses: ("absent" | "present" | "correct" | undefined)[][],
