@@ -386,20 +386,20 @@ export default function Game({
   );
 
   useEffect(() => {
-  if (!needsSave.current) return;
+    if (!needsSave.current) return;
 
-  const id = setTimeout(() => {
-    localStorage.setItem(
-      "game-data",
-      JSON.stringify({
-        guesses,
-        cellStatuses,
-      })
-    );
-    needsSave.current = false;
-  }, 200);
-  return () => clearTimeout(id);
-}, [guesses, cellStatuses]);
+    const id = setTimeout(() => {
+      localStorage.setItem(
+        "game-data",
+        JSON.stringify({
+          guesses,
+          cellStatuses,
+        }),
+      );
+      needsSave.current = false;
+    }, 200);
+    return () => clearTimeout(id);
+  }, [guesses, cellStatuses]);
 
   useEffect(() => {
     if (!isGuessing || !currentGuess) return;
