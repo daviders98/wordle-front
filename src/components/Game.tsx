@@ -372,11 +372,11 @@ export default function Game({
             prev.length === 5 ? prev : prev + key.toUpperCase(),
           );
         }
-      } else if (key === "Backspace") {
+      } else if (key === "Backspace" && !isGuessing) {
         if (gameStatus !== "game-over") {
           setCurrentGuess((prev) => prev.slice(0, -1));
         }
-      } else if (key === "Enter") {
+      } else if (key === "Enter" && !isGuessing) {
         if (gameStatus !== "game-over") {
           setCurrentGuess((prev) => {
             if (prev.length === 5) {
@@ -390,7 +390,7 @@ export default function Game({
         }
       }
     },
-    [gameStatus, currentRowIndex],
+    [gameStatus, currentRowIndex,isGuessing],
   );
 
   useEffect(() => {

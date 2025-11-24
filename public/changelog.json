@@ -1020,7 +1020,12 @@
       {
         "message": "chore: update changelog",
         "author": "David Garcia",
-        "date": "2025-11-22T15:11:40-07:00"
+        "date": "2025-11-22T15:11:43-07:00"
+      },
+      {
+        "message": "fix(WOR-60): prevent user from changing current word once submitted for review",
+        "author": "David Garcia",
+        "date": "2025-11-24T12:37:16-07:00"
       }
     ]
   }
