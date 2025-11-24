@@ -22,6 +22,11 @@ export default function StatsModal({ onClose }: StatsModalProps) {
     ? ((stats.gamesWon / stats.gamesPlayed) * 100).toFixed(1)
     : "0";
 
+    const handleResetStats = () => {
+      localStorage.removeItem("wordle-stats");
+      localStorage.removeItem("game-data");
+      window.location.reload();
+    };
   return (
     <StatsModalContainer onClick={onClose}>
       <StatsModalContent onClick={(e) => e.stopPropagation()}>
@@ -76,6 +81,9 @@ export default function StatsModal({ onClose }: StatsModalProps) {
             </TableBody>
           </Table>
         </TableContainer>
+        <ResetButton onClick={handleResetStats}>
+          Reset All Data
+        </ResetButton>
 
         <TutorialEndingText>
           🕛 A new puzzle unlocks daily at midnight (UTC+0).
@@ -84,6 +92,31 @@ export default function StatsModal({ onClose }: StatsModalProps) {
     </StatsModalContainer>
   );
 }
+
+const ResetButton = styled.button`
+  margin-top: 18px;
+  width: 30%;
+  padding: 12px;
+  background-color: #b91c1c; /* red-700 */
+  color: white;
+  font-size: 1rem;
+  font-weight: bold;
+  border: none;
+  border-radius: 8px;
+  cursor: pointer;
+  transition: background 0.2s ease;
+  display:flex;
+  justify-self:center;
+  justify-content:center;
+
+  &:hover {
+    background-color: #dc2626;
+  }
+
+  &:active {
+    background-color: #991b1b;
+  }
+`;
 
 const StatsModalContainer = styled.div`
   position: fixed;
