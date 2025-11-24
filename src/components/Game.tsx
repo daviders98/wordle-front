@@ -390,7 +390,7 @@ export default function Game({
         }
       }
     },
-    [gameStatus, currentRowIndex,isGuessing],
+    [gameStatus, currentRowIndex, isGuessing],
   );
 
   useEffect(() => {
