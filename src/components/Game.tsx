@@ -488,14 +488,20 @@ export default function Game({
 
   const computeKeyStatuses = (
     cellStatuses: ("absent" | "present" | "correct" | undefined)[][],
-    guesses: string[][],
+    guesses: string[][]
   ) => {
+    const priority = { absent: 0, present: 1, correct: 2, undefined: -1 };
     const map: Record<string, "absent" | "present" | "correct"> = {};
+
     guesses.forEach((row, rIndex) => {
       row.forEach((letter, cIndex) => {
         const status = cellStatuses?.[rIndex]?.[cIndex];
         if (!letter || !status) return;
-        map[letter] = status;
+
+        const oldStatus = map[letter];
+        if (priority[status] > priority[oldStatus]) {
+          map[letter] = status;
+        }
       });
     });
     return map;

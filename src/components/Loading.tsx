@@ -110,7 +110,7 @@ const Loading = ({ animationEnded }: { animationEnded: () => void }) => {
     (async () => {
       await run(0);
 
-      await sleep(600 + 50);
+      await sleep(450);
 
       if (!mounted) return;
 
@@ -119,6 +119,7 @@ const Loading = ({ animationEnded }: { animationEnded: () => void }) => {
         setFlippedCells(
           Array.from({ length: rows }, () => Array(cols).fill(false)),
         );
+        await sleep(400);
         setCellStatuses(
           Array.from({ length: rows }, () => Array(cols).fill(undefined)),
         );
