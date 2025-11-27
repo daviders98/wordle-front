@@ -1100,7 +1100,12 @@
       {
         "message": "chore: sync changelog",
         "author": "David Garcia",
-        "date": "2025-11-25T21:07:16-07:00"
+        "date": "2025-11-25T21:07:19-07:00"
+      },
+      {
+        "message": "fix(WOR-63): Prevent deleting letters or submitting when checking word",
+        "author": "David Garcia",
+        "date": "2025-11-27T09:01:59-07:00"
       }
     ]
   }

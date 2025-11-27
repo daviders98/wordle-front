@@ -547,9 +547,9 @@ export default function Game({
           onKeyPress={(key) => {
             if (gameStatus === "game-over") return;
 
-            if (key === "ENTER") {
+            if (key === "ENTER" && !isGuessing) {
               setIsGuessing(true);
-            } else if (key === "⌫") {
+            } else if (key === "⌫" && !isGuessing) {
               setCurrentGuess((prev) => prev.slice(0, -1));
             } else if (/^[A-Z]$/.test(key)) {
               setCurrentGuess((prev) => (prev.length < 5 ? prev + key : prev));
