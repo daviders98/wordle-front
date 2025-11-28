@@ -57,7 +57,7 @@ function App() {
       {
         method: "POST",
         credentials: "include",
-      }
+      },
     );
     const jwt = await response.json();
     setJwtValue(jwt.token);
@@ -80,7 +80,7 @@ function App() {
             "Content-Type": "application/json",
             Authorization: `Bearer ${token}`,
           },
-        }
+        },
       );
       if (response.status === 401 && retry) {
         const token = await getJWT();
@@ -91,7 +91,7 @@ function App() {
       setPastWords(data);
       return data;
     },
-    [getJWT]
+    [getJWT],
   );
 
   useEffect(() => {
