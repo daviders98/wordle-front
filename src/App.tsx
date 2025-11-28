@@ -7,6 +7,7 @@ import { StatsProvider } from "./context/StatsContext";
 import useMidnightUTCReset from "./hooks/UseMidnightUTCReset";
 import ChangelogPage from "./components/ChangelogPage";
 import WordHistory from "./components/WordHistory";
+import { isSameUTCDate } from "./utils/helpers";
 
 function App() {
   const [wakeUpDone, setWakeUpDone] = useState(false);
@@ -18,13 +19,45 @@ function App() {
 
   const togglePreviousGameExist: () => void = () =>
     setPreviousGameExist((prev) => !prev);
+
+  const checkDailyReset = useCallback(() => {
+    const statsRaw = localStorage.getItem("wordle-stats");
+
+    if (!statsRaw) return;
+
+    try {
+      const stats = JSON.parse(statsRaw);
+      const lastPlayed = stats.lastPlayedDate;
+
+      if (!isSameUTCDate(lastPlayed)) {
+        localStorage.removeItem("game-data");
+        window.location.reload();
+      }
+    } catch (e) {
+      console.error("Failed to parse stats during visibility check:", e);
+    }
+  }, []);
+
+  useEffect(() => {
+    const handleVisibility = () => {
+      if (document.visibilityState === "visible") {
+        checkDailyReset();
+      }
+    };
+
+    document.addEventListener("visibilitychange", handleVisibility);
+
+    return () =>
+      document.removeEventListener("visibilitychange", handleVisibility);
+  }, [checkDailyReset]);
+
   const getJWT = useCallback(async () => {
     const response = await fetch(
       `${process.env.REACT_APP_RENDER_BASE_URL}/api/get-jwt/`,
       {
         method: "POST",
         credentials: "include",
-      },
+      }
     );
     const jwt = await response.json();
     setJwtValue(jwt.token);
@@ -47,7 +80,7 @@ function App() {
             "Content-Type": "application/json",
             Authorization: `Bearer ${token}`,
           },
-        },
+        }
       );
       if (response.status === 401 && retry) {
         const token = await getJWT();
@@ -58,10 +91,12 @@ function App() {
       setPastWords(data);
       return data;
     },
-    [getJWT],
+    [getJWT]
   );
+
   useEffect(() => {
     getJWT();
+
     if (wakeUpCalled.current) return;
     wakeUpCalled.current = true;
 
@@ -70,8 +105,29 @@ function App() {
       .catch(() => alert("Error, game cannot be played."));
 
     const previousData = localStorage.getItem("game-data");
-    setPreviousGameExist(!!previousData);
+    const statsRaw = localStorage.getItem("wordle-stats");
+
+    if (previousData && statsRaw) {
+      try {
+        const stats = JSON.parse(statsRaw);
+        const lastPlayed = stats.lastPlayedDate;
+
+        if (isSameUTCDate(lastPlayed)) {
+          setPreviousGameExist(true);
+        } else {
+          localStorage.removeItem("game-data");
+          setPreviousGameExist(false);
+          window.location.reload();
+        }
+      } catch (err) {
+        console.error("Failed to parse stats:", err);
+        setPreviousGameExist(false);
+      }
+    } else {
+      setPreviousGameExist(false);
+    }
   }, [getJWT]);
+
   useEffect(() => {
     getPastWords({ retry: true, token: jwtValue || null });
   }, [jwtValue, getPastWords]);

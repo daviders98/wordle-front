@@ -1882,8 +1882,20 @@
       {
         "message": "fix(WOR-63): Prevent deleting letters or submitting when checking word",
         "author": "David Garcia",
-        "date": "2025-11-27T09:01:59-07:00",
+        "date": "2025-11-27T09:02:02-07:00",
         "version": "v0.7.5",
+        "source": "frontend"
+      }
+    ]
+  },
+  {
+    "version": "v1.1.6",
+    "commits": [
+      {
+        "message": "fix(WOR-64): Check if page needs reload when app goes from background to foreground",
+        "author": "David Garcia",
+        "date": "2025-11-27T19:07:14-07:00",
+        "version": "v0.7.6",
         "source": "frontend"
       }
     ]
