@@ -146,45 +146,45 @@ function App() {
     <BrowserRouter>
       <StatsProvider>
         <SolutionMeaningProvider>
-        <Routes>
-          <Route
-            path="/"
-            element={
-              loadingFinished && wakeUpDone && jwtValue && pastWords ? (
-                <Onboarding
-                  previousGameExist={previousGameExist}
-                  latestSolutionNumber={solutionNumber}
+          <Routes>
+            <Route
+              path="/"
+              element={
+                loadingFinished && wakeUpDone && jwtValue && pastWords ? (
+                  <Onboarding
+                    previousGameExist={previousGameExist}
+                    latestSolutionNumber={solutionNumber}
+                  />
+                ) : (
+                  <Loading animationEnded={finishedLoading} />
+                )
+              }
+            />
+            <Route
+              path="/play"
+              element={
+                wakeUpDone && loadingFinished ? (
+                  <Game togglePreviousGameExist={togglePreviousGameExist} />
+                ) : (
+                  <Loading animationEnded={finishedLoading} />
+                )
+              }
+            />
+            <Route path="/changelog" element={<ChangelogPage />} />
+            <Route
+              path="/history"
+              element={
+                <WordHistory
+                  pastWords={pastWords}
+                  loadPage={getPastWords}
+                  page={page}
+                  total={total}
+                  loadingWords={loadingWords}
                 />
-              ) : (
-                <Loading animationEnded={finishedLoading} />
-              )
-            }
-          />
-          <Route
-            path="/play"
-            element={
-              wakeUpDone && loadingFinished ? (
-                <Game togglePreviousGameExist={togglePreviousGameExist} />
-              ) : (
-                <Loading animationEnded={finishedLoading} />
-              )
-            }
-          />
-          <Route path="/changelog" element={<ChangelogPage />} />
-          <Route
-            path="/history"
-            element={
-              <WordHistory
-                pastWords={pastWords}
-                loadPage={getPastWords}
-                page={page}
-                total={total}
-                loadingWords={loadingWords}
-              />
-            }
-          />
-        </Routes>
-      </SolutionMeaningProvider>
+              }
+            />
+          </Routes>
+        </SolutionMeaningProvider>
       </StatsProvider>
     </BrowserRouter>
   );

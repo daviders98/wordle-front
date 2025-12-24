@@ -18,7 +18,11 @@ interface StatsModalProps {
   solution: string | null;
 }
 
-export default function StatsModal({ onClose, meaning = null, solution = null }: StatsModalProps) {
+export default function StatsModal({
+  onClose,
+  meaning = null,
+  solution = null,
+}: StatsModalProps) {
   const { stats } = useStats();
 
   const successRate = stats.gamesPlayed
@@ -62,7 +66,9 @@ export default function StatsModal({ onClose, meaning = null, solution = null }:
             <TableBody>
               <StyledRow>
                 <StyledCell>Current Streak</StyledCell>
-                <StyledCell align="right">{stats.currentStreak || 0}</StyledCell>
+                <StyledCell align="right">
+                  {stats.currentStreak || 0}
+                </StyledCell>
               </StyledRow>
               <StyledRow>
                 <StyledCell>Max Streak</StyledCell>
@@ -86,8 +92,12 @@ export default function StatsModal({ onClose, meaning = null, solution = null }:
 
         {meaning && (
           <MeaningBox>
-            <span style={{color: "#f8f8f8"}}>📝 Today's word definition:</span>
-            <MeaningText><b>{solution}</b>:{formatMeaning(meaning)}</MeaningText>
+            <span style={{ color: "#f8f8f8" }}>
+              📝 Today's word definition:
+            </span>
+            <MeaningText>
+              <b>{solution}</b>:{formatMeaning(meaning)}
+            </MeaningText>
           </MeaningBox>
         )}
 
