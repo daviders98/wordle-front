@@ -176,24 +176,24 @@ export default function Game({
   const parsedPreviousData = previousData ? JSON.parse(previousData) : null;
   const previousRowIndex = parsedPreviousData
     ? parsedPreviousData?.guesses.findIndex((row: string[]) =>
-        row.every((cell) => cell === ""),
+        row.every((cell) => cell === "")
       )
     : 0;
   const initialArray = Array.from({ length: 6 }, () => Array(5).fill(""));
   const initialCellStatuses = Array.from({ length: 6 }, () =>
-    Array<"absent" | "present" | "correct" | undefined>(5).fill(undefined),
+    Array<"absent" | "present" | "correct" | undefined>(5).fill(undefined)
   );
   const hasCorrectRow = parsedPreviousData?.cellStatuses?.some(
-    (row: string[]) => row.every((cell) => cell === "correct"),
+    (row: string[]) => row.every((cell) => cell === "correct")
   );
   const allRowsFilled = parsedPreviousData?.guesses?.every((row: string[]) =>
-    row.every((cell) => cell !== ""),
+    row.every((cell) => cell !== "")
   );
   const initialGameStatus =
     hasCorrectRow || allRowsFilled ? "game-over" : "start";
   const [hasPreviousData] = useState(previousData);
   const [guesses, setGuesses] = useState(
-    parsedPreviousData?.guesses || initialArray,
+    parsedPreviousData?.guesses || initialArray
   );
   const [showStatsModal, setShowStatsModal] = useState(false);
   const [currentGuess, setCurrentGuess] = useState("");
@@ -201,19 +201,19 @@ export default function Game({
   const [isGuessing, setIsGuessing] = useState(false);
   const [gameStatus, setGameStatus] = useState(initialGameStatus);
   const [flippedCells, setFlippedCells] = useState(
-    parsedPreviousData?.guesses || initialArray,
+    parsedPreviousData?.guesses || initialArray
   );
   const [animatedCells, setAnimatedCells] = useState(
-    parsedPreviousData?.guesses || initialArray,
+    parsedPreviousData?.guesses || initialArray
   );
   const [cellStatuses, setCellStatuses] = useState(
-    parsedPreviousData?.cellStatuses || initialCellStatuses,
+    parsedPreviousData?.cellStatuses || initialCellStatuses
   );
   const [shakingRows, setShakingRows] = useState(Array(6).fill(false));
   const [message, setMessage] = useState("");
   const [jwtValue, setJwtValue] = useState<string | null>(null);
   const [didWin, setDidWin] = useState(hasCorrectRow || false);
-  const { meaning, solution, setSolution, setMeaning } = useSolutionMeaning();
+  const {meaning,solution,setSolution,setMeaning} = useSolutionMeaning()
   const messageCooldown = useRef(false);
   const lastMessage = useRef("");
   const shakeCooldown = useRef(Array(6).fill(false));
@@ -236,13 +236,13 @@ export default function Game({
       JSON.stringify({
         ...(parsedPreviousGameData || {}),
         lastPlayedDate: today,
-      }),
+      })
     );
   };
   const testWord = useCallback(
     async (
       word: string,
-      retry = true,
+      retry = true
     ): Promise<{ valid: boolean; letters: Array<any> }> => {
       const response = await fetch(
         `${process.env.REACT_APP_RENDER_BASE_URL}/api/guess-word/`,
@@ -255,7 +255,7 @@ export default function Game({
             "Content-Type": "application/json",
             Authorization: `Bearer ${jwtValue}`,
           },
-        },
+        }
       );
       if (response.status === 401 && retry) {
         await getJWT();
@@ -264,11 +264,11 @@ export default function Game({
       const data = await response.json();
       return data;
     },
-    [jwtValue],
+    [jwtValue]
   );
 
   const mapResultToStatus = (
-    result: number[],
+    result: number[]
   ): ("absent" | "present" | "correct")[] => {
     return result.map((val) => {
       if (val === 0) return "absent";
@@ -321,31 +321,35 @@ export default function Game({
           JSON.stringify({
             guesses: guesses,
             cellStatuses: cellStatuses,
-          }),
+          })
         );
         setShowStatsModal(true);
       }, 900);
     }
   }, [gameStatus, didWin, hasPreviousData, updateStats, guesses, cellStatuses]);
 
-  useEffect(() => {
-    if (hasCorrectRow && jwtValue) {
-      fetch(`${process.env.REACT_APP_RENDER_BASE_URL}/api/word-meaning/`, {
+useEffect(() => {
+  if (hasCorrectRow && jwtValue) {
+    fetch(
+      `${process.env.REACT_APP_RENDER_BASE_URL}/api/word-meaning/`,
+      {
         headers: {
           Authorization: `Bearer ${jwtValue}`,
         },
+      }
+    )
+      .then((res) => res.json())
+      .then((data) => {
+        if (data?.meaning && data?.solution) {
+          setMeaning(data.meaning);
+          setSolution(data.solution)
+        }
+        setDidWin(true);
       })
-        .then((res) => res.json())
-        .then((data) => {
-          if (data?.meaning && data?.solution) {
-            setMeaning(data.meaning);
-            setSolution(data.solution);
-          }
-          setDidWin(true);
-        })
-        .catch((e) => console.log("⚠️ Error loading meaning on startup"));
-    }
-  }, [jwtValue]);
+      .catch((e) => console.log("⚠️ Error loading meaning on startup"));
+  }
+}, [jwtValue]);
+
 
   useEffect(() => {
     if (gameStatus !== "game-over") {
@@ -390,7 +394,7 @@ export default function Game({
       if (/^[a-zA-Z]$/.test(key)) {
         if (gameStatus !== "game-over") {
           setCurrentGuess((prev) =>
-            prev.length === 5 ? prev : prev + key.toUpperCase(),
+            prev.length === 5 ? prev : prev + key.toUpperCase()
           );
         }
       } else if (key === "Backspace" && !isGuessing) {
@@ -411,7 +415,7 @@ export default function Game({
         }
       }
     },
-    [gameStatus, currentRowIndex, isGuessing],
+    [gameStatus, currentRowIndex, isGuessing]
   );
 
   useEffect(() => {
@@ -423,7 +427,7 @@ export default function Game({
         JSON.stringify({
           guesses,
           cellStatuses,
-        }),
+        })
       );
       togglePreviousGameExist();
       needsSave.current = false;
@@ -431,103 +435,98 @@ export default function Game({
     return () => clearTimeout(id);
   }, [guesses, cellStatuses, togglePreviousGameExist, needsSave]);
 
-  const fetchedMeaningRef = useRef(false);
+  const fetchedMeaningRef = useRef(false)
   useEffect(() => {
-    if (!isGuessing || !currentGuess) return;
+  if (!isGuessing || !currentGuess) return;
 
-    const guessing = async (): Promise<void> => {
-      const {
-        valid: isValidGuess,
-        letters,
-      }: { valid: boolean; letters: number[] } = await testWord(currentGuess);
+  const guessing = async (): Promise<void> => {
+    const { valid: isValidGuess, letters }: { valid: boolean; letters: number[] } =
+      await testWord(currentGuess);
 
-      if (isGuessing && isValidGuess && currentGuess) {
-        const resultArray: number[] = letters;
+    if (isGuessing && isValidGuess && currentGuess) {
+      const resultArray: number[] = letters;
 
-        for (let i = 0; i < 5; i++) {
-          const status = mapResultToStatus(resultArray)[i] as string;
+      for (let i = 0; i < 5; i++) {
+        const status = mapResultToStatus(resultArray)[i] as string;
 
-          setTimeout(() => {
-            setCellStatuses((prev: string[][]) => {
-              const copy = prev.map((row) => [...row]);
-              copy[currentRowIndex][i] = status;
-              return copy;
-            });
+        setTimeout(() => {
+          setCellStatuses((prev: string[][]) => {
+            const copy = prev.map((row) => [...row]);
+            copy[currentRowIndex][i] = status;
+            return copy;
+          });
 
-            setFlippedCells((prev: boolean[][]) => {
-              const copy = prev.map((row) => [...row]);
-              copy[currentRowIndex][i] = true;
-              return copy;
-            });
-          }, i * 350);
-        }
-
-        setTimeout(
-          () => {
-            setCurrentRowIndex((prevCurrentRowIndex: number) => {
-              const isWin = resultArray.every((val: number) => val === 2);
-
-              if (isWin) {
-                setDidWin(true);
-                setGameStatus("game-over");
-                if (!fetchedMeaningRef.current) {
-                  fetchedMeaningRef.current = true;
-                  fetch(
-                    `${process.env.REACT_APP_RENDER_BASE_URL}/api/word-meaning/`,
-                    {
-                      method: "GET",
-                      headers: {
-                        Authorization: `Bearer ${jwtValue}`,
-                      },
-                    },
-                  )
-                    .then((res) => res.json())
-                    .then((data: { meaning?: string; solution?: string }) => {
-                      if (data?.meaning && data?.solution) {
-                        setMeaning(data.meaning);
-                        setSolution(data.solution);
-                      }
-                    })
-                    .catch(() => {
-                      showMessage("Could not load meaning 🤷‍♂️");
-                    });
-                }
-
-                return prevCurrentRowIndex;
-              }
-
-              if (prevCurrentRowIndex === 5) {
-                setGameStatus("game-over");
-                return prevCurrentRowIndex;
-              }
-
-              setCurrentGuess("");
-              return prevCurrentRowIndex + 1;
-            });
-
-            setIsGuessing(false);
-            updateLastPlayedDate();
-            needsSave.current = true;
-          },
-          5 * 300 + 500,
-        );
-      } else if (!isValidGuess && isGuessing && currentGuess) {
-        showMessage("Cannot find word in dictionary.");
-        shakeRow(currentRowIndex);
-        setIsGuessing(false);
+          setFlippedCells((prev: boolean[][]) => {
+            const copy = prev.map((row) => [...row]);
+            copy[currentRowIndex][i] = true;
+            return copy;
+          });
+        }, i * 350);
       }
-    };
 
-    guessing();
-  }, [
-    isGuessing,
-    currentRowIndex,
-    currentGuess,
-    testWord,
-    jwtValue,
-    setMeaning,
-    setSolution,
-  ]);
+      setTimeout(() => {
+        setCurrentRowIndex((prevCurrentRowIndex: number) => {
+          const isWin = resultArray.every((val: number) => val === 2);
+
+          if (isWin) {
+            setDidWin(true);
+            setGameStatus("game-over");
+              if(!fetchedMeaningRef.current){
+                fetchedMeaningRef.current = true
+              fetch(
+                `${process.env.REACT_APP_RENDER_BASE_URL}/api/word-meaning/`,
+                {
+                  method: "GET",
+                  headers: {
+                    Authorization: `Bearer ${jwtValue}`,
+                  },
+                }
+              )
+                .then((res) => res.json())
+                .then((data: { meaning?: string; solution?: string }) => {
+                  if (data?.meaning && data?.solution) {
+                    setMeaning(data.meaning);
+                    setSolution(data.solution);
+                  }
+                })
+                .catch(() => {
+                  showMessage("Could not load meaning 🤷‍♂️");
+                });
+              }
+
+            return prevCurrentRowIndex;
+          }
+
+          if (prevCurrentRowIndex === 5) {
+            setGameStatus("game-over");
+            return prevCurrentRowIndex;
+          }
+
+          setCurrentGuess("");
+          return prevCurrentRowIndex + 1;
+        });
+
+        setIsGuessing(false);
+        updateLastPlayedDate();
+        needsSave.current = true;
+      }, 5 * 300 + 500);
+    } else if (!isValidGuess && isGuessing && currentGuess) {
+      showMessage("Cannot find word in dictionary.");
+      shakeRow(currentRowIndex);
+      setIsGuessing(false);
+    }
+  };
+
+  guessing();
+}, [
+  isGuessing,
+  currentRowIndex,
+  currentGuess,
+  testWord,
+  jwtValue,
+  setMeaning,
+  setSolution,
+]);
 
   useEffect(() => {
     window.addEventListener("keydown", handleKeyDown);
@@ -542,7 +541,7 @@ export default function Game({
       {
         method: "POST",
         credentials: "include",
-      },
+      }
     );
     const jwt = await response.json();
     setJwtValue(jwt.token);
@@ -553,7 +552,7 @@ export default function Game({
 
   const computeKeyStatuses = (
     cellStatuses: ("absent" | "present" | "correct" | undefined)[][],
-    guesses: string[][],
+    guesses: string[][]
   ) => {
     const priority = { absent: 0, present: 1, correct: 2, undefined: -1 };
     const map: Record<string, "absent" | "present" | "correct"> = {};
@@ -575,13 +574,7 @@ export default function Game({
   const keyStatuses = computeKeyStatuses(cellStatuses, guesses);
   return (
     <PageContainer>
-      {showStatsModal && (
-        <StatsModal
-          onClose={toggleStatsModal}
-          meaning={meaning}
-          solution={solution}
-        />
-      )}
+      {showStatsModal && <StatsModal onClose={toggleStatsModal} meaning={meaning} solution={solution}/>}
       <NavBar />
       <FireParticles active={didWin} />
       <GameContainer>
@@ -597,7 +590,7 @@ export default function Game({
                   $win={
                     gameStatus === "game-over" &&
                     cellStatuses[row].every(
-                      (status: string) => status === "correct",
+                      (status: string) => status === "correct"
                     )
                   }
                   $winDelay={isWinningRow(row) ? col * 0.1 : 0}
