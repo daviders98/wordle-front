@@ -114,9 +114,9 @@ const CellContainer = styled.div<{
     `}
 
   @media (max-width: 600px) {
-  width: 18vw;
-  height: 18vw;
-}
+    width: 18vw;
+    height: 18vw;
+  }
 `;
 
 const jumpAnimation = keyframes`
