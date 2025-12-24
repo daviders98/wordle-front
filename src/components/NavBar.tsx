@@ -33,7 +33,9 @@ export default function NavBar() {
 
   return (
     <NavBarContainer>
-      {showStatsModal && <StatsModal onClose={toggleStatsModal} meaning={null} solution={null}/>}
+      {showStatsModal && (
+        <StatsModal onClose={toggleStatsModal} meaning={null} solution={null} />
+      )}
       {showTutorialModal && <TutorialModal onClose={toggleTutorialModal} />}
 
       <NavContent>
