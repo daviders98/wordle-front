@@ -8,3 +8,8 @@ export function isSameUTCDate(dateString: string): boolean {
     d.getUTCDate() === now.getUTCDate()
   );
 }
+
+export function formatMeaning(meaning: string): string {
+  const array = meaning.split(':')
+  return array[array.length-1]
+}

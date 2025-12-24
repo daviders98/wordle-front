@@ -1,26 +1,36 @@
-import { useCallback, useEffect, useState } from "react";
 import {
+  Box,
+  Button,
+  CircularProgress,
+  Paper,
   Table,
   TableBody,
   TableCell,
   TableContainer,
   TableHead,
   TableRow,
-  Paper,
-  CircularProgress,
-  Box,
   Typography,
-  Button,
 } from "@mui/material";
-import moment from "moment";
 import { useNavigate } from "react-router-dom";
+import moment from "moment";
 import styled from "styled-components";
+import { formatMeaning } from "../utils/helpers";
 
 interface WordEntry {
   solution: string;
   solution_date: string;
   solution_number: number;
+  meaning: string;
 }
+
+interface WordHistoryProps {
+  pastWords: WordEntry[];
+  loadPage: (page: number) => void;
+  page: number;
+  total: number | null;
+  loadingWords: boolean;
+}
+
 const Logo = styled.img`
   width: 64px;
   height: 64px;
@@ -31,6 +41,7 @@ const Logo = styled.img`
     height: 48px;
   }
 `;
+
 const TitleContainer = styled.div`
   display: flex;
   flex-direction: column;
@@ -38,60 +49,29 @@ const TitleContainer = styled.div`
   cursor: pointer;
 `;
 
-export default function WordHistory() {
-  const [words, setWords] = useState<WordEntry[]>([]);
-  const [loading, setLoading] = useState(true);
-  const [jwtValue, setJwtValue] = useState<string | null>(null);
+export default function WordHistory({
+  pastWords,
+  loadPage,
+  page,
+  total,
+  loadingWords,
+}: WordHistoryProps) {
   const navigate = useNavigate();
+  const perPage = 50;
 
-  const getJWT = async () => {
-    const response = await fetch(
-      `${process.env.REACT_APP_RENDER_BASE_URL}/api/get-jwt/`,
-      {
-        method: "POST",
-        credentials: "include",
-      },
-    );
-    const jwt = await response.json();
-    setJwtValue(jwt.token);
+  const totalPages = total ? Math.ceil(total / perPage) : 1;
+
+  const handleNext = () => {
+    if (!total || page >= totalPages) return;
+    loadPage(page + 1);
   };
 
-  const getWords = useCallback(
-    async (retry = true): Promise<void> => {
-      const response = await fetch(
-        `${process.env.REACT_APP_RENDER_BASE_URL}/api/list`,
-        {
-          method: "GET",
-          headers: {
-            "Content-Type": "application/json",
-            Authorization: `Bearer ${jwtValue}`,
-          },
-        },
-      );
+  const handlePrevious = () => {
+    if (page <= 1) return;
+    loadPage(page - 1);
+  };
 
-      if (response.status === 401 && retry) {
-        await getJWT();
-        return await getWords(false);
-      }
-
-      const data = await response.json();
-      setWords(data);
-      setLoading(false);
-    },
-    [jwtValue],
-  );
-
-  useEffect(() => {
-    getJWT();
-  }, []);
-
-  useEffect(() => {
-    if (jwtValue) {
-      getWords();
-    }
-  }, [jwtValue, getWords]);
-
-  if (loading)
+  if (loadingWords && pastWords.length === 0) {
     return (
       <Box
         sx={{
@@ -105,6 +85,7 @@ export default function WordHistory() {
         <CircularProgress />
       </Box>
     );
+  }
 
   return (
     <Box
@@ -129,33 +110,96 @@ export default function WordHistory() {
       </TitleContainer>
 
       <TableContainer component={Paper} sx={{ maxWidth: 600, borderRadius: 3 }}>
-        <Table>
+        <Table
+          sx={{
+            "& .MuiTableCell-root": {
+              py: 2,
+              px: 2,
+            },
+          }}
+        >
           <TableHead>
             <TableRow>
-              <TableCell>
+              <TableCell sx={{ width: "5%" }}>
                 <b>#</b>
               </TableCell>
-              <TableCell>
+              <TableCell sx={{ width: "20%" }}>
                 <b>Word</b>
               </TableCell>
-              <TableCell>
+              <TableCell sx={{ width: "15%" }}>
                 <b>Date</b>
+              </TableCell>
+              <TableCell sx={{ width: "60%", wordBreak: "break-word" }}>
+                <b>Meaning</b>
               </TableCell>
             </TableRow>
           </TableHead>
           <TableBody>
-            {words.map((word) => (
-              <TableRow key={word.solution_number}>
-                <TableCell>{word.solution_number}</TableCell>
-                <TableCell>{word.solution}</TableCell>
-                <TableCell>
-                  {moment(word.solution_date).format("MMM DD, YYYY")}
+            {loadingWords && pastWords.length > 0 ? (
+              <TableRow>
+                <TableCell colSpan={4} sx={{ textAlign: "center", py: 4 }}>
+                  <CircularProgress size={24} />
                 </TableCell>
               </TableRow>
-            ))}
+            ) : (
+              pastWords.map((word) => (
+                <TableRow key={word.solution_number}>
+                  <TableCell sx={{ width: "3%" }}>
+                    {word.solution_number}
+                  </TableCell>
+                  <TableCell sx={{ width: "15%" }}>
+                    <b>{word.solution}</b>
+                  </TableCell>
+                  <TableCell sx={{ width: "15%" }}>
+                    {moment(word.solution_date).format("MMM DD, YYYY")}
+                  </TableCell>
+                  <TableCell sx={{ width: "100%", wordBreak: "break-word" }}>
+                    {formatMeaning(word.meaning)}
+                  </TableCell>
+                </TableRow>
+              ))
+            )}
           </TableBody>
         </Table>
       </TableContainer>
+
+      <Box sx={{ mt: 2, display: "flex", gap: 2, justifyContent: "center" }}>
+        <Button
+          onClick={handlePrevious}
+          disabled={page <= 1}
+          sx={{
+            color: "#0C100F",
+            borderColor: "#0C100F",
+            borderRadius: "99px",
+            border: "2px solid #0C100F",
+            textTransform: "none",
+            fontWeight: 600,
+            px: 3,
+          }}
+        >
+          Previous
+        </Button>
+
+        <Typography sx={{ alignSelf: "center" }}>
+          Page {page}/{totalPages}
+        </Typography>
+
+        <Button
+          onClick={handleNext}
+          disabled={!total || page >= totalPages}
+          sx={{
+            color: "#0C100F",
+            borderColor: "#0C100F",
+            borderRadius: "99px",
+            border: "2px solid #0C100F",
+            textTransform: "none",
+            fontWeight: 600,
+            px: 3,
+          }}
+        >
+          Next
+        </Button>
+      </Box>
 
       <Button
         onClick={() => navigate("/")}

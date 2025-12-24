@@ -1752,7 +1752,7 @@
       {
         "message": "fix(WOP-25): Update README.md",
         "author": "David Garcia",
-        "date": "2025-11-22T15:08:53-07:00",
+        "date": "2025-11-22T15:09:13-07:00",
         "version": "v0.4.0",
         "source": "backend"
       }
@@ -1913,7 +1913,78 @@
       {
         "message": "chore: update changelog",
         "author": "David Garcia",
-        "date": "2025-11-27T20:32:40-07:00",
+        "date": "2025-11-27T20:32:43-07:00",
+        "version": "v0.7.7",
+        "source": "frontend"
+      },
+      {
+        "message": "chore: Sync backend changelog from main repo",
+        "author": "github-actions[bot]",
+        "date": "2025-12-24T04:23:52+00:00",
+        "version": "v0.7.7",
+        "source": "frontend"
+      },
+      {
+        "message": "feat(WOP-26): Add word meanings when generating word of the day",
+        "author": "David Garcia",
+        "date": "2025-12-23T21:27:50-07:00",
+        "version": "v0.4.1",
+        "source": "backend"
+      }
+    ]
+  },
+  {
+    "version": "v1.1.8",
+    "commits": [
+      {
+        "message": "chore: Sync backend changelog from main repo",
+        "author": "github-actions[bot]",
+        "date": "2025-12-24T04:27:57+00:00",
+        "version": "v0.7.7",
+        "source": "frontend"
+      },
+      {
+        "message": "feat(WOP-27): Prevent word from repeating within a year",
+        "author": "David Garcia",
+        "date": "2025-12-23T21:56:06-07:00",
+        "version": "v0.4.2",
+        "source": "backend"
+      }
+    ]
+  },
+  {
+    "version": "v1.1.9",
+    "commits": [
+      {
+        "message": "chore: Sync backend changelog from main repo",
+        "author": "github-actions[bot]",
+        "date": "2025-12-24T04:56:14+00:00",
+        "version": "v0.7.7",
+        "source": "frontend"
+      },
+      {
+        "message": "feat(WOP-28): Add solution number and definition to words history",
+        "author": "David Garcia",
+        "date": "2025-12-24T11:44:19-07:00",
+        "version": "v0.4.3",
+        "source": "backend"
+      }
+    ]
+  },
+  {
+    "version": "v1.2.0",
+    "commits": [
+      {
+        "message": "chore: Sync backend changelog from main repo",
+        "author": "github-actions[bot]",
+        "date": "2025-12-24T18:44:30+00:00",
+        "version": "v0.7.7",
+        "source": "frontend"
+      },
+      {
+        "message": "feat(WOR-65): Add solution number and definitions to word history",
+        "author": "David Garcia",
+        "date": "2025-12-24T11:46:03-07:00",
         "version": "v0.7.7",
         "source": "frontend"
       }

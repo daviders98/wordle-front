@@ -9,26 +9,38 @@ import ChangelogPage from "./components/ChangelogPage";
 import WordHistory from "./components/WordHistory";
 import { isSameUTCDate } from "./utils/helpers";
 
+interface PastWordsResponse {
+  words: any[];
+  page: number;
+  per_page: number;
+  total: number;
+  latest_solution_number: number;
+}
+
 function App() {
   const [wakeUpDone, setWakeUpDone] = useState(false);
   const wakeUpCalled = useRef(false);
   const [previousGameExist, setPreviousGameExist] = useState(false);
   const [loadingFinished, setLoadingFinished] = useState(false);
   const [jwtValue, setJwtValue] = useState<string | null>(null);
-  const [pastWords, setPastWords] = useState(null);
+
+  // Pagination state
+  const [pastWords, setPastWords] = useState<any[]>([]);
+  const [page, setPage] = useState(1);
+  const [perPage] = useState(50);
+  const [total, setTotal] = useState<number | null>(null);
+  const [loadingWords, setLoadingWords] = useState(true);
+  const [solutionNumber,setSolutionNumber] = useState(0)
 
   const togglePreviousGameExist: () => void = () =>
     setPreviousGameExist((prev) => !prev);
 
   const checkDailyReset = useCallback(() => {
     const statsRaw = localStorage.getItem("wordle-stats");
-
     if (!statsRaw) return;
-
     try {
       const stats = JSON.parse(statsRaw);
       const lastPlayed = stats.lastPlayedDate;
-
       if (!isSameUTCDate(lastPlayed)) {
         localStorage.removeItem("game-data");
         window.location.reload();
@@ -40,24 +52,17 @@ function App() {
 
   useEffect(() => {
     const handleVisibility = () => {
-      if (document.visibilityState === "visible") {
-        checkDailyReset();
-      }
+      if (document.visibilityState === "visible") checkDailyReset();
     };
-
     document.addEventListener("visibilitychange", handleVisibility);
-
     return () =>
       document.removeEventListener("visibilitychange", handleVisibility);
   }, [checkDailyReset]);
 
-  const getJWT = useCallback(async () => {
+  const getJWT = useCallback(async (): Promise<string | null> => {
     const response = await fetch(
       `${process.env.REACT_APP_RENDER_BASE_URL}/api/get-jwt/`,
-      {
-        method: "POST",
-        credentials: "include",
-      },
+      { method: "POST", credentials: "include" }
     );
     const jwt = await response.json();
     setJwtValue(jwt.token);
@@ -65,38 +70,39 @@ function App() {
   }, []);
 
   const getPastWords = useCallback(
-    async ({
-      retry = true,
-      token = null,
-    }: {
-      retry: boolean;
-      token: string | null;
-    }): Promise<any> => {
+    async (pageParam: number): Promise<void> => {
+      if (!jwtValue) return;
+
+      setLoadingWords(true);
+
       const response = await fetch(
-        `${process.env.REACT_APP_RENDER_BASE_URL}/api/list`,
+        `${process.env.REACT_APP_RENDER_BASE_URL}/api/list?page=${pageParam}&per_page=${perPage}`,
         {
           method: "GET",
           headers: {
             "Content-Type": "application/json",
-            Authorization: `Bearer ${token}`,
+            Authorization: `Bearer ${jwtValue}`,
           },
-        },
+        }
       );
-      if (response.status === 401 && retry) {
-        const token = await getJWT();
-        return await getPastWords({ retry: false, token: token });
-      }
-      const data = await response.json();
 
-      setPastWords(data);
-      return data;
+      if (response.status === 401) {
+        await getJWT();
+        return getPastWords(pageParam);
+      }
+
+      const data: PastWordsResponse = await response.json();
+      setSolutionNumber(data.latest_solution_number)
+      setPastWords(data.words);
+      setTotal(data.total);
+      setPage(data.page);
+      setLoadingWords(false);
     },
-    [getJWT],
+    [jwtValue, perPage, getJWT]
   );
 
   useEffect(() => {
     getJWT();
-
     if (wakeUpCalled.current) return;
     wakeUpCalled.current = true;
 
@@ -129,7 +135,7 @@ function App() {
   }, [getJWT]);
 
   useEffect(() => {
-    getPastWords({ retry: true, token: jwtValue || null });
+    if (jwtValue) getPastWords(1);
   }, [jwtValue, getPastWords]);
 
   useMidnightUTCReset();
@@ -147,7 +153,7 @@ function App() {
               loadingFinished && wakeUpDone && jwtValue && pastWords ? (
                 <Onboarding
                   previousGameExist={previousGameExist}
-                  pastWords={pastWords}
+                  latestSolutionNumber={solutionNumber}
                 />
               ) : (
                 <Loading animationEnded={finishedLoading} />
@@ -165,7 +171,18 @@ function App() {
             }
           />
           <Route path="/changelog" element={<ChangelogPage />} />
-          <Route path="/history" element={<WordHistory />} />
+          <Route
+            path="/history"
+            element={
+              <WordHistory
+                pastWords={pastWords}
+                loadPage={getPastWords}
+                page={page}
+                total={total}
+                loadingWords={loadingWords}
+              />
+            }
+          />
         </Routes>
       </StatsProvider>
     </BrowserRouter>

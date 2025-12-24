@@ -6,10 +6,10 @@ import { useNavigate } from "react-router-dom";
 
 export default function Onboarding({
   previousGameExist,
-  pastWords,
+  latestSolutionNumber
 }: {
   previousGameExist: boolean;
-  pastWords: Array<any>;
+  latestSolutionNumber: number;
 }) {
   const navigate = useNavigate();
   const [tutorialModalOpened, setTutorialModalOpened] = useState(false);
@@ -69,7 +69,7 @@ export default function Onboarding({
 
           <DateText>{moment().format("MMMM DD YYYY")}</DateText>
           <WordCountText>
-            Word #{pastWords && pastWords[0]["solution_number"] + 1}
+            Word #{latestSolutionNumber}
           </WordCountText>
           <EditedByText>Edited by David Garcia</EditedByText>
           <DevLogo src={"/logo-devgarcia.png"} alt="devgarcia logo" />
