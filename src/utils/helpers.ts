@@ -10,6 +10,6 @@ export function isSameUTCDate(dateString: string): boolean {
 }
 
 export function formatMeaning(meaning: string): string {
-  const array = meaning.split(':')
-  return array[array.length-1]
+  const array = meaning.split(":");
+  return array[array.length - 1];
 }

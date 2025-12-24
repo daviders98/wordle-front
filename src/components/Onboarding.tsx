@@ -6,7 +6,7 @@ import { useNavigate } from "react-router-dom";
 
 export default function Onboarding({
   previousGameExist,
-  latestSolutionNumber
+  latestSolutionNumber,
 }: {
   previousGameExist: boolean;
   latestSolutionNumber: number;
@@ -68,9 +68,7 @@ export default function Onboarding({
           </ButtonsContainer>
 
           <DateText>{moment().format("MMMM DD YYYY")}</DateText>
-          <WordCountText>
-            Word #{latestSolutionNumber}
-          </WordCountText>
+          <WordCountText>Word #{latestSolutionNumber}</WordCountText>
           <EditedByText>Edited by David Garcia</EditedByText>
           <DevLogo src={"/logo-devgarcia.png"} alt="devgarcia logo" />
         </OnboardingContainer>
