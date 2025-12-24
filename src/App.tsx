@@ -8,6 +8,7 @@ import useMidnightUTCReset from "./hooks/UseMidnightUTCReset";
 import ChangelogPage from "./components/ChangelogPage";
 import WordHistory from "./components/WordHistory";
 import { isSameUTCDate } from "./utils/helpers";
+import { SolutionMeaningProvider } from "./context/SolutionMeaningContext";
 
 interface PastWordsResponse {
   words: any[];
@@ -23,8 +24,6 @@ function App() {
   const [previousGameExist, setPreviousGameExist] = useState(false);
   const [loadingFinished, setLoadingFinished] = useState(false);
   const [jwtValue, setJwtValue] = useState<string | null>(null);
-
-  // Pagination state
   const [pastWords, setPastWords] = useState<any[]>([]);
   const [page, setPage] = useState(1);
   const [perPage] = useState(50);
@@ -146,6 +145,7 @@ function App() {
   return (
     <BrowserRouter>
       <StatsProvider>
+        <SolutionMeaningProvider>
         <Routes>
           <Route
             path="/"
@@ -184,6 +184,7 @@ function App() {
             }
           />
         </Routes>
+      </SolutionMeaningProvider>
       </StatsProvider>
     </BrowserRouter>
   );

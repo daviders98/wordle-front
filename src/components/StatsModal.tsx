@@ -10,12 +10,15 @@ import {
   TableRow,
   Paper,
 } from "@mui/material";
+import { formatMeaning } from "../utils/helpers";
 
 interface StatsModalProps {
   onClose: () => void;
+  meaning: string | null;
+  solution: string | null;
 }
 
-export default function StatsModal({ onClose }: StatsModalProps) {
+export default function StatsModal({ onClose, meaning = null, solution = null }: StatsModalProps) {
   const { stats } = useStats();
 
   const successRate = stats.gamesPlayed
@@ -27,6 +30,7 @@ export default function StatsModal({ onClose }: StatsModalProps) {
     localStorage.removeItem("game-data");
     window.location.reload();
   };
+
   return (
     <StatsModalContainer onClick={onClose}>
       <StatsModalContent onClick={(e) => e.stopPropagation()}>
@@ -58,9 +62,7 @@ export default function StatsModal({ onClose }: StatsModalProps) {
             <TableBody>
               <StyledRow>
                 <StyledCell>Current Streak</StyledCell>
-                <StyledCell align="right">
-                  {stats.currentStreak || 0}
-                </StyledCell>
+                <StyledCell align="right">{stats.currentStreak || 0}</StyledCell>
               </StyledRow>
               <StyledRow>
                 <StyledCell>Max Streak</StyledCell>
@@ -81,6 +83,14 @@ export default function StatsModal({ onClose }: StatsModalProps) {
             </TableBody>
           </Table>
         </TableContainer>
+
+        {meaning && (
+          <MeaningBox>
+            <span style={{color: "#f8f8f8"}}>📝 Today's word definition:</span>
+            <MeaningText><b>{solution}</b>:{formatMeaning(meaning)}</MeaningText>
+          </MeaningBox>
+        )}
+
         <ResetButton onClick={handleResetStats}>Reset All Data</ResetButton>
 
         <TutorialEndingText>
@@ -95,7 +105,7 @@ const ResetButton = styled.button`
   margin-top: 18px;
   width: 30%;
   padding: 12px;
-  background-color: #b91c1c; /* red-700 */
+  background-color: #b91c1c;
   color: white;
   font-size: 1rem;
   font-weight: bold;
@@ -213,4 +223,19 @@ const StyledRow = styled(TableRow)`
   &:hover {
     background-color: rgba(255, 255, 255, 0.05);
   }
+`;
+
+const MeaningBox = styled.div`
+  margin-top: 24px;
+  padding: 14px;
+  background: #262626;
+  border-radius: 10px;
+  border: 1px solid #333;
+`;
+
+const MeaningText = styled.p`
+  margin-top: 8px;
+  color: #e5e5e5;
+  font-size: 1rem;
+  line-height: 1.4;
 `;
