@@ -29,7 +29,7 @@ function App() {
   const [perPage] = useState(50);
   const [total, setTotal] = useState<number | null>(null);
   const [loadingWords, setLoadingWords] = useState(true);
-  const [solutionNumber,setSolutionNumber] = useState(0)
+  const [solutionNumber, setSolutionNumber] = useState(0);
 
   const togglePreviousGameExist: () => void = () =>
     setPreviousGameExist((prev) => !prev);
@@ -61,7 +61,7 @@ function App() {
   const getJWT = useCallback(async (): Promise<string | null> => {
     const response = await fetch(
       `${process.env.REACT_APP_RENDER_BASE_URL}/api/get-jwt/`,
-      { method: "POST", credentials: "include" }
+      { method: "POST", credentials: "include" },
     );
     const jwt = await response.json();
     setJwtValue(jwt.token);
@@ -82,7 +82,7 @@ function App() {
             "Content-Type": "application/json",
             Authorization: `Bearer ${jwtValue}`,
           },
-        }
+        },
       );
 
       if (response.status === 401) {
@@ -91,13 +91,13 @@ function App() {
       }
 
       const data: PastWordsResponse = await response.json();
-      setSolutionNumber(data.latest_solution_number)
+      setSolutionNumber(data.latest_solution_number);
       setPastWords(data.words);
       setTotal(data.total);
       setPage(data.page);
       setLoadingWords(false);
     },
-    [jwtValue, perPage, getJWT]
+    [jwtValue, perPage, getJWT],
   );
 
   useEffect(() => {
