@@ -67,7 +67,7 @@ const Board = styled.div`
   flex-direction: column;
   gap: clamp(6px, 1.2vh, 10px);
 
-  transform: scale(clamp(1, 0.0025 * 100vh, 1.25));
+  transform: scale(clamp(1.15, 0.0035 * 100vh, 1.6));
   transform-origin: top center;
   @media (max-width: 600px) {
     gap: 1vh;
@@ -114,11 +114,9 @@ const CellContainer = styled.div<{
     `}
 
   @media (max-width: 600px) {
-    width: 14vw;
-    height: 14vw;
-    max-width: none;
-    max-height: none;
-  }
+  width: 18vw;
+  height: 18vw;
+}
 `;
 
 const jumpAnimation = keyframes`
