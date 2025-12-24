@@ -11,6 +11,7 @@ import StatsModal from "./StatsModal";
 import TutorialModal from "./TutorialModal";
 import { useNavigate } from "react-router-dom";
 import { useStats } from "../context/StatsContext";
+import { useSolutionMeaning } from "../context/SolutionMeaningContext";
 
 export default function NavBar() {
   const [showStatsModal, setShowStatsModal] = useState(false);
@@ -19,6 +20,7 @@ export default function NavBar() {
   const navigate = useNavigate();
 
   const [timeLeft, setTimeLeft] = useState(getTimeUntilNextWord());
+  const {solution, meaning} = useSolutionMeaning()
 
   const toggleStatsModal = () => setShowStatsModal((prev) => !prev);
   const toggleTutorialModal = () => setShowTutorialModal((prev) => !prev);
@@ -34,7 +36,7 @@ export default function NavBar() {
   return (
     <NavBarContainer>
       {showStatsModal && (
-        <StatsModal onClose={toggleStatsModal} meaning={null} solution={null} />
+        <StatsModal onClose={toggleStatsModal} meaning={meaning} solution={solution} />
       )}
       {showTutorialModal && <TutorialModal onClose={toggleTutorialModal} />}
 
